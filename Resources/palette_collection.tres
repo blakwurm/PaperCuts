@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://Resources/PaletteCollection.gd" type="Script" id=1]
+[ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
+[ext_resource path="res://Palettes/midnight-ablaze-1x.png" type="Texture" id=3]
+[ext_resource path="res://Palettes/lux3k-1x.png" type="Texture" id=4]
+[ext_resource path="res://Palettes/mulfok32-1x.png" type="Texture" id=5]
+[ext_resource path="res://Palettes/31-1x.png" type="Texture" id=6]
+[ext_resource path="res://Palettes/eulbink-1x.png" type="Texture" id=7]
+[ext_resource path="res://Palettes/rust-gold-8-1x.png" type="Texture" id=8]
+[ext_resource path="res://Palettes/tranquil-fantasy-23-1x.png" type="Texture" id=9]
+[ext_resource path="res://Palettes/comfort44s-1x.png" type="Texture" id=10]
+
+[resource]
+script = ExtResource( 1 )
+palettes = [ ExtResource( 6 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ) ]
+selected = 0.0

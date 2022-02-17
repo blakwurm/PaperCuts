@@ -22,3 +22,6 @@ current = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Mundo/PolygonDrawingCamera"]
 
 [node name="UI" parent="Mundo/PolygonDrawingCamera/CanvasLayer" instance=ExtResource( 1 )]
+
+[connection signal="create_polygon" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="add_cut"]
+[connection signal="add_mode_changed" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="set_polygon_lightness"]

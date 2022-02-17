@@ -23,6 +23,7 @@ func _ready():
 func set_height(_height):
 	height = _height
 	self.material.set_shader_param("height", _height)
+	self.z_index = height * 10
 	pass
 
 func set_palette_offset(_po):

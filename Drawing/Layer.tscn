@@ -22,6 +22,7 @@ shader_param/height = 0.5
 shader_param/palette_offset = 0.5
 
 [sub_resource type="ViewportTexture" id=1]
+flags = 16
 viewport_path = NodePath("Viewport")
 
 [sub_resource type="Environment" id=4]
@@ -34,6 +35,7 @@ environment = SubResource( 4 )
 [node name="Layer" type="Sprite"]
 material = SubResource( 7 )
 position = Vector2( 1024, 1024 )
+z_index = 5
 texture = SubResource( 1 )
 script = ExtResource( 1 )
 

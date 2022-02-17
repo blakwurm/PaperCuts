@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -257,50 +259,39 @@ valign = 1
 [node name="HBoxContainer5" type="HBoxContainer" parent="Panel/VBoxContainer"]
 margin_top = 238.0
 margin_right = 277.0
-margin_bottom = 258.0
+margin_bottom = 278.0
 alignment = 1
 
-[node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer5"]
-margin_top = 3.0
-margin_right = 36.0
-margin_bottom = 17.0
-text = "Mode"
-align = 1
-valign = 1
-
-[node name="ModeOption" type="OptionButton" parent="Panel/VBoxContainer/HBoxContainer5"]
-margin_left = 40.0
+[node name="ClipperAddToggle" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer5"]
 margin_right = 277.0
-margin_bottom = 20.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 text = "Add"
-items = [ "Add", null, false, 0, null, "Remove", null, false, 1, null ]
-selected = 0
 
 [node name="HBoxContainer7" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 262.0
+margin_top = 282.0
 margin_right = 277.0
-margin_bottom = 286.0
+margin_bottom = 306.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer7"]
 margin_top = 5.0
-margin_right = 26.0
+margin_right = 59.0
 margin_bottom = 19.0
-text = "Size"
+text = "Drag Size"
 align = 1
 valign = 1
 
 [node name="SizeSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_left = 30.0
-margin_right = 104.0
+margin_left = 63.0
+margin_right = 137.0
 margin_bottom = 24.0
 size_flags_stretch_ratio = 0.32
 min_value = 1.0
 value = 1.0
 
 [node name="SizeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_left = 108.0
+margin_left = 141.0
 margin_right = 277.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -308,33 +299,33 @@ min_value = 1.0
 value = 1.0
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 290.0
+margin_top = 310.0
 margin_right = 277.0
-margin_bottom = 294.0
+margin_bottom = 314.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator5" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 298.0
+margin_top = 318.0
 margin_right = 277.0
-margin_bottom = 302.0
+margin_bottom = 322.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label5" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 306.0
+margin_top = 326.0
 margin_right = 277.0
-margin_bottom = 320.0
+margin_bottom = 340.0
 text = "Layer"
 align = 1
 valign = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 324.0
+margin_top = 344.0
 margin_right = 277.0
-margin_bottom = 344.0
+margin_bottom = 364.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Panel/VBoxContainer/HBoxContainer3"]
@@ -352,9 +343,9 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer9" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 348.0
+margin_top = 368.0
 margin_right = 277.0
-margin_bottom = 372.0
+margin_bottom = 392.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Panel/VBoxContainer/HBoxContainer9"]
@@ -372,9 +363,9 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer10" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 376.0
+margin_top = 396.0
 margin_right = 277.0
-margin_bottom = 396.0
+margin_bottom = 416.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -408,7 +399,7 @@ size_flags_horizontal = 3
 text = "MvDwn"
 
 [node name="LayerList" type="ItemList" parent="Panel/VBoxContainer"]
-margin_top = 400.0
+margin_top = 420.0
 margin_right = 277.0
 margin_bottom = 1056.0
 size_flags_vertical = 3
@@ -438,3 +429,5 @@ margin_right = 277.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "+ Clear"
+
+[connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]

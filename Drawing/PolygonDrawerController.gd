@@ -5,6 +5,8 @@ extends Camera2D
 # var a = 2
 # var b = "text"
 
+export(float, 0.0, 1.0) var polygon_lightness = 0.0 setget set_polygon_lightness
+
 onready var drag_pen = $DragPen
 onready var display_line: Line2D = $DisplayLine
 onready var tween = $Tween
@@ -14,20 +16,29 @@ var current_polygon: Polygon2D
 var last_point = Vector2.ZERO
 var last_mouse_pos = Vector2.ZERO
 
+signal create_polygon(polygon)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset_polygon()
 	pass # Replace with function body.
 
+func set_drag_leash_size(_new_size):
+	drag_pen.max_leash = _new_size
+
 func reset_polygon():
 	display_line.set_as_toplevel(true)
 	current_polygon = Polygon2D.new()
-	current_polygon.color = Color(1, 1, 1, 1)
+	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
 	display_line.points = PoolVector2Array()
 	#self.add_child(current_polygon)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func set_polygon_lightness(_pl):
+	polygon_lightness = _pl
+	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
 
 func _process(delta):
 	if Input.is_action_just_pressed("draw"):
@@ -36,7 +47,8 @@ func _process(delta):
 	if Input.is_action_just_released("draw"):
 		print("draw depressed")
 		drawing = false
-		self.get_parent().add_child(current_polygon)
+		#self.get_parent().add_child(current_polygon)
+		emit_signal("create_polygon", current_polygon)
 		print(current_polygon)
 		reset_polygon()
 	if drawing:
@@ -82,7 +94,7 @@ func _input(event):
 		drag_pen.global_position = mousepos
 		if Input.is_action_pressed("pan"):
 			tween.interpolate_property(self, "global_position",
-			self.global_position, self.global_position+(last_mouse_pos-mousepos), 0.05,
+			self.global_position, self.global_position+((last_mouse_pos-mousepos) * Vector2(2.0, 2.0)), 0.05,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			tween.start()
 

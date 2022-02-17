@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/empty_brush_texture.svg-049d47d54214f55fbb43c6a719151f78.stex"
+path="res://.import/whitesquare256.svg-953d3b31bcfdfeeae8b85efd477994f2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Drawing/empty_brush_texture.svg"
-dest_files=[ "res://.import/empty_brush_texture.svg-049d47d54214f55fbb43c6a719151f78.stex" ]
+source_file="res://Drawing/whitesquare256.svg"
+dest_files=[ "res://.import/whitesquare256.svg-953d3b31bcfdfeeae8b85efd477994f2.stex" ]
 
 [params]
 

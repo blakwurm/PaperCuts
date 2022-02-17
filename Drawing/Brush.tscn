@@ -3,7 +3,6 @@
 [ext_resource path="res://Drawing/whitesquare256.svg" type="Texture" id=1]
 [ext_resource path="res://Drawing/Brush.gd" type="Script" id=2]
 
-
 [sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("Viewport")
 
@@ -24,8 +23,7 @@ void fragment() {
 	float noise = texture(noise_texture, SCREEN_UV+TIME*0.1).r*0.3*noise_influence*0.5;
 	noise += texture(noise_texture, SCREEN_UV-TIME*0.1).r*0.3*noise_influence*0.5;
 	float outside_circle = circle(UV, ((diameter+noise)*0.5), feather);
-	COLOR.rgb = texture(TEXTURE, UV).rgb;
-	COLOR.a = max(0.0, 1.0-outside_circle);
+	COLOR = vec4(max(0.0, 1.0-outside_circle));
 }"
 
 [sub_resource type="OpenSimplexNoise" id=6]

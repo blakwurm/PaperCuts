@@ -1,17 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Drawing/whitesquare256.svg" type="Texture" id=1]
 [ext_resource path="res://Drawing/DragPen.gd" type="Script" id=2]
-
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-
-void fragment() {
-	COLOR = vec4();
-}"
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -38,8 +28,8 @@ void fragment() {
 }
 
 void fragment() {
-	float outer = size*0.5 + ring_width*0.5 - 0.05;
-	float inner = size*0.5 - ring_width*0.5 - 0.05;
+	float outer = size*0.52 + ring_width*0.5 - 0.07 + 0.07*(1.0-size);
+	float inner = size*0.52 - ring_width*0.5 - 0.07 + 0.07*(1.0-size);
 	float noise = texture(noise_texture, UV+TIME*0.1).r*0.3*noise_influence*0.5;
 	noise += texture(noise_texture, UV-TIME*0.1).r*0.3*noise_influence*0.5;
 	noise += texture(noise_texture, UV-TIME*0.3*vec2(1.0, 0.0)).r*0.3*noise_influence*0.5;
@@ -59,29 +49,18 @@ noise = SubResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/size = 0.293
-shader_param/ring_width = -0.042
+shader_param/size = 0.3
+shader_param/ring_width = -0.072
 shader_param/diameter = 0.5
 shader_param/feather = 0.1
-shader_param/noise_influence = 0.3
+shader_param/noise_influence = 0.258
 shader_param/noise_texture = SubResource( 6 )
 
 [node name="DragPen" type="Position2D"]
 script = ExtResource( 2 )
+max_leash = 0.3
 
-[node name="Pen" type="Position2D" parent="."]
-
-[node name="Polygon2D2" type="Polygon2D" parent="Pen"]
-material = SubResource( 4 )
-invert_border = 5.5
-polygon = PoolVector2Array( 0, 0, -4, -14, -13, -28, 13, -28, 4, -14 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Pen"]
-material = SubResource( 4 )
-invert_border = 5.5
-polygon = PoolVector2Array( 0, 0, -3, -15, -11, -27, 11, -27, 3, -15 )
-
-[node name="Sprite" type="TextureRect" parent="."]
+[node name="BorderGraphic" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.384314 )
 material = SubResource( 2 )
 margin_left = -144.0
@@ -93,3 +72,13 @@ stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Pen" type="Position2D" parent="."]
+
+[node name="Polygon2D2" type="Polygon2D" parent="Pen"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 4, -14, 14, -29, -14, -29, -4, -14 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Pen"]
+invert_border = 5.5
+polygon = PoolVector2Array( 0, 0, -3, -15, -11, -27, 11, -27, 3, -15 )

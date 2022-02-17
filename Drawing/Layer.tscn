@@ -1,7 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Drawing/Layer.gd" type="Script" id=1]
 [ext_resource path="res://Drawing/whitesquare256.svg" type="Texture" id=2]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform float height = 0.5;
+uniform float palette_offset = 0.5;
+
+void fragment() {
+	float black_chan = texture(TEXTURE, UV).r;
+	COLOR.a = black_chan;
+	COLOR.r = height;
+	COLOR.g = palette_offset;
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/height = 0.5
+shader_param/palette_offset = 0.5
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -14,6 +32,7 @@ background_color = Color( 1, 1, 1, 1 )
 environment = SubResource( 4 )
 
 [node name="Layer" type="Sprite"]
+material = SubResource( 7 )
 position = Vector2( 1024, 1024 )
 texture = SubResource( 1 )
 script = ExtResource( 1 )

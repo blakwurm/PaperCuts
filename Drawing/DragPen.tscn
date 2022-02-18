@@ -60,20 +60,14 @@ shader_param/noise_texture = SubResource( 6 )
 script = ExtResource( 2 )
 max_leash = 0.3
 
-[node name="BorderGraphic" type="TextureRect" parent="."]
+[node name="BorderGraphic" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.384314 )
 material = SubResource( 2 )
-margin_left = -144.0
-margin_top = -144.0
-margin_right = 144.0
-margin_bottom = 144.0
+z_index = 1000
 texture = ExtResource( 1 )
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Pen" type="Position2D" parent="."]
+z_index = 10
 
 [node name="Polygon2D2" type="Polygon2D" parent="Pen"]
 color = Color( 0, 0, 0, 1 )

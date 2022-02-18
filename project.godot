@@ -65,4 +65,7 @@ common/enable_pause_aware_picking=true
 limits/buffers/canvas_polygon_buffer_size_kb=16384
 limits/buffers/canvas_polygon_index_buffer_size_kb=16384
 environment/default_clear_color=Color( 0, 0, 0, 1 )
+quality/filters/msaa=4
+quality/filters/use_fxaa=true
+quality/filters/use_debanding=true
 environment/default_environment="res://default_env.tres"

@@ -7,6 +7,7 @@
 [node name="App" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -20,8 +21,13 @@ position = Vector2( 968, 537 )
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Mundo/PolygonDrawingCamera"]
+layer = 128
 
 [node name="UI" parent="Mundo/PolygonDrawingCamera/CanvasLayer" instance=ExtResource( 1 )]
 
+[connection signal="layer_added" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_added"]
 [connection signal="create_polygon" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="add_cut"]
+[connection signal="add_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_add_layer"]
 [connection signal="add_mode_changed" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="set_polygon_lightness"]
+[connection signal="layer_height_raised" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_layer_height_raised"]
+[connection signal="layer_selected" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_layer_selected"]

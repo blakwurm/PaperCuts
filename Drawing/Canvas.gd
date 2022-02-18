@@ -14,22 +14,28 @@ const layer_scene = preload("res://Drawing/Layer.tscn")
 onready var layers = $Layers
 onready var removed_stack = $RemovedStack
 
+signal layer_added(layer_name, layer_height)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	random.randomize()
-	var ln = add_layer()
-	if selected_layer_name == "":
-		self.selected_layer_name = ln.name
+	#var ln = add_layer()
+	#if selected_layer_name == "":
+	#	self.selected_layer_name = ln.name
 	pass # Replace with function body.
 
-func add_layer(layer_name: String = ""):
+func add_layer(layer_name: String = "", filled = true):
 	if layer_name == "":
 		layer_name = "%s" % random.randi()
 	var layer = layer_scene.instance()
 	layer.owner = layers
 	layer.name = layer_name
 	#layer.position = Vector2(size, size)
+	if layers.get_child_count() < 1:
+		selected_layer_name = layer_name
 	layers.add_child(layer)
+	layer.set_fill(filled)
+	emit_signal("layer_added", layer_name, layer.height)
 	return layer
 	pass
 
@@ -66,6 +72,8 @@ func set_palette_offset(_po):
 	pass
 
 func add_cut(newcut: Node2D):
+	if layers.get_child_count() < 1:
+		return
 	self.get_selected_layer().add_cut(newcut)
 
 func undo_cut():
@@ -78,3 +86,20 @@ func redo_cut():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_UI_add_layer(filled):
+	self.add_layer("", filled)
+	pass # Replace with function body.
+
+
+func _on_UI_layer_height_raised(layer_name, new_height):
+	var node = layers.get_node(layer_name)
+	if node != null:
+		node.height = new_height
+	pass # Replace with function body.
+
+
+func _on_UI_layer_selected(layer_name):
+	self.selected_layer_name = layer_name
+	pass # Replace with function body.

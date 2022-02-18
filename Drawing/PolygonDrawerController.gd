@@ -41,16 +41,7 @@ func set_polygon_lightness(_pl):
 	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
 
 func _process(delta):
-	if Input.is_action_just_pressed("draw"):
-		print("draw pressed")
-		drawing = true
-	if Input.is_action_just_released("draw"):
-		print("draw depressed")
-		drawing = false
-		#self.get_parent().add_child(current_polygon)
-		emit_signal("create_polygon", current_polygon)
-		print(current_polygon)
-		reset_polygon()
+
 	if drawing:
 		var penpos: Vector2 = drag_pen.get_pen_pos()
 		var length_away = penpos.distance_to(last_point)
@@ -76,6 +67,16 @@ func _input(event):
 			print("zooming out")
 			self.zoom -= Vector2(0.1,0.1)
 	if event is InputEventMouseButton:
+		if Input.is_action_just_pressed("draw"):
+			print("draw pressed")
+			drawing = true
+		if Input.is_action_just_released("draw"):
+			print("draw depressed")
+			drawing = false
+			#self.get_parent().add_child(current_polygon)
+			emit_signal("create_polygon", current_polygon)
+			print(current_polygon)
+			reset_polygon()
 		if event.is_pressed():
 		# zoom in
 			if event.button_index == BUTTON_WHEEL_UP:

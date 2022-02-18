@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
+[ext_resource path="res://UI/PositionList.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/SelectedNameBox.gd" type="Script" id=4]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -361,6 +364,7 @@ margin_left = 67.0
 margin_right = 277.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+script = ExtResource( 4 )
 
 [node name="HBoxContainer10" type="HBoxContainer" parent="Panel/VBoxContainer"]
 margin_top = 396.0
@@ -372,41 +376,25 @@ __meta__ = {
 }
 
 [node name="DupeButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
-margin_right = 66.0
+margin_right = 136.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Dupe"
 
 [node name="DelButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
-margin_left = 70.0
-margin_right = 136.0
+margin_left = 140.0
+margin_right = 277.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Del"
 
-[node name="MvUpButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
-margin_left = 140.0
-margin_right = 206.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "MvUp"
-
-[node name="MvDwnButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
-margin_left = 210.0
-margin_right = 277.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "MvDwn"
-
-[node name="LayerList" type="ItemList" parent="Panel/VBoxContainer"]
+[node name="LayerList" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 420.0
 margin_right = 277.0
 margin_bottom = 1056.0
 size_flags_vertical = 3
-items = [ "1", null, false, "2", null, false, "3", null, false ]
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer11" type="HBoxContainer" parent="Panel/VBoxContainer"]
 margin_top = 1060.0
@@ -431,3 +419,8 @@ size_flags_horizontal = 3
 text = "+ Clear"
 
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]
+[connection signal="height_change" from="Panel/VBoxContainer/LayerList" to="." method="_on_PositionList_height_change"]
+[connection signal="selected" from="Panel/VBoxContainer/LayerList" to="." method="_on_PositionList_selected"]
+[connection signal="selected" from="Panel/VBoxContainer/LayerList" to="Panel/VBoxContainer/HBoxContainer9/SelectedNameBox" method="_on_PositionList_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddFullButton" to="." method="_on_AddFullButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddClearButton" to="." method="_on_AddClearButton_pressed"]

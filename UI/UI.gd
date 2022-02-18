@@ -11,6 +11,9 @@ signal layer_height_raised(layer_name, new_height)
 signal add_layer(filled)
 
 onready var layer_list = $Panel/VBoxContainer/LayerList
+onready var color_menu_box = $ItemList/ColorMenuBox
+
+const view_material = preload("res://Drawing/palette_render_material.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,4 +54,14 @@ func _on_AddClearButton_pressed():
 
 func _on_Canvas_layer_added(layer_name, layer_height):
 	layer_list.add_item(layer_name, layer_height)
+	pass # Replace with function body.
+
+
+func _on_Canvas_layer_selected(layer_name, layer):
+	color_menu_box.set_current_layer(layer_name, layer)
+	pass # Replace with function body.
+
+
+func _on_ColorPickPopup_texture_selected(texture):
+	view_material.set_shader_param("palette", texture)
 	pass # Replace with function body.

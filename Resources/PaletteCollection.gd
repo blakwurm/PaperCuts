@@ -18,6 +18,7 @@ func set_active(_sel: Texture):
 	if _sel in palettes:
 		active = _sel
 		imgdata = _sel.get_data()
+		emit_changed()
 
 func get_selected_color():
 	var pix = imgdata.get_pixel(0.5, imgdata.get_width() * selected)

@@ -15,6 +15,7 @@ onready var layers = $Layers
 onready var removed_stack = $RemovedStack
 
 signal layer_added(layer_name, layer_height)
+signal layer_selected(layer_name, layer)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,6 +59,7 @@ func set_selected_layer_name(_sln: String):
 		selected_layer_name = layers.get_child(0)
 	else:
 		selected_layer_name = self.add_layer().name
+	emit_signal("layer_selected", selected_layer_name, layers.get_node(selected_layer_name))
 	pass
 
 func get_selected_layer():

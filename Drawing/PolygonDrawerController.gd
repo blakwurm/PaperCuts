@@ -55,7 +55,7 @@ func _process(delta):
 			print(current_polygon.polygon.size())
 		pass
 
-func _input(event):
+func _unhandled_input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventAction:
 		if event.action == "draw":

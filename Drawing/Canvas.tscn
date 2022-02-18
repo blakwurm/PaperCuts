@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Drawing/Canvas.gd" type="Script" id=1]
+[ext_resource path="res://Drawing/palette_render_material.tres" type="Material" id=2]
+[ext_resource path="res://Drawing/whitesquare256.svg" type="Texture" id=3]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -53,6 +55,7 @@ void fragment() {
 	val *= get_band(SCREEN_UV+TIME*vec2(0.0, 1.0)*0.5)*1.5;
 	val *= 2.0;
 	COLOR = vec4(val);
+	COLOR.b = 1.0;
 }"
 
 [sub_resource type="OpenSimplexNoise" id=3]
@@ -73,6 +76,20 @@ script = ExtResource( 1 )
 
 [node name="Layers" type="Node2D" parent="."]
 
+[node name="shader_debug_demo" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="shader_debug_demo"]
+color = Color( 0, 0.494118, 1, 1 )
+polygon = PoolVector2Array( 786, 309, 517, 787, 859, 1019, 995, 850, 820, 792, 1167, 680, 1333, 476, 1058, 247, 947, 173 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="shader_debug_demo"]
+color = Color( 0.384314, 0.415686, 1, 1 )
+polygon = PoolVector2Array( 1008, 671, 662, 746, 795, 908, 873, 829, 1032, 790, 1167, 680, 1333, 476, 1341, 308, 1164, 281 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="shader_debug_demo"]
+color = Color( 0.611765, 0.466667, 1, 1 )
+polygon = PoolVector2Array( 1008, 671, 775, 753, 983, 1021, 868, 793, 970, 752, 1167, 680, 1041, 492, 1341, 308, 965, 446 )
+
 [node name="RemovedStack" type="Node2D" parent="."]
 visible = false
 
@@ -81,3 +98,10 @@ material = SubResource( 2 )
 invert_enable = true
 invert_border = 21.4
 polygon = PoolVector2Array( 0, 0, 0, 2048, 2048, 2048, 2048, 0 )
+
+[node name="ViewMask" type="Sprite" parent="."]
+material = ExtResource( 2 )
+position = Vector2( 1024, 1024 )
+scale = Vector2( 8.167, 8.167 )
+z_index = 20
+texture = ExtResource( 3 )

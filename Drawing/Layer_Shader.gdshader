@@ -8,4 +8,5 @@ void fragment() {
 	COLOR.a = black_chan;
 	COLOR.r = height;
 	COLOR.g = palette_offset;
+	COLOR.b = black_chan;
 }

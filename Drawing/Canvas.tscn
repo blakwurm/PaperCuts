@@ -56,6 +56,7 @@ void fragment() {
 	val *= get_band(SCREEN_UV+TIME*vec2(0.0, 1.0)*0.5)*1.5;
 	val *= 2.0;
 	COLOR = vec4(val);
+	COLOR.b = 1.0;
 }"
 
 [sub_resource type="OpenSimplexNoise" id=3]

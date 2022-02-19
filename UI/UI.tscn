@@ -508,6 +508,12 @@ size_flags_horizontal = 3
 
 [connection signal="pressed" from="ItemList/ColorMenuBox/PalettePicker" to="ColorPickPopup" method="_on_PalettePicker_pressed"]
 [connection signal="value_changed" from="ItemList/ColorMenuBox/ColorPicker/PalettePositionSlider" to="ItemList/ColorMenuBox" method="_on_PalettePositionSlider_value_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/NewButton" to="." method="_on_NewButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/OpenButton" to="." method="_on_OpenButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/ExportButton" to="." method="_on_ExportButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer12/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer12/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer7/SizeSpinner" to="." method="_on_SizeSpinner_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer7/SizeSlider" to="." method="_on_SizeSlider_value_changed"]

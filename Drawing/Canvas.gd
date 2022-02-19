@@ -113,6 +113,7 @@ func _on_PolygonDrawingCamera_move_cuts(delta):
 
 
 func _on_UI_del_selected_layer():
+	self.remove_layer(selected_layer_name)
 	pass # Replace with function body.
 
 

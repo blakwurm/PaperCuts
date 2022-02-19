@@ -109,3 +109,27 @@ func _on_CutMoveSlider_value_changed(value):
 	$Panel/VBoxContainer/HBoxContainer14/CutMoveSpinner.value=value
 	emit_signal("set_cut_move_frac", value)
 	pass # Replace with function body.
+
+
+func _on_SaveButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_OpenButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_ExportButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_NewButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_RedoButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_UndoButton_pressed():
+	pass # Replace with function body.

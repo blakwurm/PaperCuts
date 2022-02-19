@@ -37,7 +37,9 @@ func set_palette_offset(_po):
 
 func add_cut(newcut: Node2D):
 	if newcut != null:
+		var oldpos = newcut.global_position
 		cuts.add_child(newcut)
+		newcut.global_position = oldpos
 		newcut.owner = cuts
 		for child in redo_queue.get_children():
 			child.queue_free()
@@ -62,3 +64,7 @@ func set_fill(is_filled):
 		col = Color(1,1,1,1)
 	print("bg is ", bg)
 	bg.modulate = col
+
+func move_cuts(delta: Vector2):
+	cuts.position += delta
+	pass

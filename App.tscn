@@ -17,8 +17,9 @@ __meta__ = {
 [node name="Canvas" parent="Mundo" instance=ExtResource( 3 )]
 
 [node name="PolygonDrawingCamera" parent="Mundo" instance=ExtResource( 2 )]
-position = Vector2( 968, 537 )
+position = Vector2( 968, 1104 )
 current = true
+zoom = Vector2( 2.5, 2.5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Mundo/PolygonDrawingCamera"]
 layer = 128
@@ -28,7 +29,13 @@ layer = 128
 [connection signal="layer_added" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_added"]
 [connection signal="layer_selected" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_selected"]
 [connection signal="create_polygon" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="add_cut"]
+[connection signal="move_cuts" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="_on_PolygonDrawingCamera_move_cuts"]
 [connection signal="add_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_add_layer"]
 [connection signal="add_mode_changed" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="set_polygon_lightness"]
+[connection signal="del_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_del_selected_layer"]
+[connection signal="dupe_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_dupe_selected_layer"]
 [connection signal="layer_height_raised" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_layer_height_raised"]
 [connection signal="layer_selected" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_layer_selected"]
+[connection signal="rename_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_rename_selected_layer"]
+[connection signal="resize_pen_leash" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="_on_UI_resize_pen_leash"]
+[connection signal="set_cut_move_frac" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="_on_UI_set_cut_move_frac"]

@@ -9,6 +9,11 @@ signal add_mode_changed(new_add)
 signal layer_selected(layer_name)
 signal layer_height_raised(layer_name, new_height)
 signal add_layer(filled)
+signal del_selected_layer()
+signal dupe_selected_layer()
+signal rename_selected_layer(new_name)
+signal resize_pen_leash(new_size)
+signal set_cut_move_frac(new_frac)
 
 onready var layer_list = $Panel/VBoxContainer/LayerList
 onready var color_menu_box = $ItemList/ColorMenuBox
@@ -64,4 +69,43 @@ func _on_Canvas_layer_selected(layer_name, layer):
 
 func _on_ColorPickPopup_texture_selected(texture):
 	view_material.set_shader_param("palette", texture)
+	pass # Replace with function body.
+
+
+func _on_DelButton_pressed():
+	emit_signal("del_selected_layer")
+	pass # Replace with function body.
+
+
+func _on_DupeButton_pressed():
+	emit_signal("dupe_selected_layer")
+	pass # Replace with function body.
+
+
+func _on_SelectedNameBox_text_changed(new_text):
+	emit_signal("rename_selected_layer", new_text)
+	pass # Replace with function body.
+
+
+func _on_SizeSpinner_value_changed(value):
+	$Panel/VBoxContainer/HBoxContainer7/SizeSlider.value=value
+	emit_signal("resize_pen_leash", value)
+	pass # Replace with function body.
+
+
+func _on_SizeSlider_value_changed(value):
+	$Panel/VBoxContainer/HBoxContainer7/SizeSpinner.value=value
+	emit_signal("resize_pen_leash", value)
+	pass # Replace with function body.
+
+
+func _on_CutMoveSpinner_value_changed(value):
+	$Panel/VBoxContainer/HBoxContainer14/CutMoveSlider.value=value
+	emit_signal("set_cut_move_frac", value)
+	pass # Replace with function body.
+
+
+func _on_CutMoveSlider_value_changed(value):
+	$Panel/VBoxContainer/HBoxContainer14/CutMoveSpinner.value=value
+	emit_signal("set_cut_move_frac", value)
 	pass # Replace with function body.

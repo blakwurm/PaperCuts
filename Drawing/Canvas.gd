@@ -105,3 +105,20 @@ func _on_UI_layer_height_raised(layer_name, new_height):
 func _on_UI_layer_selected(layer_name):
 	self.selected_layer_name = layer_name
 	pass # Replace with function body.
+
+
+func _on_PolygonDrawingCamera_move_cuts(delta):
+	get_selected_layer().move_cuts(delta)
+	pass # Replace with function body.
+
+
+func _on_UI_del_selected_layer():
+	pass # Replace with function body.
+
+
+func _on_UI_dupe_selected_layer():
+	pass # Replace with function body.
+
+
+func _on_UI_rename_selected_layer(new_name):
+	pass # Replace with function body.

@@ -16,7 +16,10 @@ var current_polygon: Polygon2D
 var last_point = Vector2.ZERO
 var last_mouse_pos = Vector2.ZERO
 
+var cut_move_frac = 0.5
+
 signal create_polygon(polygon)
+signal move_cuts(delta)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -98,8 +101,21 @@ func _unhandled_input(event):
 			self.global_position, self.global_position+((last_mouse_pos-mousepos) * Vector2(2.0, 2.0)), 0.05,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			tween.start()
+		elif Input.is_action_pressed("movecuts"):
+			emit_signal("move_cuts", (mousepos-last_mouse_pos)*cut_move_frac)
+			pass
 
 			#self.global_position += (last_mouse_pos - mousepos)
 		last_mouse_pos = mousepos
 		
 		
+
+
+func _on_UI_resize_pen_leash(new_size):
+	set_drag_leash_size(new_size)
+	pass # Replace with function body.
+
+
+func _on_UI_set_cut_move_frac(new_frac):
+	cut_move_frac=new_frac
+	pass # Replace with function body.

@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Drawing/Layer.gd" type="Script" id=1]
 [ext_resource path="res://Drawing/whitesquare256.svg" type="Texture" id=2]
-[ext_resource path="res://Drawing/LayerMaterial.tres" type="Material" id=3]
+[ext_resource path="res://Drawing/Layer_Shader.gdshader" type="Shader" id=3]
 
 [sub_resource type="Environment" id=4]
 background_mode = 1
@@ -10,6 +10,11 @@ background_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="World" id=5]
 environment = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 3 )
+shader_param/height = 0.5
+shader_param/palette_offset = 0.5
 
 [sub_resource type="ViewportTexture" id=8]
 viewport_path = NodePath("Viewport")
@@ -40,6 +45,6 @@ polygon = PoolVector2Array( 850, 550, 682, 804, 868, 1046, 1420, 1271, 1637, 855
 visible = false
 
 [node name="Texture" type="Sprite" parent="."]
-material = ExtResource( 3 )
+material = SubResource( 9 )
 position = Vector2( 1024, 1024 )
 texture = SubResource( 8 )

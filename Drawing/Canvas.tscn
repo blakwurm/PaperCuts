@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Drawing/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://Drawing/palette_render_material.tres" type="Material" id=2]
@@ -75,6 +75,9 @@ shader_param/noise_texture = SubResource( 4 )
 flags = 1
 viewport_path = NodePath("Layers")
 
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Renderer")
+
 [node name="Canvas" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -89,7 +92,7 @@ visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="Layers/shader_debug_demo"]
 color = Color( 0, 0.494118, 1, 1 )
-polygon = PoolVector2Array( 786, 309, 517, 787, 859, 1019, 995, 850, 820, 792, 1167, 680, 1333, 476, 1058, 247, 947, 173 )
+polygon = PoolVector2Array( 677, 384, 517, 787, 859, 1019, 995, 850, 820, 792, 1167, 680, 1333, 476, 1058, 247, 947, 173 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="Layers/shader_debug_demo"]
 color = Color( 0.384314, 0.415686, 1, 1 )
@@ -111,8 +114,18 @@ invert_enable = true
 invert_border = 21.4
 polygon = PoolVector2Array( 0, 0, 0, 2048, 2048, 2048, 2048, 0 )
 
-[node name="ViewMask" type="Sprite" parent="."]
+[node name="Renderer" type="Viewport" parent="."]
+size = Vector2( 2048, 2048 )
+transparent_bg = true
+usage = 0
+
+[node name="ShadowProcessing" type="Sprite" parent="Renderer"]
 material = ExtResource( 2 )
 position = Vector2( 1024, 1024 )
 z_index = 20
 texture = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1024, 1024 )
+texture = SubResource( 6 )
+flip_v = true

@@ -7,6 +7,9 @@ extends Node2D
 
 export onready var selected_layer_name = "" setget set_selected_layer_name
 
+const palette_material = preload("res://Drawing/palette_render_material.tres")
+onready var render = $Render
+
 const size = 2048
 
 var random = RandomNumberGenerator.new()
@@ -90,6 +93,24 @@ func redo_cut():
 #	pass
 
 
+
+func save_current(filepath):
+	layers.set_meta("palette", palette_material.get_shader_param("palette"))
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(layers)
+	ResourceSaver.save(filepath, packed_scene)
+
+func load_thing(filepath):
+	# Load the PackedScene resource
+	var packed_scene = load(filepath)
+	# Instance the scene
+	var my_scene = packed_scene.instance()
+	var oldlayers = $Layers
+	self.remove_child(oldlayers)
+	oldlayers.queue_free()
+	palette_material.set_shader_param("palette", my_scene.get_meta("palette"))
+	add_child(my_scene)
+
 func _on_UI_add_layer(filled):
 	self.add_layer("", filled)
 	pass # Replace with function body.
@@ -122,4 +143,14 @@ func _on_UI_dupe_selected_layer():
 
 
 func _on_UI_rename_selected_layer(new_name):
+	pass # Replace with function body.
+
+
+func _on_UI_save_file(filepath):
+	self.save_current(filepath)
+	pass # Replace with function body.
+
+
+func _on_UI_load_file(filepath):
+	self.load_thing(filepath)
 	pass # Replace with function body.

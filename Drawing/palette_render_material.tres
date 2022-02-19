@@ -5,6 +5,6 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/shadow_amount = 0.005
+shader_param/shadow_amount = 0.009
 shader_param/shadow_passes = 10
 shader_param/palette = ExtResource( 2 )

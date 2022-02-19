@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D palette;
-uniform float shadow_amount = 0.0025;
+uniform float shadow_amount = 0.005;
 uniform int shadow_passes = 10;
 
 float shadow_depth(sampler2D tex, vec2 uv, vec2 look_distance, float current_height) {
@@ -9,21 +9,31 @@ float shadow_depth(sampler2D tex, vec2 uv, vec2 look_distance, float current_hei
 	vec2 current_look = dist_fract;
 	float shadow = 0.0;
 	for (int i = 0; i < shadow_passes; i++) {
-		float sample = textureLod(tex, uv+current_look, 0.8).r;
-		shadow = min(0.0, current_height - sample) / float(shadow_passes-i);
+		float sample = textureLod(tex, uv+dist_fract*float(i), 4.0).r;
+		shadow += min(0.0, (current_height - sample)/float(i)*0.5);
 		current_look += dist_fract;
 	}
 	return shadow;
 }
 
+float new_shadow_depth(sampler2D tex, vec2 uv, vec2 look_distance, float current_height) {
+	float sample = texture(tex, uv).r;
+	float shadow = min(0.0, current_height - sample);
+	return shadow;
+}
+
 void fragment() {
-	vec4 screen_sample = texture(SCREEN_TEXTURE, SCREEN_UV);
+	vec4 screen_sample = texture(TEXTURE, UV);
 	float r = screen_sample.r;
-	float shadow = shadow_depth(SCREEN_TEXTURE, SCREEN_UV, vec2(shadow_amount, 0), r);
-	shadow += shadow_depth(SCREEN_TEXTURE, SCREEN_UV, vec2(0, shadow_amount), r);
-	shadow += shadow_depth(SCREEN_TEXTURE, SCREEN_UV, vec2(-shadow_amount, 0), r);
-	shadow += shadow_depth(SCREEN_TEXTURE, SCREEN_UV, vec2(0, -shadow_amount), r);
-	shadow /= 4.0;
+	float shadow = shadow_depth(TEXTURE, UV, vec2(shadow_amount, 0), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(0, shadow_amount), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(-shadow_amount, 0), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(0, -shadow_amount), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(shadow_amount, shadow_amount), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(-shadow_amount, -shadow_amount), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(shadow_amount, -shadow_amount), r);
+	shadow += shadow_depth(TEXTURE, UV, vec2(-shadow_amount, shadow_amount), r);
+	shadow /= 8.0;
 	
 	vec4 palette_sample = texture(palette, vec2(screen_sample.g)) * screen_sample.b;
 	//palette_sample.rgb *= 1.0-shadow;

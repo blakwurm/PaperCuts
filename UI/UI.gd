@@ -14,6 +14,9 @@ signal dupe_selected_layer()
 signal rename_selected_layer(new_name)
 signal resize_pen_leash(new_size)
 signal set_cut_move_frac(new_frac)
+signal save_file(filepath)
+signal load_file(filepath)
+signal export_to_file(filepath)
 
 onready var layer_list = $Panel/VBoxContainer/LayerList
 onready var color_menu_box = $ItemList/ColorMenuBox
@@ -112,14 +115,17 @@ func _on_CutMoveSlider_value_changed(value):
 
 
 func _on_SaveButton_pressed():
+	$SaveDialog.show()
 	pass # Replace with function body.
 
 
 func _on_OpenButton_pressed():
+	$LoadDialog.show()
 	pass # Replace with function body.
 
 
 func _on_ExportButton_pressed():
+	$ExportDialog.show()
 	pass # Replace with function body.
 
 
@@ -132,4 +138,20 @@ func _on_RedoButton_pressed():
 
 
 func _on_UndoButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_SaveDialog_file_selected(path):
+	emit_signal("save_file", path)
+	pass # Replace with function body.
+
+
+func _on_LoadDialog_file_selected(path):
+	emit_signal("load_file", path)
+	pass # Replace with function body.
+
+
+func _on_ExportDialog_file_selected(path):
+	print(path)
+	emit_signal("export_to_file", path)
 	pass # Replace with function body.

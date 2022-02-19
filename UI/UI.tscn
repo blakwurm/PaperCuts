@@ -506,6 +506,58 @@ __meta__ = {
 margin_right = 656.0
 size_flags_horizontal = 3
 
+[node name="SaveDialog" type="FileDialog" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 400, 140 )
+dialog_hide_on_ok = true
+access = 2
+filters = PoolStringArray( "*.papercut ; Papercut File" )
+current_dir = "/"
+current_file = "foo.papercut"
+current_path = "/foo.papercut"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadDialog" type="FileDialog" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 400, 140 )
+window_title = "Load a File"
+dialog_hide_on_ok = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.papercut ; Papercut File" )
+current_dir = "/"
+current_path = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportDialog" type="FileDialog" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 400, 140 )
+dialog_hide_on_ok = true
+access = 2
+filters = PoolStringArray( "*.png ; PNG Images", "*.tres ; Godot Scene" )
+current_dir = "/"
+current_file = "image.png"
+current_path = "/image.png"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="ItemList/ColorMenuBox/PalettePicker" to="ColorPickPopup" method="_on_PalettePicker_pressed"]
 [connection signal="value_changed" from="ItemList/ColorMenuBox/ColorPicker/PalettePositionSlider" to="ItemList/ColorMenuBox" method="_on_PalettePositionSlider_value_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/NewButton" to="." method="_on_NewButton_pressed"]
@@ -529,3 +581,6 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddClearButton" to="." method="_on_AddClearButton_pressed"]
 [connection signal="texture_selected" from="ColorPickPopup" to="." method="_on_ColorPickPopup_texture_selected"]
 [connection signal="texture_selected" from="ColorPickPopup" to="ItemList/ColorMenuBox" method="_on_ColorPickPopup_texture_selected"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
+[connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
+[connection signal="file_selected" from="ExportDialog" to="." method="_on_ExportDialog_file_selected"]

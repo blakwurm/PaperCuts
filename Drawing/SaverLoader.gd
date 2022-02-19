@@ -11,6 +11,7 @@ func _ready():
 	pass # Replace with function body.
 
 func save_current(filepath):
+	
 	pass
 
 func load_file(filepath):

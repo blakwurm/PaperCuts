@@ -158,6 +158,7 @@ func load_thing(filepath, append=false):
 
 func export_image(filepath):
 	var imgdata = render.texture.get_data()
+	imgdata.flip_y()
 	imgdata.save_png(filepath)
 	pass
 

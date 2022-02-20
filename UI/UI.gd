@@ -76,6 +76,8 @@ func _process(delta):
 		$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
 	elif Input.is_action_just_pressed("open"):
 		$Panel/VBoxContainer/HBoxContainer8/OpenButton.emit_signal("pressed")
+	elif Input.is_action_just_pressed("export"):
+		$Panel/VBoxContainer/HBoxContainer8/ExportButton.emit_signal("pressed")
 	elif Input.is_action_just_pressed("undo_cut"):
 		$Panel/VBoxContainer/HBoxContainer12/UndoButton.emit_signal("pressed")
 	elif Input.is_action_just_pressed("redo_cut"):

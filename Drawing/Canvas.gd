@@ -111,7 +111,7 @@ func redo_cut():
 
 
 
-func save_current(filepath):
+func save_current(filepath: String):
 	var saved = SavedPapercut.new()
 	saved.palette = palette_material.get_shader_param("palette").get_data()
 
@@ -130,6 +130,8 @@ func save_current(filepath):
 	var dir = Directory.new()
 	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
+	self.export_image(filepath.replace(".papercut.tres", ".pretty.png"))
+	self.export_raw_image(filepath.replace(".papercut.tres", ".raw.png"))
 	print("should be saved now")
 	active_piece.from_saved = true
 
@@ -157,11 +159,21 @@ func load_thing(filepath, append=false):
 	active_piece.from_saved = true
 	active_piece.emit_changed()
 
+func get_pretty_png():
+	var imgdata: Image = render.texture.get_data()
+	imgdata.flip_y()
+	var buf = imgdata.save_png_to_buffer()
+	return buf
+
 func export_image(filepath):
 	var imgdata = render.texture.get_data()
 	imgdata.flip_y()
 	imgdata.save_png(filepath)
 	pass
+	
+func get_raw_png():
+	var imgdata: Image = pre_color_and_shadow.texture.get_data()
+	return imgdata.save_png_to_buffer()
 	
 func export_raw_image(filepath):
 	var imgdata = pre_color_and_shadow.texture.get_data()

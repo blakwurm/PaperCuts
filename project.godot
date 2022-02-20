@@ -40,6 +40,8 @@ _global_script_class_icons={
 
 config/name="PaperCuts"
 run/main_scene="res://App.tscn"
+config/use_hidden_project_data_directory=false
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [display]

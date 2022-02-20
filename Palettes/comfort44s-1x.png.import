@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/comfort44s-1x.png-fb3f3acbffe21b6f3c7e40ac041ac0ec.stex"
+path="res://import/comfort44s-1x.png-fb3f3acbffe21b6f3c7e40ac041ac0ec.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Palettes/comfort44s-1x.png"
-dest_files=[ "res://.import/comfort44s-1x.png-fb3f3acbffe21b6f3c7e40ac041ac0ec.stex" ]
+dest_files=[ "res://import/comfort44s-1x.png-fb3f3acbffe21b6f3c7e40ac041ac0ec.stex" ]
 
 [params]
 

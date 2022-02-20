@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lux3k-1x.png-90b39503d2f4d96e831f83fe4cc85a36.stex"
+path="res://import/lux3k-1x.png-90b39503d2f4d96e831f83fe4cc85a36.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Palettes/lux3k-1x.png"
-dest_files=[ "res://.import/lux3k-1x.png-90b39503d2f4d96e831f83fe4cc85a36.stex" ]
+dest_files=[ "res://import/lux3k-1x.png-90b39503d2f4d96e831f83fe4cc85a36.stex" ]
 
 [params]
 

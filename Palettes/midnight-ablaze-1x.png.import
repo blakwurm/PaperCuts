@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/midnight-ablaze-1x.png-4660bea7af8c781e0e2cbec6ea47d20b.stex"
+path="res://import/midnight-ablaze-1x.png-4660bea7af8c781e0e2cbec6ea47d20b.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Palettes/midnight-ablaze-1x.png"
-dest_files=[ "res://.import/midnight-ablaze-1x.png-4660bea7af8c781e0e2cbec6ea47d20b.stex" ]
+dest_files=[ "res://import/midnight-ablaze-1x.png-4660bea7af8c781e0e2cbec6ea47d20b.stex" ]
 
 [params]
 

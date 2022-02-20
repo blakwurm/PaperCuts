@@ -31,6 +31,8 @@ const view_material = preload("res://PaperCuts/palette_render_material.tres")
 const active_piece = preload("res://Resources/ActivePiece.tres")
 const palette_collection = preload("res://Resources/palette_collection.tres")
 
+const palette_dir_path = "user://palettes"
+
 var custom_palettes: CustomPalettes
 
 # Called when the node enters the scene tree for the first time.
@@ -38,23 +40,30 @@ func _ready():
 	active_piece.connect("changed", self, "_on_active_piece_change")
 	pass # Replace with function body.
 	get_tree().connect("files_dropped", self, "_on_files_dropped")
-	load_custom_palettes()
+	load_user_palettes()
 
-func load_custom_palettes():
-	var cust = load("user://custom_palettes.tres")
-	if cust != null:
-		custom_palettes = cust
-	else:
-		custom_palettes = CustomPalettes.new()
-	custom_palettes.connect("changed", palette_collection, "on_custom_palette_change")
-	save_custom_palettes()
-
-func save_custom_palettes():
-	if custom_palettes == null:
-		load_custom_palettes()
-	else:
-		ResourceSaver.save("user://custom_pallettes.tres", custom_palettes)
-
+func load_user_palettes():
+	var dir = Directory.new()
+	palette_collection.clear_palettes()
+	if !dir.dir_exists(palette_dir_path):
+		dir.make_dir(palette_dir_path)
+	if dir.open(palette_dir_path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			print("filename: ", file_name)
+			if file_name.ends_with(".png"):
+				var newpath = palette_dir_path + "/" + file_name
+				var img = Image.new()
+				img.load(newpath)
+				var tx = ImageTexture.new()
+				tx.create_from_image(img, 0)
+				palette_collection.palettes.append(tx)
+				palette_collection.emit_changed()
+			file_name = dir.get_next()
+		pass
+	
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -71,23 +80,6 @@ func _process(delta):
 		$Panel/VBoxContainer/HBoxContainer12/UndoButton.emit_signal("pressed")
 	elif Input.is_action_just_pressed("redo_cut"):
 		$Panel/VBoxContainer/HBoxContainer12/RedoButton.emit_signal("pressed")
-
-
-func _input(event):
-	if event is InputEventAction:
-		match event.action:
-			"save":
-				if active_piece.from_saved:
-					emit_signal("save_file", $SaveDialog.current_path)
-				else:
-					$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
-				pass
-			"save_as":
-				$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
-				pass
-			"load":
-				$Panel/VBoxContainer/HBoxContainer8/OpenButton.emit_signal("pressed")
-				pass
 
 func _on_ClipperAddToggle_toggled(button_pressed):
 	var val = 0
@@ -302,3 +294,14 @@ func _on_files_dropped(files, screen):
 		$SaveDialog.current_path = firstfile
 		$LoadDialog.current_path = firstfile
 	print(files)
+
+
+func _on_OpenPalettesButton_pressed():
+	var paldir = "file://" + OS.get_user_data_dir() + "/" + "palettes"
+	OS.shell_open(paldir)
+	pass # Replace with function body.
+
+
+func _on_ReloadPalettesButton_pressed():
+	self.load_user_palettes()
+	pass # Replace with function body.

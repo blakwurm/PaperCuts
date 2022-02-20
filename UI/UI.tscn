@@ -488,7 +488,7 @@ expand = true
 margin_left = 18.0
 margin_top = 15.0
 margin_right = 674.0
-margin_bottom = 809.0
+margin_bottom = 789.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -496,6 +496,28 @@ __meta__ = {
 [node name="ColorOptions" type="VBoxContainer" parent="ColorPickPopup/ScrollContainer"]
 margin_right = 656.0
 size_flags_horizontal = 3
+
+[node name="OpenPalettesButton" type="Button" parent="ColorPickPopup"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -70.5
+margin_top = -49.0
+margin_right = 69.5
+margin_bottom = -29.0
+text = "Open Palette Folder"
+
+[node name="ReloadPalettesButton" type="Button" parent="ColorPickPopup"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -58.5
+margin_top = -26.0
+margin_right = 58.5
+margin_bottom = -6.0
+text = "Reload Palettes"
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 anchor_right = 1.0
@@ -553,6 +575,7 @@ margin_left = -100.0
 margin_top = -35.0
 margin_right = 100.0
 margin_bottom = 35.0
+rect_min_size = Vector2( 400, 140 )
 window_title = "Rename"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -596,6 +619,8 @@ margin_bottom = -36.0
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddClearButton" to="." method="_on_AddClearButton_pressed"]
 [connection signal="texture_selected" from="ColorPickPopup" to="." method="_on_ColorPickPopup_texture_selected"]
 [connection signal="texture_selected" from="ColorPickPopup" to="ItemList/ColorMenuBox" method="_on_ColorPickPopup_texture_selected"]
+[connection signal="pressed" from="ColorPickPopup/OpenPalettesButton" to="." method="_on_OpenPalettesButton_pressed"]
+[connection signal="pressed" from="ColorPickPopup/ReloadPalettesButton" to="." method="_on_ReloadPalettesButton_pressed"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
 [connection signal="file_selected" from="ExportDialog" to="." method="_on_ExportDialog_file_selected"]

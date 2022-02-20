@@ -34,6 +34,7 @@ layer = 128
 [connection signal="add_mode_changed" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="set_polygon_lightness"]
 [connection signal="del_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_del_selected_layer"]
 [connection signal="dupe_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_dupe_selected_layer"]
+[connection signal="export_to_file" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_export_to_file"]
 [connection signal="layer_height_raised" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_layer_height_raised"]
 [connection signal="layer_selected" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_layer_selected"]
 [connection signal="load_file" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_load_file"]

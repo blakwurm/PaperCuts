@@ -10,6 +10,7 @@ export onready var selected_layer_name = "" setget set_selected_layer_name
 const palette_material = preload("res://PaperCuts/palette_render_material.tres")
 const active_piece = preload("res://Resources/ActivePiece.tres")
 onready var render = $Render
+onready var pre_color_and_shadow = $Renderer/ShadowProcessing
 
 const size = 2048
 
@@ -155,6 +156,14 @@ func load_thing(filepath, append=false):
 	active_piece.from_saved = true
 	active_piece.emit_changed()
 
+func export_image(filepath):
+	var imgdata = render.texture.get_data()
+	imgdata.save_png(filepath)
+	pass
+
+func export_scene(filepath):
+	pass
+
 func _on_UI_add_layer(filled):
 	self.add_layer("", filled)
 	pass # Replace with function body.
@@ -208,4 +217,12 @@ func _on_UI_undo_cut():
 
 func _on_UI_redo_cut():
 	redo_cut()
+	pass # Replace with function body.
+
+
+func _on_UI_export_to_file(filepath: String):
+	if filepath.ends_with(".png"):
+		export_image(filepath)
+	elif filepath.ends_with(".tscn"):
+		export_scene(filepath)
 	pass # Replace with function body.

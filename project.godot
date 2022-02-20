@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "PaletteCollection",
 "language": "GDScript",
 "path": "res://Resources/PaletteCollection.gd"
+}, {
+"base": "Resource",
+"class": "SavedPapercut",
+"language": "GDScript",
+"path": "res://Resources/saved_papercuts.gd"
 } ]
 _global_script_class_icons={
-"PaletteCollection": ""
+"PaletteCollection": "",
+"SavedPapercut": ""
 }
 
 [application]

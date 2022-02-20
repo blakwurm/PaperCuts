@@ -1,0 +1,141 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Node2D
+tool
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+export(float, 0.0, 1.0) var height = 0.5 setget set_height
+export(float, 0.0, 1.0) var palette_offset = 0.5 setget set_palette_offset
+
+onready var cuts = $Viewport/Cuts
+onready var redo_queue = $RedoQueue
+onready var bg = $Viewport/BG
+onready var texture = $Texture
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	print(\"is there a background? \", bg)
+	texture.material = texture.material.duplicate()
+	self.height = height
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func set_height(_height):
+	height = _height
+	if texture == null:
+		texture.material.set_shader_param(\"height\", _height)
+		texture.z_index = 10 * _height
+	pass
+
+func set_palette_offset(_po):
+	palette_offset = _po
+	texture.material.set_shader_param(\"palette_offset\", _po)
+	pass
+
+func add_cut(newcut: Node2D):
+	if newcut != null:
+		var oldpos = newcut.global_position
+		cuts.add_child(newcut)
+		newcut.global_position = oldpos
+		newcut.owner = cuts
+		for child in redo_queue.get_children():
+			child.queue_free()
+
+func undo_cut():
+	if cuts.get_child_count() > 0:
+		var children: Array = cuts.get_children()
+		var last = children.pop_back()
+		redo_queue.add_child(last)
+		last.owner = redo_queue
+
+func redo_cut():
+	if redo_queue.get_child_count() > 0:
+		var children: Array = redo_queue.get_children()
+		var last = redo_queue.pop_back()
+		cuts.add_child(last)
+		last.owner = cuts
+
+func set_fill(is_filled):
+	var col = Color(0,0,0,1)
+	if is_filled:
+		col = Color(1,1,1,1)
+	print(\"bg is \", bg)
+	bg.modulate = col
+
+func move_cuts(delta: Vector2):
+	cuts.position += delta
+	pass
+"
+
+[sub_resource type="Environment" id=4]
+background_mode = 1
+background_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="World" id=5]
+environment = SubResource( 4 )
+
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/whitesquare256.svg-953d3b31bcfdfeeae8b85efd477994f2.stex"
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform float height = 0.5;
+uniform float palette_offset = 0.5;
+
+void fragment() {
+	float black_chan = texture(TEXTURE, UV).r;
+	COLOR.a = black_chan;
+	COLOR.r = height;
+	COLOR.g = palette_offset;
+	COLOR.b = black_chan;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/height = 0.5
+shader_param/palette_offset = 0.5
+
+[sub_resource type="ViewportTexture" id=10]
+viewport_path = NodePath("Viewport")
+
+[node name="4032178395" type="Node2D"]
+script = SubResource( 6 )
+height = 0.5
+palette_offset = 0.5
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 2048, 2048 )
+own_world = true
+world = SubResource( 5 )
+usage = 1
+render_target_v_flip = true
+
+[node name="BG" type="Sprite" parent="Viewport"]
+position = Vector2( 1024, 1024 )
+scale = Vector2( 10, 10 )
+texture = SubResource( 7 )
+
+[node name="Cuts" type="Node2D" parent="Viewport"]
+
+[node name="Polygon2D" type="Polygon2D" parent="Viewport/Cuts"]
+visible = false
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 850, 550, 682, 804, 868, 1046, 1420, 1271, 1637, 855, 1443, 434, 1067, 280, 1102, 830, 976, 880, 908, 499 )
+
+[node name="RedoQueue" type="Node2D" parent="."]
+visible = false
+
+[node name="Texture" type="Sprite" parent="."]
+material = SubResource( 9 )
+position = Vector2( 1024, 1024 )
+texture = SubResource( 10 )

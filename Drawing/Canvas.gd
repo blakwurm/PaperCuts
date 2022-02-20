@@ -28,16 +28,22 @@ func _ready():
 	#	self.selected_layer_name = ln.name
 	pass # Replace with function body.
 
-func add_layer(layer_name: String = "", filled = true):
+func add_layer(layer_name: String = "", filled = true, height = null, palette_offset = null, backdata = null):
 	if layer_name == "":
 		layer_name = "%s" % random.randi()
 	var layer = layer_scene.instance()
 	layer.owner = layers
 	layer.name = layer_name
-	#layer.position = Vector2(size, size)
 	if layers.get_child_count() < 1:
 		selected_layer_name = layer_name
 	layers.add_child(layer)
+	if height:
+		layer.height = height
+	if palette_offset:
+		layer.palette_offset = palette_offset
+	if backdata:
+		layer.set_back(backdata)
+	#layer.position = Vector2(size, size)
 	layer.set_fill(filled)
 	emit_signal("layer_added", layer_name, layer.height)
 	return layer
@@ -95,21 +101,40 @@ func redo_cut():
 
 
 func save_current(filepath):
-	layers.set_meta("palette", palette_material.get_shader_param("palette"))
-	var packed_scene = PackedScene.new()
-	packed_scene.pack(layers)
-	ResourceSaver.save(filepath, packed_scene)
+	var saved = SavedPapercut.new()
+	saved.palette = palette_material.get_shader_param("palette").get_data()
 
-func load_thing(filepath):
-	# Load the PackedScene resource
-	var packed_scene = load(filepath)
-	# Instance the scene
-	var my_scene = packed_scene.instance()
-	var oldlayers = $Layers
-	self.remove_child(oldlayers)
-	oldlayers.queue_free()
-	palette_material.set_shader_param("palette", my_scene.get_meta("palette"))
-	add_child(my_scene)
+	for child in layers.get_children():
+		var txdata = child.get_node("Texture").texture.get_data()
+		txdata.convert(Image.FORMAT_L8)
+		var pn = txdata.save_png_to_buffer()
+		#txdata.save_png("user://%s" % child.name)
+		var ldata = [child.name, child.height, child.palette_offset, pn]
+		saved.layers.append(ldata)
+		pass
+	saved.artist = "Zaphodious"
+	saved.art_version = 0
+	print(saved)
+	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
+	print("should be saved now")
+
+func load_thing(filepath, append=false):
+	var res = load(filepath)
+	print(res)
+	var l = res.layers
+	if !append:
+		for lay in layers.get_children():
+			layers.remove_child(lay)
+			lay.queue_free()
+			pass
+	for lay in l:
+		self.add_layer(lay[0], true, lay[1], lay[2], lay[3])
+		#layers.add_child(lay.instance())
+	var tx = ImageTexture.new()
+	tx.create_from_image(res.palette, 0)
+	var pal: Image = res.palette
+	
+	palette_material.set_shader_param("palette", tx)
 
 func _on_UI_add_layer(filled):
 	self.add_layer("", filled)

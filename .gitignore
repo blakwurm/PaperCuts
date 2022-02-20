@@ -11,3 +11,6 @@ export_presets.cfg
 data_*/
 
 android/build/*
+
+# Papercut files, generally
+*.papercut.tres

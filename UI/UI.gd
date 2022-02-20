@@ -21,6 +21,8 @@ signal export_to_file(filepath)
 onready var layer_list = $Panel/VBoxContainer/LayerList
 onready var color_menu_box = $ItemList/ColorMenuBox
 
+var opened_path = null
+
 const view_material = preload("res://Drawing/palette_render_material.tres")
 
 # Called when the node enters the scene tree for the first time.
@@ -147,6 +149,7 @@ func _on_SaveDialog_file_selected(path):
 
 
 func _on_LoadDialog_file_selected(path):
+	opened_path = path
 	emit_signal("load_file", path)
 	pass # Replace with function body.
 
@@ -154,4 +157,8 @@ func _on_LoadDialog_file_selected(path):
 func _on_ExportDialog_file_selected(path):
 	print(path)
 	emit_signal("export_to_file", path)
+	pass # Replace with function body.
+
+
+func _on_OpenButton2_pressed():
 	pass # Replace with function body.

@@ -81,28 +81,35 @@ margin_bottom = 20.0
 alignment = 1
 
 [node name="NewButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_right = 66.0
+margin_right = 49.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "New"
 
 [node name="OpenButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 70.0
-margin_right = 136.0
+margin_left = 53.0
+margin_right = 102.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Open"
 
+[node name="AppendButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
+margin_left = 106.0
+margin_right = 167.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Append"
+
 [node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 140.0
-margin_right = 206.0
+margin_left = 171.0
+margin_right = 220.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Save"
 
 [node name="ExportButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 210.0
-margin_right = 277.0
+margin_left = 224.0
+margin_right = 276.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Export"
@@ -507,7 +514,6 @@ margin_right = 656.0
 size_flags_horizontal = 3
 
 [node name="SaveDialog" type="FileDialog" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1.0
@@ -515,34 +521,31 @@ margin_bottom = 1.0
 rect_min_size = Vector2( 400, 140 )
 dialog_hide_on_ok = true
 access = 2
-filters = PoolStringArray( "*.papercut ; Papercut File" )
-current_dir = "/"
-current_file = "foo.papercut"
-current_path = "/foo.papercut"
+filters = PoolStringArray( "*.papercut.tres ; Papercut File" )
+current_dir = "/Users"
+current_path = "/Users/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LoadDialog" type="FileDialog" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1.0
 margin_bottom = 1.0
 rect_min_size = Vector2( 400, 140 )
-window_title = "Load a File"
+window_title = "Open a File"
 dialog_hide_on_ok = true
 mode = 0
 access = 2
-filters = PoolStringArray( "*.papercut ; Papercut File" )
-current_dir = "/"
-current_path = "/"
+filters = PoolStringArray( "*.papercut.tres ; Papercut File" )
+current_dir = "/Users"
+current_path = "/Users/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ExportDialog" type="FileDialog" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1.0
@@ -550,10 +553,9 @@ margin_bottom = 1.0
 rect_min_size = Vector2( 400, 140 )
 dialog_hide_on_ok = true
 access = 2
-filters = PoolStringArray( "*.png ; PNG Images", "*.tres ; Godot Scene" )
-current_dir = "/"
-current_file = "image.png"
-current_path = "/image.png"
+filters = PoolStringArray( "*.png ; PNG Images", "*.tscn ; Godot Scene" )
+current_dir = "/Users"
+current_path = "/Users/"
 __meta__ = {
 "_edit_use_anchors_": false
 }

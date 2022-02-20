@@ -13,10 +13,15 @@ onready var redo_queue = $RedoQueue
 onready var bg = $Viewport/BG
 onready var texture = $Texture
 
+var needs_offset_set_on_ready = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("is there a background? ", bg)
 	texture.material = texture.material.duplicate()
+	self.height = height
+	if needs_offset_set_on_ready:
+		self.palette_offset = palette_offset
 	pass # Replace with function body.
 
 
@@ -26,13 +31,17 @@ func _ready():
 
 func set_height(_height):
 	height = _height
-	texture.material.set_shader_param("height", _height)
-	texture.z_index = 10 * _height
+	if texture != null:
+		texture.material.set_shader_param("height", _height)
+		texture.z_index = 10 * _height
 	pass
 
 func set_palette_offset(_po):
 	palette_offset = _po
-	texture.material.set_shader_param("palette_offset", _po)
+	if texture == null:
+		needs_offset_set_on_ready = true
+	else:
+		texture.material.set_shader_param("palette_offset", _po)
 	pass
 
 func add_cut(newcut: Node2D):
@@ -64,6 +73,14 @@ func set_fill(is_filled):
 		col = Color(1,1,1,1)
 	print("bg is ", bg)
 	bg.modulate = col
+
+func set_back(back_png_data):
+	var tx = ImageTexture.new()
+	var img = Image.new()
+	img.load_png_from_buffer(back_png_data)
+	tx.create_from_image(img)
+	bg.texture = tx
+	bg.scale = Vector2.ONE
 
 func move_cuts(delta: Vector2):
 	cuts.position += delta

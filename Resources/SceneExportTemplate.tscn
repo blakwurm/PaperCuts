@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PaperCuts/palette_render_material.tres" type="Material" id=1]
+
+[node name="PaperCut" type="Sprite"]
+material = ExtResource( 1 )

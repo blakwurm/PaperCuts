@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "SavedPapercut",
 "language": "GDScript",
-"path": "res://Resources/saved_papercuts.gd"
+"path": "res://PaperCuts/saved_papercuts.gd"
 } ]
 _global_script_class_icons={
 "ActivePiece": "",

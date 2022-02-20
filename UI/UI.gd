@@ -29,11 +29,31 @@ var opened_path = null
 
 const view_material = preload("res://PaperCuts/palette_render_material.tres")
 const active_piece = preload("res://Resources/ActivePiece.tres")
+const palette_collection = preload("res://Resources/palette_collection.tres")
+
+var custom_palettes: CustomPalettes
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	active_piece.connect("changed", self, "_on_active_piece_change")
 	pass # Replace with function body.
+	get_tree().connect("files_dropped", self, "_on_files_dropped")
+	load_custom_palettes()
+
+func load_custom_palettes():
+	var cust = load("user://custom_palettes.tres")
+	if cust != null:
+		custom_palettes = cust
+	else:
+		custom_palettes = CustomPalettes.new()
+	custom_palettes.connect("changed", palette_collection, "on_custom_palette_change")
+	save_custom_palettes()
+
+func save_custom_palettes():
+	if custom_palettes == null:
+		load_custom_palettes()
+	else:
+		ResourceSaver.save("user://custom_pallettes.tres", custom_palettes)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -274,3 +294,11 @@ func _on_active_piece_change():
 	$Panel/VBoxContainer/HBoxContainer/NameField.text = active_piece.name
 	$Panel/VBoxContainer/HBoxContainer2/ArtistField.text = active_piece.artist
 	$Panel/VBoxContainer/HBoxContainer4/VersionSpinner.value = active_piece.version
+
+func _on_files_dropped(files, screen):
+	var firstfile: String = files[0]
+	if firstfile.ends_with("papercut.tres"):
+		emit_signal("load_file", firstfile)
+		$SaveDialog.current_path = firstfile
+		$LoadDialog.current_path = firstfile
+	print(files)

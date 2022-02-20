@@ -8,6 +8,7 @@ onready var tex = $ColorPicker/PaletteTexture
 # var b = "text"
 
 const palettes: PaletteCollection = preload("res://Resources/palette_collection.tres")
+const palette_material = preload("res://PaperCuts/palette_render_material.tres")
 
 var current_layer = null
 
@@ -15,6 +16,7 @@ signal palette_changed(palette_graphic)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	palette_material.connect("changed", self, "_on_palette_material_changed")
 	pass # Replace with function body.
 
 func set_current_layer(layer_name, raw_layer):
@@ -40,3 +42,7 @@ func _on_PalettePicker_ready():
 func _on_ColorPickPopup_texture_selected(texture):
 	tex.texture = texture
 	pass # Replace with function body.
+
+func _on_palette_material_changed():
+	tex.texture = palette_material.get_shader_param("palette")
+	pass

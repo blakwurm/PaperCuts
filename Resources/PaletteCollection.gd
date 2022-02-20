@@ -27,6 +27,13 @@ func get_selected_color():
 	else:
 		return Color(1, 1, 1, 1)
 
+func on_custom_palette_change():
+	var cust = load("user://custom_palettes.tres")
+	for img in cust.images:
+		var tx = ImageTexture.new()
+		tx.create_from_image(img)
+		palettes.append(tx)
+	self.emit_changed()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

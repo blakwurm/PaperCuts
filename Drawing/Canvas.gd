@@ -52,10 +52,12 @@ func add_layer(layer_name: String = "", filled = true, height = null, palette_of
 
 func remove_layer(layer_name):
 	var layer = layers.get_node(layer_name)
-	removed_stack.add_child(layer)
-	layer.owner = removed_stack
-	if layers.get_child_count() < 1:
-		self.selected_layer_name = self.add_layer().name
+	if layer == null:
+		return
+	layers.remove_child(layer)
+	layer.queue_free()
+	#if layers.get_child_count() < 1:
+	#	self.selected_layer_name = self.add_layer().name
 
 func undo_remove():
 	var layer = removed_stack.get_child_count().pop_last()
@@ -66,7 +68,7 @@ func set_selected_layer_name(_sln: String):
 	if layers.get_node(_sln) != null:
 		selected_layer_name = _sln
 	elif layers.get_child_count() > 0:
-		selected_layer_name = layers.get_child(0)
+		selected_layer_name = layers.get_child(0).name
 	else:
 		selected_layer_name = self.add_layer().name
 	emit_signal("layer_selected", selected_layer_name, layers.get_node(selected_layer_name))
@@ -123,6 +125,8 @@ func save_current(filepath):
 	saved.artist = active_piece.artist
 	saved.art_version = active_piece.version
 	print(saved)
+	var dir = Directory.new()
+	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
 	print("should be saved now")
 	active_piece.from_saved = true
@@ -144,6 +148,7 @@ func load_thing(filepath, append=false):
 	var pal: Image = res.palette
 	
 	palette_material.set_shader_param("palette", tx)
+	palette_material.emit_changed()
 	active_piece.name = res.name 
 	active_piece.artist = res.artist
 	active_piece.version = res.art_version

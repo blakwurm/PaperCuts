@@ -47,4 +47,5 @@ visible = false
 [node name="Texture" type="Sprite" parent="."]
 material = SubResource( 9 )
 position = Vector2( 1024, 1024 )
+z_index = 5
 texture = SubResource( 8 )

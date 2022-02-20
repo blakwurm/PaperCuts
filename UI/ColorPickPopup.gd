@@ -11,6 +11,7 @@ onready var texture_option_template = $TextureOption
 signal texture_selected(texture)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	palettes.connect("changed", self, "build_color_options")
 	build_color_options()
 	pass # Replace with function body.
 

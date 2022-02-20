@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Resources/active_piece.gd"
 }, {
 "base": "Resource",
+"class": "CustomPalettes",
+"language": "GDScript",
+"path": "res://Resources/custom_palettes.gd"
+}, {
+"base": "Resource",
 "class": "PaletteCollection",
 "language": "GDScript",
 "path": "res://Resources/PaletteCollection.gd"
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ActivePiece": "",
+"CustomPalettes": "",
 "PaletteCollection": "",
 "SavedPapercut": ""
 }

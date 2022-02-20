@@ -26,11 +26,22 @@ max_value = 1.0
 step = 0.01
 
 [node name="ItemList" type="ItemList" parent="HBoxContainer"]
+visible = false
+margin_left = 20.0
+margin_right = 968.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 margin_left = 20.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+
+[node name="LayerButtons" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+margin_right = 1900.0
+size_flags_horizontal = 3
 
 [connection signal="value_changed" from="HBoxContainer/HeightSlider" to="." method="_on_VSlider_value_changed"]
 [connection signal="item_selected" from="HBoxContainer/ItemList" to="." method="_on_ItemList_item_selected"]

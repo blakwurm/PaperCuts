@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "ActivePiece",
+"language": "GDScript",
+"path": "res://Resources/active_piece.gd"
+}, {
+"base": "Resource",
 "class": "PaletteCollection",
 "language": "GDScript",
 "path": "res://Resources/PaletteCollection.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://Resources/saved_papercuts.gd"
 } ]
 _global_script_class_icons={
+"ActivePiece": "",
 "PaletteCollection": "",
 "SavedPapercut": ""
 }
@@ -64,6 +70,31 @@ zoom_out={
 movecuts={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+save={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+open={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":79,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+save_as={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":true,"meta":false,"command":true,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+undo_cut={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+redo_cut={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":89,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

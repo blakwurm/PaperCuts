@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
 [ext_resource path="res://UI/PositionList.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/SelectedNameBox.gd" type="Script" id=4]
 [ext_resource path="res://UI/ColorMenuBox.gd" type="Script" id=5]
 [ext_resource path="res://UI/ColorPickPopup.gd" type="Script" id=6]
 [ext_resource path="res://UI/TextureOption.gd" type="Script" id=7]
@@ -124,14 +123,14 @@ alignment = 1
 margin_right = 136.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-text = "Undo (Z)"
+text = "Undo Cut"
 
 [node name="RedoButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer12"]
 margin_left = 140.0
 margin_right = 277.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-text = "Redo (V)"
+text = "Redo Cut"
 
 [node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer"]
 margin_top = 48.0
@@ -383,31 +382,16 @@ text = "Layer"
 align = 1
 valign = 1
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="RenameLayerButton" type="Button" parent="Panel/VBoxContainer"]
 margin_top = 390.0
 margin_right = 277.0
-margin_bottom = 414.0
-alignment = 1
-
-[node name="Label2" type="Label" parent="Panel/VBoxContainer/HBoxContainer9"]
-margin_top = 5.0
-margin_right = 63.0
-margin_bottom = 19.0
-text = "Selected: "
-align = 1
-valign = 1
-
-[node name="SelectedNameBox" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer9"]
-margin_left = 67.0
-margin_right = 277.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-script = ExtResource( 4 )
+margin_bottom = 410.0
+text = "No Layer Selected"
 
 [node name="HBoxContainer10" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 418.0
+margin_top = 414.0
 margin_right = 277.0
-margin_bottom = 438.0
+margin_bottom = 434.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -429,7 +413,7 @@ text = "Del"
 [node name="LayerList" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 442.0
+margin_top = 438.0
 margin_right = 277.0
 margin_bottom = 1056.0
 size_flags_vertical = 3
@@ -560,6 +544,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="RenameDialog" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -35.0
+margin_right = 100.0
+margin_bottom = 35.0
+window_title = "Rename"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RenameBox" type="LineEdit" parent="RenameDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[connection signal="layer_selected" from="." to="." method="_on_UI_layer_selected"]
+[connection signal="rename_selected_layer" from="." to="Panel/VBoxContainer/LayerList" method="_on_UI_rename_selected_layer"]
 [connection signal="pressed" from="ItemList/ColorMenuBox/PalettePicker" to="ColorPickPopup" method="_on_PalettePicker_pressed"]
 [connection signal="value_changed" from="ItemList/ColorMenuBox/ColorPicker/PalettePositionSlider" to="ItemList/ColorMenuBox" method="_on_PalettePositionSlider_value_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/NewButton" to="." method="_on_NewButton_pressed"]
@@ -568,17 +576,22 @@ __meta__ = {
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer12/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer12/RedoButton" to="." method="_on_RedoButton_pressed"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/HBoxContainer/NameField" to="." method="_on_NameField_focus_exited"]
+[connection signal="text_entered" from="Panel/VBoxContainer/HBoxContainer/NameField" to="." method="_on_NameField_text_entered"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/HBoxContainer2/ArtistField" to="." method="_on_ArtistField_focus_exited"]
+[connection signal="text_entered" from="Panel/VBoxContainer/HBoxContainer2/ArtistField" to="." method="_on_ArtistField_text_entered"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/HBoxContainer4/VersionSpinner" to="." method="_on_VersionSpinner_focus_exited"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer4/VersionSpinner" to="." method="_on_VersionSpinner_value_changed"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer7/SizeSpinner" to="." method="_on_SizeSpinner_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer7/SizeSlider" to="." method="_on_SizeSlider_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer14/CutMoveSpinner" to="." method="_on_CutMoveSpinner_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer14/CutMoveSlider" to="." method="_on_CutMoveSlider_value_changed"]
-[connection signal="text_changed" from="Panel/VBoxContainer/HBoxContainer9/SelectedNameBox" to="." method="_on_SelectedNameBox_text_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/RenameLayerButton" to="." method="_on_RenameLayerButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer10/DupeButton" to="." method="_on_DupeButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer10/DelButton" to="." method="_on_DelButton_pressed"]
 [connection signal="height_change" from="Panel/VBoxContainer/LayerList" to="." method="_on_PositionList_height_change"]
 [connection signal="selected" from="Panel/VBoxContainer/LayerList" to="." method="_on_PositionList_selected"]
-[connection signal="selected" from="Panel/VBoxContainer/LayerList" to="Panel/VBoxContainer/HBoxContainer9/SelectedNameBox" method="_on_PositionList_selected"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddFullButton" to="." method="_on_AddFullButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddClearButton" to="." method="_on_AddClearButton_pressed"]
 [connection signal="texture_selected" from="ColorPickPopup" to="." method="_on_ColorPickPopup_texture_selected"]
@@ -586,3 +599,5 @@ __meta__ = {
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
 [connection signal="file_selected" from="ExportDialog" to="." method="_on_ExportDialog_file_selected"]
+[connection signal="confirmed" from="RenameDialog" to="." method="_on_RenameDialog_confirmed"]
+[connection signal="text_entered" from="RenameDialog/RenameBox" to="." method="_on_RenameBox_text_entered"]

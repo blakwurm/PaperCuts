@@ -57,13 +57,15 @@ func undo_cut():
 	if cuts.get_child_count() > 0:
 		var children: Array = cuts.get_children()
 		var last = children.pop_back()
+		cuts.remove_child(last)
 		redo_queue.add_child(last)
 		last.owner = redo_queue
 
 func redo_cut():
 	if redo_queue.get_child_count() > 0:
 		var children: Array = redo_queue.get_children()
-		var last = redo_queue.pop_back()
+		var last = children.pop_back()
+		redo_queue.remove_child(last)
 		cuts.add_child(last)
 		last.owner = cuts
 

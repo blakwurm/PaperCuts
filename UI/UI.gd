@@ -5,6 +5,8 @@ extends Control
 # var a = 2
 # var b = "text"
 
+
+
 signal add_mode_changed(new_add)
 signal layer_selected(layer_name)
 signal layer_height_raised(layer_name, new_height)
@@ -17,22 +19,55 @@ signal set_cut_move_frac(new_frac)
 signal save_file(filepath)
 signal load_file(filepath)
 signal export_to_file(filepath)
+signal undo_cut
+signal redo_cut
 
 onready var layer_list = $Panel/VBoxContainer/LayerList
 onready var color_menu_box = $ItemList/ColorMenuBox
 
 var opened_path = null
 
-const view_material = preload("res://Drawing/palette_render_material.tres")
+const view_material = preload("res://PaperCuts/palette_render_material.tres")
+const active_piece = preload("res://Resources/ActivePiece.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	active_piece.connect("changed", self, "_on_active_piece_change")
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_pressed("save"):
+		if active_piece.from_saved:
+			emit_signal("save_file", $SaveDialog.current_path)
+		else:
+			$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
+	elif Input.is_action_just_pressed("save_as"):
+		$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
+	elif Input.is_action_just_pressed("open"):
+		$Panel/VBoxContainer/HBoxContainer8/OpenButton.emit_signal("pressed")
+	elif Input.is_action_just_pressed("undo_cut"):
+		$Panel/VBoxContainer/HBoxContainer12/UndoButton.emit_signal("pressed")
+	elif Input.is_action_just_pressed("redo_cut"):
+		$Panel/VBoxContainer/HBoxContainer12/RedoButton.emit_signal("pressed")
+
+
+func _input(event):
+	if event is InputEventAction:
+		match event.action:
+			"save":
+				if active_piece.from_saved:
+					emit_signal("save_file", $SaveDialog.current_path)
+				else:
+					$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
+				pass
+			"save_as":
+				$Panel/VBoxContainer/HBoxContainer8/SaveButton.emit_signal("pressed")
+				pass
+			"load":
+				$Panel/VBoxContainer/HBoxContainer8/OpenButton.emit_signal("pressed")
+				pass
 
 func _on_ClipperAddToggle_toggled(button_pressed):
 	var val = 0
@@ -64,6 +99,8 @@ func _on_AddClearButton_pressed():
 
 func _on_Canvas_layer_added(layer_name, layer_height):
 	layer_list.add_item(layer_name, layer_height)
+	emit_signal("layer_selected", layer_name)
+	layer_list.select_item_key(layer_name)
 	pass # Replace with function body.
 
 
@@ -136,10 +173,12 @@ func _on_NewButton_pressed():
 
 
 func _on_RedoButton_pressed():
+	emit_signal("redo_cut")
 	pass # Replace with function body.
 
 
 func _on_UndoButton_pressed():
+	emit_signal("undo_cut")
 	pass # Replace with function body.
 
 
@@ -151,6 +190,11 @@ func _on_SaveDialog_file_selected(path):
 func _on_LoadDialog_file_selected(path):
 	opened_path = path
 	emit_signal("load_file", path)
+	var savedia:FileDialog = $SaveDialog
+	var loaddia:FileDialog = $LoadDialog
+	savedia.current_dir = loaddia.current_dir
+	savedia.current_file = loaddia.current_file
+	savedia.current_path = loaddia.current_path
 	pass # Replace with function body.
 
 
@@ -162,3 +206,71 @@ func _on_ExportDialog_file_selected(path):
 
 func _on_OpenButton2_pressed():
 	pass # Replace with function body.
+
+
+func _on_RenameDialog_confirmed():
+	var new_text = $RenameDialog/RenameBox.text
+	emit_signal("rename_selected_layer", new_text)
+	pass # Replace with function body.
+
+
+func _on_RenameLayerButton_pressed():
+	$RenameDialog.show()
+	$RenameDialog/RenameBox.grab_focus()
+	pass # Replace with function body.
+
+
+func _on_UI_layer_selected(layer_name):
+	$Panel/VBoxContainer/RenameLayerButton.text = "Rename '%s'" % layer_name
+	pass # Replace with function body.
+
+
+func _on_RenameBox_text_entered(new_text):
+	emit_signal("rename_selected_layer", new_text)
+	$RenameDialog/RenameBox.text = ""
+	$RenameDialog.visible = false
+	pass # Replace with function body.
+
+func _name_change(new_text):
+	active_piece.name = new_text
+	active_piece.emit_changed()
+	
+func _on_NameField_text_entered(new_text):
+	_name_change(new_text)
+	pass # Replace with function body.
+
+
+func _on_NameField_focus_exited():
+	_name_change($Panel/VBoxContainer/HBoxContainer/NameField.text)
+	pass # Replace with function body.
+
+func _artist_change(new_text):
+	active_piece.artist = new_text
+	active_piece.emit_changed()
+
+func _on_ArtistField_text_entered(new_text):
+	_artist_change( new_text)
+	pass # Replace with function body.
+
+
+func _on_ArtistField_focus_exited():
+	_artist_change($Panel/VBoxContainer/HBoxContainer2/ArtistField.text)
+	pass # Replace with function body.
+
+func _version_change(new_ver):
+	active_piece.version = new_ver
+	active_piece.emit_changed()
+
+func _on_VersionSpinner_value_changed(value):
+	_version_change(value)
+	pass # Replace with function body.
+
+
+func _on_VersionSpinner_focus_exited():
+	_version_change($Panel/VBoxContainer/HBoxContainer4/VersionSpinner.value)
+	pass # Replace with function body.
+
+func _on_active_piece_change():
+	$Panel/VBoxContainer/HBoxContainer/NameField.text = active_piece.name
+	$Panel/VBoxContainer/HBoxContainer2/ArtistField.text = active_piece.artist
+	$Panel/VBoxContainer/HBoxContainer4/VersionSpinner.value = active_piece.version

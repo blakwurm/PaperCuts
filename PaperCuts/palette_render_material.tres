@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://Drawing/palette_rendder_shader.gdshader" type="Shader" id=1]
+[ext_resource path="res://PaperCuts/palette_rendder_shader.gdshader" type="Shader" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
 
 [resource]

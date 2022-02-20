@@ -7,7 +7,8 @@ extends Node2D
 
 export onready var selected_layer_name = "" setget set_selected_layer_name
 
-const palette_material = preload("res://Drawing/palette_render_material.tres")
+const palette_material = preload("res://PaperCuts/palette_render_material.tres")
+const active_piece = preload("res://Resources/ActivePiece.tres")
 onready var render = $Render
 
 const size = 2048
@@ -71,6 +72,12 @@ func set_selected_layer_name(_sln: String):
 	emit_signal("layer_selected", selected_layer_name, layers.get_node(selected_layer_name))
 	pass
 
+func rename_selected_layer(_name: String):
+	var layer = layers.get_node(selected_layer_name)
+	layer.name = _name
+	selected_layer_name = _name
+	pass
+
 func get_selected_layer():
 	return layers.get_node(selected_layer_name)
 
@@ -112,11 +119,13 @@ func save_current(filepath):
 		var ldata = [child.name, child.height, child.palette_offset, pn]
 		saved.layers.append(ldata)
 		pass
-	saved.artist = "Zaphodious"
-	saved.art_version = 0
+	saved.name = active_piece.name
+	saved.artist = active_piece.artist
+	saved.art_version = active_piece.version
 	print(saved)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
 	print("should be saved now")
+	active_piece.from_saved = true
 
 func load_thing(filepath, append=false):
 	var res = load(filepath)
@@ -135,6 +144,11 @@ func load_thing(filepath, append=false):
 	var pal: Image = res.palette
 	
 	palette_material.set_shader_param("palette", tx)
+	active_piece.name = res.name 
+	active_piece.artist = res.artist
+	active_piece.version = res.art_version
+	active_piece.from_saved = true
+	active_piece.emit_changed()
 
 func _on_UI_add_layer(filled):
 	self.add_layer("", filled)
@@ -168,6 +182,7 @@ func _on_UI_dupe_selected_layer():
 
 
 func _on_UI_rename_selected_layer(new_name):
+	self.rename_selected_layer(new_name)
 	pass # Replace with function body.
 
 
@@ -178,4 +193,14 @@ func _on_UI_save_file(filepath):
 
 func _on_UI_load_file(filepath):
 	self.load_thing(filepath)
+	pass # Replace with function body.
+
+
+func _on_UI_undo_cut():
+	undo_cut()
+	pass # Replace with function body.
+
+
+func _on_UI_redo_cut():
+	redo_cut()
 	pass # Replace with function body.

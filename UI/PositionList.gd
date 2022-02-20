@@ -5,10 +5,11 @@ extends Control
 # var a = 2
 # var b = "text"
 
-onready var items = $HBoxContainer/ItemList
+const layer_button = preload("res://UI/LayerButton.tscn")
+
 onready var height_slider = $HBoxContainer/HeightSlider
+onready var layer_buttons = $HBoxContainer/ScrollContainer/LayerButtons
 var raw_items = {}
-var selected_ind = 0 setget select_item_ind
 var selected_key = "" setget select_item_key
 
 signal selected(key)
@@ -20,34 +21,27 @@ func _ready():
 
 func add_item(key: String, height: float):
 	print(key)
-	items.add_item(key)
 	raw_items[key] = height
 	print(raw_items)
 	self.sort_items_by_height()
 	self.selected_key = key
 
 func remove_item(key):
-	var ind = items.items.bsearch(key)
-	items.remove_item(ind)
 	raw_items.erase(key)
 	self.sort_items_by_height()
-	
-func select_item_ind(_ind):
-	selected_ind = _ind
-	items.select(_ind)
-	selected_key = items.get_item_text(_ind)
-	var height = raw_items.get(selected_key, 0.0)
-	height_slider.value = height
-	print("selected thing at ", _ind)
 
 func select_item_key(_key):
-	select_item_ind(items.items.bsearch(_key))
+	selected_key = _key
+	height_slider.value = raw_items.get(_key, 0.0)
+	for child in layer_buttons.get_children():
+		child.pressed = child.layer_name == selected_key
+	emit_signal("selected", _key)
 
 func rename_selected_item(_new_name):
 	var height = raw_items[selected_key]
 	raw_items.erase(selected_key)
 	raw_items[_new_name] = height
-	items.set_item_text(selected_ind, _new_name)
+	sort_items_by_height()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -58,9 +52,14 @@ func sort_items_by_height():
 	for key in raw_items.keys():
 		li.append([key, raw_items[key]])
 	li.sort_custom(self, "_height_sort_fn")
-	items.clear()
+	for child in layer_buttons.get_children():
+		child.queue_free()
 	for thingy in li:
-		items.add_item(thingy[0])
+		var btn = layer_button.instance()
+		btn.layer_name = thingy[0]
+		btn.pressed = btn.layer_name == selected_key
+		btn.connect("layer_selected", self, "_on_layer_button_pressed")
+		layer_buttons.add_child(btn)
 	pass
 
 static func _height_sort_fn(a, b):
@@ -76,12 +75,17 @@ func change_selected_height(_h: float):
 	emit_signal("height_change", selected_key, _h)
 	pass
 
-func _on_ItemList_item_selected(index):
-	self.selected_ind = index
-	emit_signal("selected", selected_key)
-	pass # Replace with function body.
-
+func _on_layer_button_pressed(layername):
+	self.selected_key = layername
+	emit_signal("selected", layername)
 
 func _on_VSlider_value_changed(value):
 	change_selected_height(value)
+	pass # Replace with function body.
+
+
+func _on_UI_rename_selected_layer(new_name):
+	self.rename_selected_item(new_name)
+	self.sort_items_by_height()
+	emit_signal("selected", new_name)
 	pass # Replace with function body.

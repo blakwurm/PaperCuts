@@ -28,10 +28,12 @@ layer = 128
 
 [connection signal="layer_added" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_added"]
 [connection signal="layer_selected" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_selected"]
+[connection signal="change_zoom" from="Mundo/PolygonDrawingCamera" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_PolygonDrawingCamera_change_zoom"]
 [connection signal="create_polygon" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="add_cut"]
 [connection signal="move_cuts" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="_on_PolygonDrawingCamera_move_cuts"]
 [connection signal="add_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_add_layer"]
 [connection signal="add_mode_changed" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="set_polygon_lightness"]
+[connection signal="append_file" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_append_file"]
 [connection signal="del_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_del_selected_layer"]
 [connection signal="dupe_selected_layer" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_dupe_selected_layer"]
 [connection signal="export_to_file" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_export_to_file"]
@@ -43,4 +45,5 @@ layer = 128
 [connection signal="resize_pen_leash" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="_on_UI_resize_pen_leash"]
 [connection signal="save_file" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_save_file"]
 [connection signal="set_cut_move_frac" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="_on_UI_set_cut_move_frac"]
+[connection signal="set_zoom" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/PolygonDrawingCamera" method="_on_UI_set_zoom"]
 [connection signal="undo_cut" from="Mundo/PolygonDrawingCamera/CanvasLayer/UI" to="Mundo/Canvas" method="_on_UI_undo_cut"]

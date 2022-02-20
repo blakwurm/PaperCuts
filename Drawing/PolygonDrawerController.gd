@@ -20,10 +20,12 @@ var cut_move_frac = 0.5
 
 signal create_polygon(polygon)
 signal move_cuts(delta)
+signal change_zoom(zoomdist)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset_polygon()
+	emit_signal("change_zoom", self.zoom.x)
 	pass # Replace with function body.
 
 func set_drag_leash_size(_new_size):
@@ -66,9 +68,11 @@ func _unhandled_input(event):
 		if event.action == "zoom_in":
 			print("zooming in")
 			self.zoom += Vector2(0.1,0.1)
+			emit_signal("change_zoom", self.zoom.x)
 		if event.action == "zoom_out":
 			print("zooming out")
 			self.zoom -= Vector2(0.1,0.1)
+			emit_signal("change_zoom", self.zoom.x)
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("draw"):
 			print("draw pressed")
@@ -109,6 +113,9 @@ func _unhandled_input(event):
 		last_mouse_pos = mousepos
 		
 		
+func set_zoom_amt(new_zoom: float):
+	self.zoom = Vector2(new_zoom, new_zoom)
+	emit_signal("change_zoom", self.zoom.x)
 
 
 func _on_UI_resize_pen_leash(new_size):
@@ -118,4 +125,9 @@ func _on_UI_resize_pen_leash(new_size):
 
 func _on_UI_set_cut_move_frac(new_frac):
 	cut_move_frac=new_frac
+	pass # Replace with function body.
+
+
+func _on_UI_set_zoom(new_zoom_amt):
+	self.set_zoom_amt(new_zoom_amt)
 	pass # Replace with function body.

@@ -241,3 +241,8 @@ func _on_UI_export_to_file(filepath: String):
 	elif filepath.ends_with(".png"):
 		export_image(filepath)
 	pass # Replace with function body.
+
+
+func _on_UI_append_file(filepath):
+	self.load_thing(filepath, true)
+	pass # Replace with function body.

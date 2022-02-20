@@ -245,14 +245,21 @@ margin_left = 41.0
 margin_right = 115.0
 margin_bottom = 24.0
 size_flags_stretch_ratio = 0.32
-min_value = 1.0
+min_value = 0.25
+max_value = 5.0
+step = 0.25
 value = 1.0
+allow_greater = true
 
 [node name="ZoomSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer13"]
 margin_left = 119.0
 margin_right = 277.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
+min_value = 0.25
+max_value = 5.0
+step = 0.25
+value = 0.25
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
 margin_top = 212.0
@@ -551,6 +558,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AppendDialog" type="FileDialog" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 400, 140 )
+window_title = "Open a File"
+dialog_hide_on_ok = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.papercut.tres ; Papercut File" )
+current_dir = "/Users"
+current_path = "/Users/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ExportDialog" type="FileDialog" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -595,6 +619,7 @@ margin_bottom = -36.0
 [connection signal="value_changed" from="ItemList/ColorMenuBox/ColorPicker/PalettePositionSlider" to="ItemList/ColorMenuBox" method="_on_PalettePositionSlider_value_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/NewButton" to="." method="_on_NewButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/OpenButton" to="." method="_on_OpenButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/AppendButton" to="." method="_on_AppendButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer12/UndoButton" to="." method="_on_UndoButton_pressed"]
@@ -605,6 +630,8 @@ margin_bottom = -36.0
 [connection signal="text_entered" from="Panel/VBoxContainer/HBoxContainer2/ArtistField" to="." method="_on_ArtistField_text_entered"]
 [connection signal="focus_exited" from="Panel/VBoxContainer/HBoxContainer4/VersionSpinner" to="." method="_on_VersionSpinner_focus_exited"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer4/VersionSpinner" to="." method="_on_VersionSpinner_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer13/ZoomSpinner" to="." method="_on_ZoomSpinner_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer13/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer7/SizeSpinner" to="." method="_on_SizeSpinner_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer7/SizeSlider" to="." method="_on_SizeSlider_value_changed"]
@@ -623,6 +650,7 @@ margin_bottom = -36.0
 [connection signal="pressed" from="ColorPickPopup/ReloadPalettesButton" to="." method="_on_ReloadPalettesButton_pressed"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
+[connection signal="file_selected" from="AppendDialog" to="." method="_on_AppendDialog_file_selected"]
 [connection signal="file_selected" from="ExportDialog" to="." method="_on_ExportDialog_file_selected"]
 [connection signal="confirmed" from="RenameDialog" to="." method="_on_RenameDialog_confirmed"]
 [connection signal="text_entered" from="RenameDialog/RenameBox" to="." method="_on_RenameBox_text_entered"]

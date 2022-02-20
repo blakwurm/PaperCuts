@@ -18,7 +18,9 @@ signal resize_pen_leash(new_size)
 signal set_cut_move_frac(new_frac)
 signal save_file(filepath)
 signal load_file(filepath)
+signal append_file(filepath)
 signal export_to_file(filepath)
+signal set_zoom(new_zoom_amt)
 signal undo_cut
 signal redo_cut
 
@@ -306,4 +308,32 @@ func _on_OpenPalettesButton_pressed():
 
 func _on_ReloadPalettesButton_pressed():
 	self.load_user_palettes()
+	pass # Replace with function body.
+
+
+func _on_AppendButton_pressed():
+	$AppendDialog.show()
+	pass # Replace with function body.
+
+
+func _on_AppendDialog_file_selected(path):
+	emit_signal("append_file", path)
+	pass # Replace with function body.
+
+
+func _on_ZoomSpinner_value_changed(value):
+	$Panel/VBoxContainer/HBoxContainer13/ZoomSlider.value = value
+	emit_signal("set_zoom", value)
+	pass # Replace with function body.
+
+
+func _on_ZoomSlider_value_changed(value):
+	$Panel/VBoxContainer/HBoxContainer13/ZoomSpinner.value = value
+	emit_signal("set_zoom", value)
+	pass # Replace with function body.
+
+
+func _on_PolygonDrawingCamera_change_zoom(zoomdist):
+	$Panel/VBoxContainer/HBoxContainer13/ZoomSlider.value = zoomdist
+	$Panel/VBoxContainer/HBoxContainer13/ZoomSpinner.value = zoomdist
 	pass # Replace with function body.

@@ -20,8 +20,8 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 277.0
-margin_top = -48.0
+margin_left = 481.0
+margin_top = -79.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,34 +35,34 @@ __meta__ = {
 }
 
 [node name="PalettePicker" type="Button" parent="ItemList/ColorMenuBox"]
-margin_right = 107.0
-margin_bottom = 48.0
+margin_right = 186.0
+margin_bottom = 79.0
 size_flags_stretch_ratio = 0.02
 text = "Change Palette"
 
 [node name="ColorPicker" type="VBoxContainer" parent="ItemList/ColorMenuBox"]
-margin_left = 111.0
-margin_right = 1643.0
-margin_bottom = 48.0
+margin_left = 194.0
+margin_right = 1439.0
+margin_bottom = 79.0
 size_flags_horizontal = 3
 
 [node name="PalettePositionSlider" type="HSlider" parent="ItemList/ColorMenuBox/ColorPicker"]
-margin_right = 1532.0
-margin_bottom = 16.0
+margin_right = 1245.0
+margin_bottom = 32.0
 max_value = 1.0
 step = 0.001
 
 [node name="PaletteTexture" type="TextureRect" parent="ItemList/ColorMenuBox/ColorPicker"]
-margin_top = 20.0
-margin_right = 1532.0
-margin_bottom = 48.0
+margin_top = 40.0
+margin_right = 1245.0
+margin_bottom = 79.0
 size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
 
 [node name="Panel" type="Panel" parent="."]
 anchor_bottom = 1.0
-margin_right = 277.0
+margin_right = 481.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -75,175 +75,244 @@ __meta__ = {
 }
 
 [node name="HBoxContainer8" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_right = 277.0
-margin_bottom = 20.0
+margin_right = 481.0
+margin_bottom = 37.0
 alignment = 1
 
 [node name="NewButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_right = 49.0
-margin_bottom = 20.0
+margin_right = 114.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "New"
 
 [node name="OpenButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 53.0
-margin_right = 102.0
-margin_bottom = 20.0
+margin_left = 122.0
+margin_right = 236.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Open"
 
 [node name="AppendButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 106.0
-margin_right = 167.0
-margin_bottom = 20.0
+margin_left = 244.0
+margin_right = 358.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Append"
 
 [node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 171.0
-margin_right = 220.0
-margin_bottom = 20.0
+margin_left = 366.0
+margin_right = 481.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Save"
 
 [node name="ExportButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 224.0
-margin_right = 276.0
-margin_bottom = 20.0
+visible = false
+margin_left = 386.0
+margin_right = 481.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Export"
 
 [node name="HBoxContainer12" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 24.0
-margin_right = 277.0
-margin_bottom = 44.0
+margin_top = 45.0
+margin_right = 481.0
+margin_bottom = 82.0
 alignment = 1
 
 [node name="UndoButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer12"]
-margin_right = 136.0
-margin_bottom = 20.0
+margin_right = 236.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Undo Cut"
 
 [node name="RedoButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer12"]
-margin_left = 140.0
-margin_right = 277.0
-margin_bottom = 20.0
+margin_left = 244.0
+margin_right = 481.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Redo Cut"
 
 [node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 48.0
-margin_right = 277.0
-margin_bottom = 52.0
+margin_top = 90.0
+margin_right = 481.0
+margin_bottom = 98.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 56.0
-margin_right = 277.0
-margin_bottom = 70.0
+margin_top = 106.0
+margin_right = 481.0
+margin_bottom = 131.0
 text = "Image"
 align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 74.0
-margin_right = 277.0
-margin_bottom = 98.0
+margin_top = 139.0
+margin_right = 481.0
+margin_bottom = 184.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_top = 5.0
-margin_right = 38.0
-margin_bottom = 19.0
-text = "Name"
+margin_top = 10.0
+margin_right = 84.0
+margin_bottom = 35.0
+text = "Name   "
 align = 1
 valign = 1
 
 [node name="NameField" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_left = 42.0
-margin_right = 277.0
-margin_bottom = 24.0
+margin_left = 92.0
+margin_right = 481.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 102.0
-margin_right = 277.0
-margin_bottom = 126.0
+margin_top = 192.0
+margin_right = 481.0
+margin_bottom = 237.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
-margin_top = 5.0
-margin_right = 35.0
-margin_bottom = 19.0
-text = "Artist"
+margin_top = 10.0
+margin_right = 82.0
+margin_bottom = 35.0
+text = "Artist    "
 align = 1
 valign = 1
 
 [node name="ArtistField" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer2"]
-margin_left = 39.0
-margin_right = 277.0
-margin_bottom = 24.0
+margin_left = 90.0
+margin_right = 481.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 130.0
-margin_right = 277.0
-margin_bottom = 154.0
+margin_top = 245.0
+margin_right = 481.0
+margin_bottom = 290.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer4"]
-margin_top = 5.0
-margin_right = 48.0
-margin_bottom = 19.0
+margin_top = 10.0
+margin_right = 82.0
+margin_bottom = 35.0
 text = "Version"
 align = 1
 valign = 1
 
 [node name="VersionSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer4"]
-margin_left = 52.0
-margin_right = 277.0
-margin_bottom = 24.0
+margin_left = 90.0
+margin_right = 481.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
 
+[node name="HBoxContainer15" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 298.0
+margin_right = 481.0
+margin_bottom = 343.0
+alignment = 1
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer15"]
+margin_top = 10.0
+margin_right = 163.0
+margin_bottom = 35.0
+text = "Shadow Depth "
+align = 1
+valign = 1
+
+[node name="ShadowSizeSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer15"]
+margin_left = 171.0
+margin_right = 367.0
+margin_bottom = 45.0
+size_flags_stretch_ratio = 0.32
+min_value = 0.001
+max_value = 0.01
+step = 0.001
+value = 0.009
+allow_greater = true
+
+[node name="ShadowSizeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer15"]
+margin_left = 375.0
+margin_right = 481.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 0.02
+step = 0.001
+value = 0.009
+
+[node name="HBoxContainer16" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 351.0
+margin_right = 481.0
+margin_bottom = 396.0
+alignment = 1
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer16"]
+margin_top = 10.0
+margin_right = 165.0
+margin_bottom = 35.0
+text = "Shadow Passes"
+align = 1
+valign = 1
+
+[node name="ShadowPassesSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer16"]
+margin_left = 173.0
+margin_right = 369.0
+margin_bottom = 45.0
+size_flags_stretch_ratio = 0.32
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+allow_greater = true
+
+[node name="ShadowPassesSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer16"]
+margin_left = 377.0
+margin_right = 481.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+
 [node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 158.0
-margin_right = 277.0
-margin_bottom = 162.0
+margin_top = 404.0
+margin_right = 481.0
+margin_bottom = 412.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 166.0
-margin_right = 277.0
-margin_bottom = 180.0
+margin_top = 420.0
+margin_right = 481.0
+margin_bottom = 445.0
 text = "View"
 align = 1
 valign = 1
 
 [node name="HBoxContainer13" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 184.0
-margin_right = 277.0
-margin_bottom = 208.0
+margin_top = 453.0
+margin_right = 481.0
+margin_bottom = 498.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer13"]
-margin_top = 5.0
-margin_right = 37.0
-margin_bottom = 19.0
+margin_top = 10.0
+margin_right = 63.0
+margin_bottom = 35.0
 text = "Zoom"
 align = 1
 valign = 1
 
 [node name="ZoomSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer13"]
-margin_left = 41.0
-margin_right = 115.0
-margin_bottom = 24.0
+margin_left = 71.0
+margin_right = 267.0
+margin_bottom = 45.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.25
 max_value = 5.0
@@ -252,9 +321,9 @@ value = 1.0
 allow_greater = true
 
 [node name="ZoomSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer13"]
-margin_left = 119.0
-margin_right = 277.0
-margin_bottom = 16.0
+margin_left = 275.0
+margin_right = 481.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 min_value = 0.25
 max_value = 5.0
@@ -262,51 +331,51 @@ step = 0.25
 value = 0.25
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 212.0
-margin_right = 277.0
-margin_bottom = 216.0
+margin_top = 506.0
+margin_right = 481.0
+margin_bottom = 514.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 220.0
-margin_right = 277.0
-margin_bottom = 234.0
+margin_top = 522.0
+margin_right = 481.0
+margin_bottom = 547.0
 text = "Clippers"
 align = 1
 valign = 1
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 238.0
-margin_right = 277.0
-margin_bottom = 278.0
+margin_top = 555.0
+margin_right = 481.0
+margin_bottom = 635.0
 alignment = 1
 
 [node name="ClipperAddToggle" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer5"]
-margin_right = 277.0
-margin_bottom = 40.0
+margin_right = 481.0
+margin_bottom = 80.0
 size_flags_horizontal = 3
 text = "Add"
 
 [node name="HBoxContainer7" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 282.0
-margin_right = 277.0
-margin_bottom = 306.0
+margin_top = 643.0
+margin_right = 481.0
+margin_bottom = 688.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_top = 5.0
-margin_right = 59.0
-margin_bottom = 19.0
+margin_top = 10.0
+margin_right = 101.0
+margin_bottom = 35.0
 text = "Drag Size"
 align = 1
 valign = 1
 
 [node name="SizeSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_left = 63.0
-margin_right = 137.0
-margin_bottom = 24.0
+margin_left = 109.0
+margin_right = 305.0
+margin_bottom = 45.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.01
 max_value = 1.0
@@ -314,9 +383,9 @@ step = 0.01
 value = 0.3
 
 [node name="SizeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_left = 141.0
-margin_right = 277.0
-margin_bottom = 16.0
+margin_left = 313.0
+margin_right = 481.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 min_value = 0.01
 max_value = 1.0
@@ -324,39 +393,39 @@ step = 0.01
 value = 0.3
 
 [node name="HSeparator6" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 310.0
-margin_right = 277.0
-margin_bottom = 314.0
+margin_top = 696.0
+margin_right = 481.0
+margin_bottom = 704.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label6" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 318.0
-margin_right = 277.0
-margin_bottom = 332.0
+margin_top = 712.0
+margin_right = 481.0
+margin_bottom = 737.0
 text = "Cut Mover"
 align = 1
 valign = 1
 
 [node name="HBoxContainer14" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 336.0
-margin_right = 277.0
-margin_bottom = 360.0
+margin_top = 745.0
+margin_right = 481.0
+margin_bottom = 790.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer14"]
-margin_top = 5.0
-margin_right = 65.0
-margin_bottom = 19.0
+margin_top = 10.0
+margin_right = 112.0
+margin_bottom = 35.0
 text = "Move Frac"
 align = 1
 valign = 1
 
 [node name="CutMoveSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer14"]
-margin_left = 69.0
-margin_right = 143.0
-margin_bottom = 24.0
+margin_left = 120.0
+margin_right = 316.0
+margin_bottom = 45.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.1
 max_value = 1.0
@@ -364,9 +433,9 @@ step = 0.01
 value = 0.5
 
 [node name="CutMoveSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer14"]
-margin_left = 147.0
-margin_right = 277.0
-margin_bottom = 16.0
+margin_left = 324.0
+margin_right = 481.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 min_value = 0.1
 max_value = 1.0
@@ -374,60 +443,60 @@ step = 0.01
 value = 0.5
 
 [node name="HSeparator5" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 364.0
-margin_right = 277.0
-margin_bottom = 368.0
+margin_top = 798.0
+margin_right = 481.0
+margin_bottom = 806.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label5" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 372.0
-margin_right = 277.0
-margin_bottom = 386.0
-text = "Layer"
+margin_top = 814.0
+margin_right = 481.0
+margin_bottom = 839.0
+text = "Layers"
 align = 1
 valign = 1
 
 [node name="RenameLayerButton" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 390.0
-margin_right = 277.0
-margin_bottom = 410.0
+margin_top = 847.0
+margin_right = 481.0
+margin_bottom = 884.0
 text = "No Layer Selected"
 
 [node name="HBoxContainer10" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 414.0
-margin_right = 277.0
-margin_bottom = 434.0
+margin_top = 892.0
+margin_right = 481.0
+margin_bottom = 929.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DupeButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
-margin_right = 136.0
-margin_bottom = 20.0
+margin_right = 236.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Dupe"
 
 [node name="DelButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
-margin_left = 140.0
-margin_right = 277.0
-margin_bottom = 20.0
+margin_left = 244.0
+margin_right = 481.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Del"
 
 [node name="LayerList" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 438.0
-margin_right = 277.0
-margin_bottom = 1056.0
+margin_top = 937.0
+margin_right = 481.0
+margin_bottom = 1035.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer11" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 1060.0
-margin_right = 277.0
+margin_top = 1043.0
+margin_right = 481.0
 margin_bottom = 1080.0
 alignment = 1
 __meta__ = {
@@ -435,15 +504,15 @@ __meta__ = {
 }
 
 [node name="AddFullButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer11"]
-margin_right = 136.0
-margin_bottom = 20.0
+margin_right = 236.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "+ Full"
 
 [node name="AddClearButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer11"]
-margin_left = 140.0
-margin_right = 277.0
-margin_bottom = 20.0
+margin_left = 244.0
+margin_right = 481.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "+ Clear"
 
@@ -451,6 +520,7 @@ text = "+ Clear"
 layer = 20
 
 [node name="ColorPickPopup" type="WindowDialog" parent="."]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 755.0
@@ -492,38 +562,45 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorPickPopup"]
-margin_left = 18.0
-margin_top = 15.0
-margin_right = 674.0
-margin_bottom = 789.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -120.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorOptions" type="VBoxContainer" parent="ColorPickPopup/ScrollContainer"]
-margin_right = 656.0
+margin_right = 625.0
 size_flags_horizontal = 3
 
-[node name="OpenPalettesButton" type="Button" parent="ColorPickPopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorPickPopup"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -70.5
-margin_top = -49.0
-margin_right = 69.5
-margin_bottom = -29.0
-text = "Open Palette Folder"
+margin_left = -119.5
+margin_top = -93.0
+margin_right = 119.5
+margin_bottom = -11.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ReloadPalettesButton" type="Button" parent="ColorPickPopup"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -58.5
-margin_top = -26.0
-margin_right = 58.5
-margin_bottom = -6.0
+[node name="OpenPalettesButton" type="Button" parent="ColorPickPopup/VBoxContainer"]
+margin_right = 239.0
+margin_bottom = 37.0
+text = "Open Palette Folder"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadPalettesButton" type="Button" parent="ColorPickPopup/VBoxContainer"]
+margin_top = 45.0
+margin_right = 239.0
+margin_bottom = 82.0
 text = "Reload Palettes"
 
 [node name="SaveDialog" type="FileDialog" parent="."]
@@ -608,10 +685,21 @@ __meta__ = {
 [node name="RenameBox" type="LineEdit" parent="RenameDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -36.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -69.0
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -35.0
+margin_right = 100.0
+margin_bottom = 35.0
+dialog_text = "New Piece?"
 
 [connection signal="layer_selected" from="." to="." method="_on_UI_layer_selected"]
 [connection signal="rename_selected_layer" from="." to="Panel/VBoxContainer/LayerList" method="_on_UI_rename_selected_layer"]
@@ -630,6 +718,10 @@ margin_bottom = -36.0
 [connection signal="text_entered" from="Panel/VBoxContainer/HBoxContainer2/ArtistField" to="." method="_on_ArtistField_text_entered"]
 [connection signal="focus_exited" from="Panel/VBoxContainer/HBoxContainer4/VersionSpinner" to="." method="_on_VersionSpinner_focus_exited"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer4/VersionSpinner" to="." method="_on_VersionSpinner_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer15/ShadowSizeSpinner" to="." method="_on_ShadowSize_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer15/ShadowSizeSlider" to="." method="_on_ShadowSize_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer16/ShadowPassesSpinner" to="." method="_on_ShadowPasses_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer16/ShadowPassesSlider" to="." method="_on_ShadowPasses_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer13/ZoomSpinner" to="." method="_on_ZoomSpinner_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer13/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]
@@ -646,8 +738,8 @@ margin_bottom = -36.0
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer11/AddClearButton" to="." method="_on_AddClearButton_pressed"]
 [connection signal="texture_selected" from="ColorPickPopup" to="." method="_on_ColorPickPopup_texture_selected"]
 [connection signal="texture_selected" from="ColorPickPopup" to="ItemList/ColorMenuBox" method="_on_ColorPickPopup_texture_selected"]
-[connection signal="pressed" from="ColorPickPopup/OpenPalettesButton" to="." method="_on_OpenPalettesButton_pressed"]
-[connection signal="pressed" from="ColorPickPopup/ReloadPalettesButton" to="." method="_on_ReloadPalettesButton_pressed"]
+[connection signal="pressed" from="ColorPickPopup/VBoxContainer/OpenPalettesButton" to="." method="_on_OpenPalettesButton_pressed"]
+[connection signal="pressed" from="ColorPickPopup/VBoxContainer/ReloadPalettesButton" to="." method="_on_ReloadPalettesButton_pressed"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
 [connection signal="file_selected" from="AppendDialog" to="." method="_on_AppendDialog_file_selected"]

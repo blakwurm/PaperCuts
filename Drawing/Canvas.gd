@@ -22,10 +22,12 @@ onready var removed_stack = $RemovedStack
 
 signal layer_added(layer_name, layer_height)
 signal layer_selected(layer_name, layer)
+signal layer_removed(layer_name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	random.randomize()
+	active_piece.connect("changed", self, "_on_active_piece_change")
 	#var ln = add_layer()
 	#if selected_layer_name == "":
 	#	self.selected_layer_name = ln.name
@@ -58,6 +60,7 @@ func remove_layer(layer_name):
 		return
 	layers.remove_child(layer)
 	layer.queue_free()
+	emit_signal("layer_removed", layer_name)
 	#if layers.get_child_count() < 1:
 	#	self.selected_layer_name = self.add_layer().name
 
@@ -126,12 +129,22 @@ func save_current(filepath: String):
 	saved.name = active_piece.name
 	saved.artist = active_piece.artist
 	saved.art_version = active_piece.version
+	saved.shadow_passes = active_piece.shadow_passes
+	saved.shadow_size = active_piece.shadow_size
 	print(saved)
 	var dir = Directory.new()
 	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
 	self.export_image(filepath.replace(".papercut.tres", ".pretty.png"))
 	self.export_raw_image(filepath.replace(".papercut.tres", ".raw.png"))
+	var exported_mat = ShaderMaterial.new()
+	exported_mat.shader = load("res://PaperCuts/palette_rendder_shader.gdshader")
+	var tx = ImageTexture.new()
+	tx.create_from_image(saved.palette, 0)
+	exported_mat.set_shader_param("palette", tx)
+	exported_mat.set_shader_param("shadow_passes", saved.shadow_passes)
+	exported_mat.set_shader_param("shadow_amount", saved.shadow_size)
+	ResourceSaver.save(filepath.replace(".papercut.tres", ".shadowmat.tres"), exported_mat)
 	print("should be saved now")
 	active_piece.from_saved = true
 
@@ -156,6 +169,8 @@ func load_thing(filepath, append=false):
 	active_piece.name = res.name 
 	active_piece.artist = res.artist
 	active_piece.version = res.art_version
+	active_piece.shadow_passes = res.shadow_passes
+	active_piece.shadow_size = res.shadow_size
 	active_piece.from_saved = true
 	active_piece.emit_changed()
 
@@ -246,3 +261,8 @@ func _on_UI_export_to_file(filepath: String):
 func _on_UI_append_file(filepath):
 	self.load_thing(filepath, true)
 	pass # Replace with function body.
+
+func _on_active_piece_change():
+	palette_material.set_shader_param("shadow_amount", active_piece.shadow_size)
+	palette_material.set_shader_param("shadow_passes", active_piece.shadow_passes)
+	pass

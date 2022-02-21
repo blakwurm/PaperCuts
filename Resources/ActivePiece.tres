@@ -8,3 +8,5 @@ name = ""
 artist = ""
 version = 0
 from_saved = false
+shadow_size = 0.009
+shadow_passes = 10

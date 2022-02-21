@@ -27,6 +27,7 @@ layer = 128
 [node name="UI" parent="Mundo/PolygonDrawingCamera/CanvasLayer" instance=ExtResource( 1 )]
 
 [connection signal="layer_added" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_added"]
+[connection signal="layer_removed" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_removed"]
 [connection signal="layer_selected" from="Mundo/Canvas" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_Canvas_layer_selected"]
 [connection signal="change_zoom" from="Mundo/PolygonDrawingCamera" to="Mundo/PolygonDrawingCamera/CanvasLayer/UI" method="_on_PolygonDrawingCamera_change_zoom"]
 [connection signal="create_polygon" from="Mundo/PolygonDrawingCamera" to="Mundo/Canvas" method="add_cut"]

@@ -185,6 +185,7 @@ func _on_ExportButton_pressed():
 
 
 func _on_NewButton_pressed():
+	emit_signal("new_canvas")
 	pass # Replace with function body.
 
 
@@ -217,10 +218,6 @@ func _on_LoadDialog_file_selected(path):
 func _on_ExportDialog_file_selected(path):
 	print(path)
 	emit_signal("export_to_file", path)
-	pass # Replace with function body.
-
-
-func _on_OpenButton2_pressed():
 	pass # Replace with function body.
 
 
@@ -290,6 +287,11 @@ func _on_active_piece_change():
 	$Panel/VBoxContainer/HBoxContainer/NameField.text = active_piece.name
 	$Panel/VBoxContainer/HBoxContainer2/ArtistField.text = active_piece.artist
 	$Panel/VBoxContainer/HBoxContainer4/VersionSpinner.value = active_piece.version
+	$Panel/VBoxContainer/HBoxContainer15/ShadowSizeSlider.value = active_piece.shadow_size
+	$Panel/VBoxContainer/HBoxContainer15/ShadowSizeSpinner.value = active_piece.shadow_size
+	$Panel/VBoxContainer/HBoxContainer16/ShadowPassesSlider.value = active_piece.shadow_passes
+	$Panel/VBoxContainer/HBoxContainer16/ShadowPassesSpinner.value = active_piece.shadow_passes
+	
 
 func _on_files_dropped(files, screen):
 	var firstfile: String = files[0]
@@ -336,4 +338,21 @@ func _on_ZoomSlider_value_changed(value):
 func _on_PolygonDrawingCamera_change_zoom(zoomdist):
 	$Panel/VBoxContainer/HBoxContainer13/ZoomSlider.value = zoomdist
 	$Panel/VBoxContainer/HBoxContainer13/ZoomSpinner.value = zoomdist
+	pass # Replace with function body.
+
+
+func _on_ShadowSize_value_changed(value):
+	active_piece.shadow_size = value
+	active_piece.emit_changed()
+	pass # Replace with function body.
+
+
+func _on_ShadowPasses_value_changed(value):
+	active_piece.shadow_passes = value
+	active_piece.emit_changed()
+	pass # Replace with function body.
+
+
+func _on_Canvas_layer_removed(layer_name):
+	layer_list.remove_item(layer_name)
 	pass # Replace with function body.

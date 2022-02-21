@@ -14,6 +14,9 @@ export(int) var art_version = 1
 export(Image) var palette
 export(float) var shadow_size = 0.009
 export(int) var shadow_passes = 10
+export(bool) var save_with_shader = false
+export(bool) var save_with_pretty = false
+export(bool) var save_with_raw = false
 
 enum LAYER_DATA_IND {
 	NAME, HEIGHT, PALETTE_OFFSET, PNG

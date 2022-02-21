@@ -131,20 +131,26 @@ func save_current(filepath: String):
 	saved.art_version = active_piece.version
 	saved.shadow_passes = active_piece.shadow_passes
 	saved.shadow_size = active_piece.shadow_size
+	saved.save_with_pretty = active_piece.save_with_pretty
+	saved.save_with_raw = active_piece.save_with_raw
+	saved.save_with_shader = active_piece.save_with_shader
 	print(saved)
 	var dir = Directory.new()
 	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
-	self.export_image(filepath.replace(".papercut.tres", ".pretty.png"))
-	self.export_raw_image(filepath.replace(".papercut.tres", ".raw.png"))
-	var exported_mat = ShaderMaterial.new()
-	exported_mat.shader = load("res://PaperCuts/palette_rendder_shader.gdshader")
-	var tx = ImageTexture.new()
-	tx.create_from_image(saved.palette, 0)
-	exported_mat.set_shader_param("palette", tx)
-	exported_mat.set_shader_param("shadow_passes", saved.shadow_passes)
-	exported_mat.set_shader_param("shadow_amount", saved.shadow_size)
-	ResourceSaver.save(filepath.replace(".papercut.tres", ".shadowmat.tres"), exported_mat)
+	if active_piece.save_with_pretty:
+		self.export_image(filepath.replace(".papercut.tres", ".pretty.png"))
+	if active_piece.save_with_raw:
+		self.export_raw_image(filepath.replace(".papercut.tres", ".raw.png"))
+	if active_piece.save_with_shader:
+		var exported_mat = ShaderMaterial.new()
+		exported_mat.shader = load("res://PaperCuts/palette_rendder_shader.gdshader")
+		var tx = ImageTexture.new()
+		tx.create_from_image(saved.palette, 0)
+		exported_mat.set_shader_param("palette", tx)
+		exported_mat.set_shader_param("shadow_passes", saved.shadow_passes)
+		exported_mat.set_shader_param("shadow_amount", saved.shadow_size)
+		ResourceSaver.save(filepath.replace(".papercut.tres", ".shadowmat.tres"), exported_mat)
 	print("should be saved now")
 	active_piece.from_saved = true
 
@@ -171,6 +177,9 @@ func load_thing(filepath, append=false):
 	active_piece.version = res.art_version
 	active_piece.shadow_passes = res.shadow_passes
 	active_piece.shadow_size = res.shadow_size
+	active_piece.save_with_pretty = res.save_with_pretty
+	active_piece.save_with_raw = res.save_with_raw
+	active_piece.save_with_shader = res.save_with_shader
 	active_piece.from_saved = true
 	active_piece.emit_changed()
 

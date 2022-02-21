@@ -356,3 +356,22 @@ func _on_ShadowPasses_value_changed(value):
 func _on_Canvas_layer_removed(layer_name):
 	layer_list.remove_item(layer_name)
 	pass # Replace with function body.
+
+
+
+func _on_saveshadercheck_toggled(button_pressed):
+	active_piece.save_with_shader = button_pressed
+	active_piece.emit_changed()
+	pass # Replace with function body.
+
+
+func _on_saverawcheck_toggled(button_pressed):
+	active_piece.save_with_raw = button_pressed
+	active_piece.emit_changed()
+	pass # Replace with function body.
+
+
+func _on_saveprettycheck_toggled(button_pressed):
+	active_piece.save_with_pretty = button_pressed
+	active_piece.emit_changed()
+	pass # Replace with function body.

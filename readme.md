@@ -10,7 +10,7 @@ Use the "Change Palette" menu to adjust which palette you're using. Palettes are
 
 Undo/Redo work depending on which layer you have selected, and undo/redo cuts. Adding and removing layers are not handled with undo/redo.
 
-When you save the piece, several images and a .shadowmat.tres shader texture will be generated. If a custom palette was used, that palette will be saved to the file.
+The palette being used will be embedded in the save file. Additionally, if enabled, then when saving the file several images and a .shadowmat.tres shader texture will be saved alongside the file.
 
 Controls:
 | Button | Action |

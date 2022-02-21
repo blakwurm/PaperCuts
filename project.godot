@@ -39,10 +39,14 @@ _global_script_class_icons={
 [application]
 
 config/name="PaperCuts"
+config/description="A quaint little drawing app for making paper-cut art"
 run/main_scene="res://App.tscn"
 config/use_hidden_project_data_directory=false
 run/low_processor_mode=true
+boot_splash/image="res://twinkiwinki.pretty.png"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.pretty.png"
+config/windows_native_icon="res://icon.pretty.ico"
 
 [display]
 

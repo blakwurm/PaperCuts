@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://PaperCuts/palette_rendder_shader.gdshader" type="Shader" id=1]
+
+[sub_resource type="Image" id=1]
+data = {
+"data": PoolByteArray( 67, 0, 42, 137, 0, 39, 217, 36, 60, 255, 97, 87, 255, 183, 98, 199, 110, 70, 115, 57, 46, 52, 17, 31, 3, 7, 16, 39, 59, 45, 69, 130, 57, 156, 185, 59, 255, 216, 50, 255, 130, 59, 209, 64, 31, 124, 25, 26, 49, 12, 27, 131, 63, 52, 235, 156, 110, 255, 218, 172, 255, 255, 228, 191, 195, 198, 109, 138, 141, 41, 59, 73, 4, 21, 40, 3, 62, 94, 28, 146, 167, 119, 214, 193, 255, 224, 220, 255, 136, 169, 192, 59, 148, 96, 23, 97 ),
+"format": "RGB8",
+"height": 1,
+"mipmaps": false,
+"width": 32
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 0
+flags = 0
+image = SubResource( 1 )
+size = Vector2( 32, 1 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/shadow_amount = 0.009
+shader_param/shadow_passes = 10
+shader_param/palette = SubResource( 2 )

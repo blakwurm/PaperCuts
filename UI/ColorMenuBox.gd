@@ -2,6 +2,7 @@ extends HBoxContainer
 
 onready var palette_picker = $PalettePicker
 onready var pal_pos_slider = $ColorPicker/PalettePositionSlider
+onready var bright_slider = $VBoxContainer2/BrightnessSlider
 onready var tex = $ColorPicker/PaletteTexture
 # Declare member variables here. Examples:
 # var a = 2
@@ -22,6 +23,7 @@ func _ready():
 func set_current_layer(layer_name, raw_layer):
 	current_layer = raw_layer
 	pal_pos_slider.value = raw_layer.palette_offset
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -46,3 +48,9 @@ func _on_ColorPickPopup_texture_selected(texture):
 func _on_palette_material_changed():
 	tex.texture = palette_material.get_shader_param("palette")
 	pass
+
+
+func _on_BrightnessSlider_value_changed(value):
+	if current_layer != null:
+		current_layer.brightness_add = value
+	pass # Replace with function body.

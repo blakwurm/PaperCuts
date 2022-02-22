@@ -39,6 +39,7 @@ func add_layer(layer_name: String = "", filled = true, height = null, palette_of
 	var layer = layer_scene.instance()
 	layer.owner = layers
 	layer.name = layer_name
+	#layer.brightness_add = 0.5
 	if layers.get_child_count() < 1:
 		selected_layer_name = layer_name
 	layers.add_child(layer)

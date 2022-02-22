@@ -15,6 +15,7 @@ environment = SubResource( 4 )
 shader = ExtResource( 3 )
 shader_param/height = 0.5
 shader_param/palette_offset = 0.5
+shader_param/brightness_add = 0.0
 
 [sub_resource type="ViewportTexture" id=8]
 viewport_path = NodePath("Viewport")

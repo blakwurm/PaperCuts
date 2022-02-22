@@ -7,6 +7,7 @@ tool
 
 export(float, 0.0, 1.0) var height = 0.5 setget set_height
 export(float, 0.0, 1.0) var palette_offset = 0.5 setget set_palette_offset
+export(float, 0.0, 1.0) var brightness_add = 0.0 setget set_brightness_add
 
 onready var cuts = $Viewport/Cuts
 onready var redo_queue = $RedoQueue
@@ -22,6 +23,7 @@ func _ready():
 	self.height = height
 	if needs_offset_set_on_ready:
 		self.palette_offset = palette_offset
+		self.brightness_add = brightness_add
 	pass # Replace with function body.
 
 
@@ -44,6 +46,14 @@ func set_palette_offset(_po):
 		texture.material.set_shader_param("palette_offset", _po)
 	pass
 
+func set_brightness_add(_nb):
+	brightness_add = _nb
+	if texture == null:
+		needs_offset_set_on_ready = true
+	else:
+		texture.material.set_shader_param("brightness_add", _nb)
+	pass
+	
 func add_cut(newcut: Node2D):
 	if newcut != null:
 		var oldpos = newcut.global_position

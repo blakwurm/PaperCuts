@@ -35,7 +35,7 @@ void fragment() {
 	shadow += shadow_depth(TEXTURE, UV, vec2(-shadow_amount, shadow_amount), r);
 	shadow /= 8.0;
 	
-	vec4 palette_sample = texture(palette, vec2(screen_sample.g)) * screen_sample.b;
+	vec4 palette_sample = (texture(palette, vec2(screen_sample.g)) * (1.0+15.0*pow(100000.0, screen_sample.b - 1.0)) ) * screen_sample.a;
 	//palette_sample.rgb *= 1.0-shadow;
 	COLOR = mix(palette_sample, vec4(vec3(0.0), 1.0), -shadow);
 }

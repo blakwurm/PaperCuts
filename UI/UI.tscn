@@ -40,21 +40,38 @@ margin_bottom = 79.0
 size_flags_stretch_ratio = 0.02
 text = "Change Palette"
 
-[node name="ColorPicker" type="VBoxContainer" parent="ItemList/ColorMenuBox"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ItemList/ColorMenuBox"]
 margin_left = 194.0
+margin_right = 226.0
+margin_bottom = 79.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BrightnessSlider" type="VSlider" parent="ItemList/ColorMenuBox/VBoxContainer2"]
+margin_right = 32.0
+margin_bottom = 79.0
+size_flags_horizontal = 2
+size_flags_vertical = 3
+max_value = 1.1
+step = 0.01
+
+[node name="ColorPicker" type="VBoxContainer" parent="ItemList/ColorMenuBox"]
+margin_left = 234.0
 margin_right = 1439.0
 margin_bottom = 79.0
 size_flags_horizontal = 3
 
 [node name="PalettePositionSlider" type="HSlider" parent="ItemList/ColorMenuBox/ColorPicker"]
-margin_right = 1245.0
+margin_right = 1205.0
 margin_bottom = 32.0
 max_value = 1.0
 step = 0.001
 
 [node name="PaletteTexture" type="TextureRect" parent="ItemList/ColorMenuBox/ColorPicker"]
 margin_top = 40.0
-margin_right = 1245.0
+margin_right = 1205.0
 margin_bottom = 79.0
 size_flags_vertical = 3
 texture = ExtResource( 2 )
@@ -524,6 +541,7 @@ anchor_bottom = 0.0
 margin_top = 993.0
 margin_right = 492.0
 margin_bottom = 1035.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer11" type="HBoxContainer" parent="Panel/VBoxContainer"]
@@ -736,6 +754,7 @@ dialog_text = "New Piece?"
 [connection signal="layer_selected" from="." to="." method="_on_UI_layer_selected"]
 [connection signal="rename_selected_layer" from="." to="Panel/VBoxContainer/LayerList" method="_on_UI_rename_selected_layer"]
 [connection signal="pressed" from="ItemList/ColorMenuBox/PalettePicker" to="ColorPickPopup" method="_on_PalettePicker_pressed"]
+[connection signal="value_changed" from="ItemList/ColorMenuBox/VBoxContainer2/BrightnessSlider" to="ItemList/ColorMenuBox" method="_on_BrightnessSlider_value_changed"]
 [connection signal="value_changed" from="ItemList/ColorMenuBox/ColorPicker/PalettePositionSlider" to="ItemList/ColorMenuBox" method="_on_PalettePositionSlider_value_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/NewButton" to="." method="_on_NewButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer8/OpenButton" to="." method="_on_OpenButton_pressed"]

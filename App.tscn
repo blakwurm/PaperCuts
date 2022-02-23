@@ -17,9 +17,9 @@ __meta__ = {
 [node name="Canvas" parent="Mundo" instance=ExtResource( 3 )]
 
 [node name="PolygonDrawingCamera" parent="Mundo" instance=ExtResource( 2 )]
-position = Vector2( 968, 1104 )
+position = Vector2( 304, 1131 )
 current = true
-zoom = Vector2( 2.5, 2.5 )
+zoom = Vector2( 4, 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Mundo/PolygonDrawingCamera"]
 layer = 128

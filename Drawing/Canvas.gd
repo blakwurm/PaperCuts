@@ -117,7 +117,9 @@ func redo_cut():
 
 func save_current(filepath: String):
 	var saved = SavedPapercut.new()
-	saved.palette = palette_material.get_shader_param("palette").get_data()
+	var imgparam = palette_material.get_shader_param("palette")
+	if imgparam != null:
+		saved.palette = imgparam.get_data()
 
 	for child in layers.get_children():
 		var txdata = child.get_node("Texture").texture.get_data()

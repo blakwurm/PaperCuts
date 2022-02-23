@@ -16,6 +16,7 @@ signal dupe_selected_layer()
 signal rename_selected_layer(new_name)
 signal resize_pen_leash(new_size)
 signal set_cut_move_frac(new_frac)
+signal set_mirror_mode(mirror_mode)
 signal save_file(filepath)
 signal load_file(filepath)
 signal append_file(filepath)
@@ -84,6 +85,10 @@ func _process(delta):
 		$Panel/VBoxContainer/HBoxContainer12/UndoButton.emit_signal("pressed")
 	elif Input.is_action_just_pressed("redo_cut"):
 		$Panel/VBoxContainer/HBoxContainer12/RedoButton.emit_signal("pressed")
+	elif Input.is_action_just_pressed("toggle_clipper_add"):
+		var a = $Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle
+		a.pressed = !a.pressed
+		a.emit_signal("toggled", a.pressed)
 
 func _on_ClipperAddToggle_toggled(button_pressed):
 	var val = 0
@@ -374,4 +379,18 @@ func _on_saverawcheck_toggled(button_pressed):
 func _on_saveprettycheck_toggled(button_pressed):
 	active_piece.save_with_pretty = button_pressed
 	active_piece.emit_changed()
+	pass # Replace with function body.
+
+
+func _on_MirrorLRCheck_toggled(button_pressed):
+	pass # Replace with function body.
+
+
+func _on_MirrorTBCheck_toggled(button_pressed):
+	pass # Replace with function body.
+
+
+
+func _on_MirrorOption_item_selected(index):
+	emit_signal("set_mirror_mode", index)
 	pass # Replace with function body.

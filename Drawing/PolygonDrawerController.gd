@@ -6,13 +6,16 @@ extends Camera2D
 # var b = "text"
 
 export(float, 0.0, 1.0) var polygon_lightness = 0.0 setget set_polygon_lightness
+export(int, "None", "LR", "TB") var mirror_mode = 0
 
 onready var drag_pen = $DragPen
 onready var display_line: Line2D = $DisplayLine
+onready var mirror_line: Line2D = $MirrorLine
 onready var tween = $Tween
 
 var drawing = false
 var current_polygon: Polygon2D
+var mirror_polygon: Polygon2D
 var last_point = Vector2.ZERO
 var last_mouse_pos = Vector2.ZERO
 
@@ -33,9 +36,12 @@ func set_drag_leash_size(_new_size):
 
 func reset_polygon():
 	display_line.set_as_toplevel(true)
+	mirror_line.set_as_toplevel(true)
 	current_polygon = Polygon2D.new()
 	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
+	mirror_polygon = current_polygon.duplicate()
 	display_line.points = PoolVector2Array()
+	mirror_line.points = PoolVector2Array()
 	#self.add_child(current_polygon)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -44,6 +50,7 @@ func reset_polygon():
 func set_polygon_lightness(_pl):
 	polygon_lightness = _pl
 	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
+	mirror_polygon.color = current_polygon.color
 
 func _process(delta):
 
@@ -57,8 +64,22 @@ func _process(delta):
 			poly.append(penpos)
 			current_polygon.polygon = poly
 			display_line.points = poly
+			if mirror_mode > 0:
+				var dispoly = mirror_polygon.polygon
+				dispoly.append(calc_mirror_point(penpos, mirror_mode))
+				mirror_polygon.polygon = dispoly
+				mirror_line.points = dispoly
 			print(current_polygon.polygon.size())
+			print(mirror_polygon.polygon.size())
 		pass
+
+const translate_axis = [Vector2.ZERO, Vector2(1024, 0), Vector2(0, 1024)]
+const translate_multiplier = [Vector2(1,1), Vector2(-1, 1), Vector2(1, -1)]
+
+func calc_mirror_point(point: Vector2, mode: int):
+	var axis = translate_axis[mode]
+	var mult = translate_multiplier[mode]
+	return (axis+((point-axis) * mult))
 
 func _unhandled_input(event):
 	# Mouse in viewport coordinates.
@@ -81,8 +102,9 @@ func _unhandled_input(event):
 			print("draw depressed")
 			drawing = false
 			#self.get_parent().add_child(current_polygon)
+			if mirror_mode > 0:
+				current_polygon.add_child(mirror_polygon)
 			emit_signal("create_polygon", current_polygon)
-			print(current_polygon)
 			reset_polygon()
 		if event.is_pressed():
 		# zoom in
@@ -130,4 +152,10 @@ func _on_UI_set_cut_move_frac(new_frac):
 
 func _on_UI_set_zoom(new_zoom_amt):
 	self.set_zoom_amt(new_zoom_amt)
+	pass # Replace with function body.
+
+
+func _on_UI_set_mirror_mode(mirror_mode):
+	self.mirror_mode = mirror_mode
+	print("Mirror mode is now ", mirror_mode)
 	pass # Replace with function body.

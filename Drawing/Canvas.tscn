@@ -120,6 +120,7 @@ material = ExtResource( 2 )
 position = Vector2( 1024, 1024 )
 z_index = 20
 texture = SubResource( 5 )
+flip_v = true
 
 [node name="Render" type="Sprite" parent="."]
 position = Vector2( 1024, 1024 )

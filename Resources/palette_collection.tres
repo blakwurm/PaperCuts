@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://Resources/PaletteCollection.gd" type="Script" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
@@ -10,9 +10,10 @@
 [ext_resource path="res://Palettes/rust-gold-8-1x.png" type="Texture" id=8]
 [ext_resource path="res://Palettes/tranquil-fantasy-23-1x.png" type="Texture" id=9]
 [ext_resource path="res://Palettes/comfort44s-1x.png" type="Texture" id=10]
+[ext_resource path="res://Palettes/famicube-1x.png" type="Texture" id=11]
 
 [resource]
 script = ExtResource( 1 )
 palettes = [  ]
 selected = 0.0
-built_in_palettes = [ ExtResource( 6 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ) ]
+built_in_palettes = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ) ]

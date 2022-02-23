@@ -17,4 +17,11 @@ points = PoolVector2Array( 162, -108, 295, -91 )
 width = 5.0
 default_color = Color( 0.196078, 0.270588, 0.647059, 1 )
 
+[node name="MirrorLine" type="Line2D" parent="."]
+position = Vector2( 22, -23 )
+z_index = 49
+points = PoolVector2Array( 162, -108, 295, -91 )
+width = 3.328
+default_color = Color( 0.196078, 0.647059, 0.537255, 1 )
+
 [node name="Tween" type="Tween" parent="."]

@@ -46,7 +46,8 @@ func _on_ColorPickPopup_texture_selected(texture):
 	pass # Replace with function body.
 
 func _on_palette_material_changed():
-	tex.texture = palette_material.get_shader_param("palette")
+	if tex != null:
+		tex.texture = palette_material.get_shader_param("palette")
 	pass
 
 

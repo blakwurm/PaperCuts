@@ -7,6 +7,7 @@ extends Control
 
 
 
+signal new_canvas
 signal add_mode_changed(new_add)
 signal layer_selected(layer_name)
 signal layer_height_raised(layer_name, new_height)
@@ -190,7 +191,8 @@ func _on_ExportButton_pressed():
 
 
 func _on_NewButton_pressed():
-	emit_signal("new_canvas")
+	#emit_signal("new_canvas")
+	$ConfirmationDialog.show()
 	pass # Replace with function body.
 
 
@@ -393,4 +395,11 @@ func _on_MirrorTBCheck_toggled(button_pressed):
 
 func _on_MirrorOption_item_selected(index):
 	emit_signal("set_mirror_mode", index)
+	pass # Replace with function body.
+
+
+func _on_ConfirmationDialog_confirmed():
+	active_piece.from_saved = false
+	active_piece.name = ""
+	get_tree().reload_current_scene()
 	pass # Replace with function body.

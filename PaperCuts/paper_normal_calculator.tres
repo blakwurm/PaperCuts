@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=14 format=2]
+
+[ext_resource path="res://PaperCuts/paper_normal_shader.gdshader" type="Shader" id=1]
+[ext_resource path="res://PaperCuts/Materials/Flower_pattern_pxr128_normal.png" type="Texture" id=2]
+[ext_resource path="res://PaperCuts/Materials/Golden_snakeskin_pxr128_normal.png" type="Texture" id=3]
+[ext_resource path="res://PaperCuts/Materials/Jade_cloth_pxr128_normal.png" type="Texture" id=4]
+[ext_resource path="res://PaperCuts/Materials/Tan_marble_pxr128_normal.png" type="Texture" id=5]
+[ext_resource path="res://PaperCuts/Materials/Spots_pxr128_normal.png" type="Texture" id=6]
+[ext_resource path="res://PaperCuts/Materials/Fine_gray_gravel_pxr128_normal.png" type="Texture" id=7]
+[ext_resource path="res://PaperCuts/Materials/Gray_swirl_marble_pxr128_normal.png" type="Texture" id=8]
+[ext_resource path="res://PaperCuts/Materials/Green_marble_pxr128_normal.png" type="Texture" id=9]
+[ext_resource path="res://PaperCuts/Materials/Jute_cocomat_pxr128_normal.png" type="Texture" id=10]
+[ext_resource path="res://PaperCuts/Materials/Black_granite_pxr128_normal.png" type="Texture" id=11]
+[ext_resource path="res://PaperCuts/Materials/Buffed_marble_pxr128_normal.png" type="Texture" id=12]
+[ext_resource path="res://PaperCuts/Materials/Dirt_and_gravel_pxr128_normal.png" type="Texture" id=13]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/black_granite = ExtResource( 11 )
+shader_param/buffed_marble = ExtResource( 12 )
+shader_param/dirt_and_gravel = ExtResource( 13 )
+shader_param/fine_gray_gravel = ExtResource( 7 )
+shader_param/flower_pattern = ExtResource( 2 )
+shader_param/golden_snakeskin = ExtResource( 3 )
+shader_param/gray_swirl = ExtResource( 8 )
+shader_param/green_marble = ExtResource( 9 )
+shader_param/jade_cloth = ExtResource( 4 )
+shader_param/jute_cocomat = ExtResource( 10 )
+shader_param/spots_pxr = ExtResource( 6 )
+shader_param/tan_marble = ExtResource( 5 )

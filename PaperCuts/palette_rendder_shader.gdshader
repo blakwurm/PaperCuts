@@ -3,6 +3,7 @@ shader_type canvas_item;
 uniform sampler2D palette;
 uniform float shadow_amount = 0.005;
 uniform int shadow_passes = 10;
+uniform sampler2D normals;
 
 float shadow_depth(sampler2D tex, vec2 uv, vec2 look_distance, float current_height) {
 	vec2 dist_fract = look_distance / float(shadow_passes);
@@ -35,7 +36,7 @@ void fragment() {
 	shadow += shadow_depth(TEXTURE, UV, vec2(-shadow_amount, shadow_amount), r);
 	shadow /= 8.0;
 	
-	vec4 palette_sample = (texture(palette, vec2(screen_sample.g)) * (1.0+15.0*pow(100000.0, screen_sample.b - 1.0)) ) ;
+	vec4 palette_sample = (texture(palette, vec2(screen_sample.g))); // * (1.0+15.0*pow(100000.0, screen_sample.b - 1.0)) ) ;
 	//palette_sample.rgb *= 1.0-shadow;
 	COLOR = mix(palette_sample, vec4(vec3(0.0), 1.0), -shadow);
 	COLOR.a = screen_sample.a;

@@ -10,6 +10,7 @@ export(Texture) var active setget set_active
 export(float, 0, 1) var selected = 0.0
 var imgdata: Image = Image.new()
 export(Array, Texture) var built_in_palettes = []
+export(Texture) var default_palette
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

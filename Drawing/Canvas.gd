@@ -278,3 +278,7 @@ func _on_active_piece_change():
 	palette_material.set_shader_param("shadow_amount", active_piece.shadow_size)
 	palette_material.set_shader_param("shadow_passes", active_piece.shadow_passes)
 	pass
+
+
+func _on_UI_new_canvas():
+	pass # Replace with function body.

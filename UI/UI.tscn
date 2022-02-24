@@ -777,14 +777,15 @@ margin_right = -8.0
 margin_bottom = -36.0
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -35.0
-margin_right = 100.0
-margin_bottom = 35.0
+margin_left = -200.0
+margin_top = -70.0
+margin_right = 200.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 400, 140 )
 dialog_text = "New Piece?"
 
@@ -838,3 +839,4 @@ dialog_text = "New Piece?"
 [connection signal="file_selected" from="ExportDialog" to="." method="_on_ExportDialog_file_selected"]
 [connection signal="confirmed" from="RenameDialog" to="." method="_on_RenameDialog_confirmed"]
 [connection signal="text_entered" from="RenameDialog/RenameBox" to="." method="_on_RenameBox_text_entered"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]

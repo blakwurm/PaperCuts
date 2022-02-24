@@ -4,7 +4,7 @@ A simple art tool, for making paper cut art assets for the forthcoming game Ored
 
 ## App Usage
 
-Add a layer by clicking on the "+" buttons at the bottom. Adjust the layer's distanace off of the bottom using the slider. Adjust the color using the horizontal color slider. (Color brightness/lumonosity can be adjusted using the unlabeled vertical slider next to the color slider, but this is only really useful in special circumstances.)
+Add a layer by clicking on the "+" buttons at the bottom. Adjust the layer's distanace off of the bottom using the slider. Adjust the color using the horizontal color slider. The paper texture can be adjusted using the slider next to the color picker.
 
 Use the "Change Palette" menu to adjust which palette you're using. Palettes are 1-pixel-high png images, and custom palettes can be added by placing them in the folder opened from the palette menu. Check out https://lospec.com/palette-list for more palettes (download them as "PNG Image (1x)")
 
@@ -38,5 +38,5 @@ If enabled, the app will save ".raw.png" images alongside the save game. You can
 The image's channels are:
 - R: Color, spcificlly the UV (vec2(r,r)) of the color palette image. This works perfectly fine for 1-pixel-high palette images, but will probably yield undefined and interesting results if a higher-height image is used.
 - G: Height, where 0 is lowest and 1 is highest. 
-- B: Lumonosity, to be used at the discretion of the consuming shader. 
+- B: Which normal map to use. In the shader, the value is multiplied by 12 and rounded, and used as the index.
 - A: Alpha, unchanged

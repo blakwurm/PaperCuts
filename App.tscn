@@ -14,7 +14,7 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.6, 0.6, 0.6, 1 )
+color = Color( 0.807843, 0.807843, 0.807843, 1 )
 
 [node name="Mundo" type="Node2D" parent="."]
 

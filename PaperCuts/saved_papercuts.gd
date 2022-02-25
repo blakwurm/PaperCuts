@@ -19,7 +19,7 @@ export(bool) var save_with_pretty = false
 export(bool) var save_with_raw = false
 
 enum LAYER_DATA_IND {
-	NAME, HEIGHT, PALETTE_OFFSET, PNG
+	NAME, HEIGHT, PALETTE_OFFSET, PNG, NORMALIND
 }
 
 # Called when the node enters the scene tree for the first time.

@@ -11,6 +11,7 @@ const palette_material = preload("res://PaperCuts/palette_render_material.tres")
 const active_piece = preload("res://Resources/ActivePiece.tres")
 const scene_export_template = preload("res://Resources/SceneExportTemplate.tscn")
 onready var render = $Render
+onready var normal_render = $NormalRender
 onready var pre_color_and_shadow = $Renderer/ShadowProcessing
 
 const size = 2048
@@ -33,7 +34,7 @@ func _ready():
 	#	self.selected_layer_name = ln.name
 	pass # Replace with function body.
 
-func add_layer(layer_name: String = "", filled = true, height = null, palette_offset = null, backdata = null):
+func add_layer(layer_name: String = "", filled = true, height = null, palette_offset = null, backdata = null, normalind = 0.0):
 	if layer_name == "":
 		layer_name = "%s" % random.randi()
 	var layer = layer_scene.instance()
@@ -49,6 +50,7 @@ func add_layer(layer_name: String = "", filled = true, height = null, palette_of
 		layer.palette_offset = palette_offset
 	if backdata:
 		layer.set_back(backdata)
+	layer.brightness_add = normalind
 	#layer.position = Vector2(size, size)
 	layer.set_fill(filled)
 	emit_signal("layer_added", layer_name, layer.height)
@@ -126,7 +128,7 @@ func save_current(filepath: String):
 		txdata.convert(Image.FORMAT_L8)
 		var pn = txdata.save_png_to_buffer()
 		#txdata.save_png("user://%s" % child.name)
-		var ldata = [child.name, child.height, child.palette_offset, pn]
+		var ldata = [child.name, child.height, child.palette_offset, pn, child.brightness_add]
 		saved.layers.append(ldata)
 		pass
 	saved.name = active_piece.name
@@ -137,12 +139,12 @@ func save_current(filepath: String):
 	saved.save_with_pretty = active_piece.save_with_pretty
 	saved.save_with_raw = active_piece.save_with_raw
 	saved.save_with_shader = active_piece.save_with_shader
-	print(saved)
 	var dir = Directory.new()
 	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
 	if active_piece.save_with_pretty:
 		self.export_image(filepath.replace(".papercut.tres", ".pretty.png"))
+		self.export_normal(filepath.replace(".papercut.tres", ".normal.png"))
 	if active_piece.save_with_raw:
 		self.export_raw_image(filepath.replace(".papercut.tres", ".raw.png"))
 	if active_piece.save_with_shader:
@@ -154,12 +156,10 @@ func save_current(filepath: String):
 		exported_mat.set_shader_param("shadow_passes", saved.shadow_passes)
 		exported_mat.set_shader_param("shadow_amount", saved.shadow_size)
 		ResourceSaver.save(filepath.replace(".papercut.tres", ".shadowmat.tres"), exported_mat)
-	print("should be saved now")
 	active_piece.from_saved = true
 
 func load_thing(filepath, append=false):
 	var res = load(filepath)
-	print(res)
 	var l = res.layers
 	if !append:
 		for lay in layers.get_children():
@@ -167,7 +167,7 @@ func load_thing(filepath, append=false):
 			lay.queue_free()
 			pass
 	for lay in l:
-		self.add_layer(lay[0], true, lay[1], lay[2], lay[3])
+		self.add_layer(lay[0], true, lay[1], lay[2], lay[3], lay[4])
 		#layers.add_child(lay.instance())
 	var tx = ImageTexture.new()
 	tx.create_from_image(res.palette, 0)
@@ -194,7 +194,14 @@ func get_pretty_png():
 
 func export_image(filepath):
 	var imgdata = render.texture.get_data()
-	imgdata.flip_y()
+	#imgdata.flip_y()
+	imgdata.save_png(filepath)
+	pass
+
+func export_normal(filepath):
+	var imgdata = normal_render.texture.get_data()
+	#imgdata.flip_y()
+	print("normals are ", imgdata)
 	imgdata.save_png(filepath)
 	pass
 	

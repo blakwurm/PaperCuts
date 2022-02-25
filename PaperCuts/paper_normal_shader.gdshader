@@ -14,6 +14,7 @@ uniform sampler2D type_i;
 uniform sampler2D type_j;
 uniform sampler2D type_k;
 uniform sampler2D type_l;
+uniform bool as_normal = true;
 
 const float material_count = 12.0;
 
@@ -42,6 +43,13 @@ vec3 get_this_normal(float blue_channel, vec2 uv) {
 }
 
 void fragment() {
-	NORMAL = get_this_normal(texture(encoded, UV).b, fract(SCREEN_UV*3.14));
+	float screenratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+	vec3 this_normal = get_this_normal(texture(encoded, UV).b, fract(SCREEN_UV*3.14*vec2(1, screenratio)));
+	if (as_normal) {
+		COLOR = texture(TEXTURE, UV);
+		NORMAL = this_normal;
+	} else {
+		COLOR.rgb = this_normal;
+	}
 	//NORMAL = texture(dirt_and_gravel, SCREEN_UV);
 }

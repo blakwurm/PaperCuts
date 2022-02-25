@@ -118,7 +118,12 @@ func redo_cut():
 
 
 func save_current(filepath: String):
-	var saved = SavedPapercut.new()
+	var saved: SavedPapercut
+	if ResourceLoader.exists(filepath):
+		saved = ResourceLoader.load(filepath)
+		saved.layers = []
+	else:
+		saved = SavedPapercut.new()
 	var imgparam = palette_material.get_shader_param("palette")
 	if imgparam != null:
 		saved.palette = imgparam.get_data()

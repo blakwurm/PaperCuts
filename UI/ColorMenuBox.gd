@@ -3,7 +3,7 @@ extends HBoxContainer
 onready var palette_picker = $PalettePicker
 onready var pal_pos_slider = $ColorPicker/PalettePositionSlider
 onready var bright_slider = $VBoxContainer2/BrightnessSlider
-onready var tex = $ColorPicker/PaletteTexture
+onready var tex = $ColorPicker/Control/PaletteTexture
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

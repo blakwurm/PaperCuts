@@ -18,6 +18,7 @@ const size = 2048
 
 var random = RandomNumberGenerator.new()
 const layer_scene = preload("res://Drawing/Layer.tscn")
+const random_word_list = preload("res://Resources/word_list.tres")
 onready var layers = $Layers
 onready var removed_stack = $RemovedStack
 
@@ -28,6 +29,7 @@ signal layer_removed(layer_name)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	random.randomize()
+	random_word_list.rand = random
 	active_piece.connect("changed", self, "_on_active_piece_change")
 	#var ln = add_layer()
 	#if selected_layer_name == "":
@@ -36,7 +38,12 @@ func _ready():
 
 func add_layer(layer_name: String = "", filled = true, height = null, palette_offset = null, backdata = null, normalind = 0.0):
 	if layer_name == "":
-		layer_name = "%s" % random.randi()
+		var exists = true
+		while exists:
+			var n = random_word_list.get_random_animal()
+			if !layers.has_node(n):
+				layer_name = n
+				exists = false
 	var layer = layer_scene.instance()
 	layer.owner = layers
 	layer.name = layer_name

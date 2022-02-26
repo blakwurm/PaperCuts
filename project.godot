@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "SavedPapercut",
 "language": "GDScript",
 "path": "res://PaperCuts/saved_papercuts.gd"
+}, {
+"base": "Resource",
+"class": "WordList",
+"language": "GDScript",
+"path": "res://Resources/wordlist.gd"
 } ]
 _global_script_class_icons={
 "ActivePiece": "",
 "CustomPalettes": "",
 "DrawingPreview": "",
 "PaletteCollection": "",
-"SavedPapercut": ""
+"SavedPapercut": "",
+"WordList": ""
 }
 
 [application]
@@ -60,6 +66,10 @@ window/size/width=1280
 window/size/height=720
 window/dpi/allow_hidpi=true
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom_font="res://UI/font/Bender/bender_bold_standard.tres"
 
 [input]
 

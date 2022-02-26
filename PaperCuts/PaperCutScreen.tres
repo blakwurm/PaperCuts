@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://PaperCuts/PaperCutScreen_shader.tres" type="Shader" id=1]
+[ext_resource path="res://Palettes/famicube-1x.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/shadow_amount = 0.005
+shader_param/shadow_passes = 10
+shader_param/palette = ExtResource( 2 )

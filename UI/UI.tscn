@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://UI/ColorMenuBox.gd" type="Script" id=5]
 [ext_resource path="res://UI/ColorPickPopup.gd" type="Script" id=6]
 [ext_resource path="res://UI/TextureOption.gd" type="Script" id=7]
+[ext_resource path="res://PaperCuts/PaperCutScreen.tres" type="Material" id=8]
+[ext_resource path="res://Drawing/whitesquare256.svg" type="Texture" id=9]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -38,14 +40,14 @@ __meta__ = {
 }
 
 [node name="PalettePicker" type="Button" parent="ItemList/ColorMenuBox"]
-margin_right = 107.0
+margin_right = 98.0
 margin_bottom = 55.0
 size_flags_stretch_ratio = 0.02
 text = "Change Palette"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ItemList/ColorMenuBox"]
-margin_left = 111.0
-margin_right = 127.0
+margin_left = 102.0
+margin_right = 118.0
 margin_bottom = 55.0
 size_flags_vertical = 3
 __meta__ = {
@@ -61,13 +63,13 @@ max_value = 1.1
 step = 0.01
 
 [node name="ColorPicker" type="VBoxContainer" parent="ItemList/ColorMenuBox"]
-margin_left = 131.0
+margin_left = 122.0
 margin_right = 947.0
 margin_bottom = 55.0
 size_flags_horizontal = 3
 
 [node name="PalettePositionSlider" type="HSlider" parent="ItemList/ColorMenuBox/ColorPicker"]
-margin_right = 816.0
+margin_right = 825.0
 margin_bottom = 16.0
 max_value = 1.0
 step = 0.001
@@ -75,7 +77,7 @@ step = 0.001
 [node name="Control" type="Control" parent="ItemList/ColorMenuBox/ColorPicker"]
 show_behind_parent = true
 margin_top = 20.0
-margin_right = 816.0
+margin_right = 825.0
 margin_bottom = 55.0
 mouse_filter = 2
 size_flags_vertical = 3
@@ -110,33 +112,33 @@ __meta__ = {
 
 [node name="HBoxContainer8" type="HBoxContainer" parent="Panel/VBoxContainer"]
 margin_right = 332.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 alignment = 1
 
 [node name="NewButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
 margin_right = 80.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "New"
 
 [node name="OpenButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
 margin_left = 84.0
 margin_right = 164.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Open"
 
 [node name="AppendButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
 margin_left = 168.0
 margin_right = 248.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Append"
 
 [node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
 margin_left = 252.0
 margin_right = 332.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Save"
 
@@ -149,120 +151,120 @@ size_flags_horizontal = 3
 text = "Export"
 
 [node name="HBoxContainer12" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 332.0
-margin_bottom = 44.0
+margin_bottom = 46.0
 alignment = 1
 
 [node name="UndoButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer12"]
 margin_right = 164.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Undo Cut"
 
 [node name="RedoButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer12"]
 margin_left = 168.0
 margin_right = 332.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Redo Cut"
 
 [node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 48.0
+margin_top = 50.0
 margin_right = 332.0
-margin_bottom = 52.0
+margin_bottom = 54.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 56.0
+margin_top = 58.0
 margin_right = 332.0
-margin_bottom = 70.0
+margin_bottom = 73.0
 text = "Image"
 align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 74.0
+margin_top = 77.0
 margin_right = 332.0
-margin_bottom = 98.0
+margin_bottom = 102.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
 margin_top = 5.0
-margin_right = 50.0
-margin_bottom = 19.0
+margin_right = 43.0
+margin_bottom = 20.0
 text = "Name   "
 align = 1
 valign = 1
 
 [node name="NameField" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_left = 54.0
+margin_left = 47.0
 margin_right = 332.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 102.0
+margin_top = 106.0
 margin_right = 332.0
-margin_bottom = 126.0
+margin_bottom = 131.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
 margin_top = 5.0
-margin_right = 51.0
-margin_bottom = 19.0
+margin_right = 50.0
+margin_bottom = 20.0
 text = "Artist    "
 align = 1
 valign = 1
 
 [node name="ArtistField" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer2"]
-margin_left = 55.0
+margin_left = 54.0
 margin_right = 332.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 130.0
+margin_top = 135.0
 margin_right = 332.0
-margin_bottom = 154.0
+margin_bottom = 160.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer4"]
 margin_top = 5.0
-margin_right = 48.0
-margin_bottom = 19.0
+margin_right = 42.0
+margin_bottom = 20.0
 text = "Version"
 align = 1
 valign = 1
 
 [node name="VersionSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer4"]
-margin_left = 52.0
+margin_left = 46.0
 margin_right = 332.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
 
 [node name="HBoxContainer15" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 158.0
+margin_top = 164.0
 margin_right = 332.0
-margin_bottom = 182.0
+margin_bottom = 189.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer15"]
 margin_top = 5.0
-margin_right = 95.0
-margin_bottom = 19.0
+margin_right = 86.0
+margin_bottom = 20.0
 text = "Shadow Depth "
 align = 1
 valign = 1
 
 [node name="ShadowSizeSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer15"]
-margin_left = 99.0
-margin_right = 173.0
-margin_bottom = 24.0
+margin_left = 90.0
+margin_right = 164.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.001
 max_value = 0.01
@@ -271,7 +273,7 @@ value = 0.009
 allow_greater = true
 
 [node name="ShadowSizeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer15"]
-margin_left = 177.0
+margin_left = 168.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -281,23 +283,23 @@ step = 0.001
 value = 0.009
 
 [node name="HBoxContainer16" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 186.0
+margin_top = 193.0
 margin_right = 332.0
-margin_bottom = 210.0
+margin_bottom = 218.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer16"]
 margin_top = 5.0
-margin_right = 96.0
-margin_bottom = 19.0
+margin_right = 86.0
+margin_bottom = 20.0
 text = "Shadow Passes"
 align = 1
 valign = 1
 
 [node name="ShadowPassesSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer16"]
-margin_left = 100.0
-margin_right = 174.0
-margin_bottom = 24.0
+margin_left = 90.0
+margin_right = 164.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 min_value = 1.0
 max_value = 20.0
@@ -305,7 +307,7 @@ value = 10.0
 allow_greater = true
 
 [node name="ShadowPassesSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer16"]
-margin_left = 178.0
+margin_left = 168.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -314,71 +316,71 @@ max_value = 20.0
 value = 10.0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 214.0
-margin_right = 332.0
-margin_bottom = 238.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer3"]
-margin_top = 5.0
-margin_right = 63.0
-margin_bottom = 19.0
-text = "Save With"
-
-[node name="saveshadercheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
-margin_left = 67.0
-margin_right = 138.0
-margin_bottom = 24.0
-text = "Shader"
-
-[node name="saveprettycheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
-margin_left = 142.0
-margin_right = 208.0
-margin_bottom = 24.0
-text = "Pretty"
-
-[node name="saverawcheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
-margin_left = 212.0
-margin_right = 265.0
-margin_bottom = 24.0
-text = "Raw"
-
-[node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 242.0
+margin_top = 222.0
 margin_right = 332.0
 margin_bottom = 246.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_top = 4.0
+margin_right = 57.0
+margin_bottom = 19.0
+text = "Save With"
+
+[node name="saveshadercheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 61.0
+margin_right = 129.0
+margin_bottom = 24.0
+text = "Shader"
+
+[node name="saveprettycheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 133.0
+margin_right = 198.0
+margin_bottom = 24.0
+text = "Pretty"
+
+[node name="saverawcheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 202.0
+margin_right = 254.0
+margin_bottom = 24.0
+text = "Raw"
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer"]
 margin_top = 250.0
 margin_right = 332.0
-margin_bottom = 264.0
+margin_bottom = 254.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 258.0
+margin_right = 332.0
+margin_bottom = 273.0
 text = "View"
 align = 1
 valign = 1
 
 [node name="HBoxContainer13" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 268.0
+margin_top = 277.0
 margin_right = 332.0
-margin_bottom = 292.0
+margin_bottom = 302.0
 alignment = 1
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/HBoxContainer13"]
 margin_top = 5.0
-margin_right = 37.0
-margin_bottom = 19.0
+margin_right = 31.0
+margin_bottom = 20.0
 text = "Zoom"
 align = 1
 valign = 1
 
 [node name="ZoomSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer13"]
-margin_left = 41.0
-margin_right = 115.0
-margin_bottom = 24.0
+margin_left = 35.0
+margin_right = 109.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.25
 max_value = 5.0
@@ -387,7 +389,7 @@ value = 1.0
 allow_greater = true
 
 [node name="ZoomSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer13"]
-margin_left = 119.0
+margin_left = 113.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -397,51 +399,52 @@ step = 0.25
 value = 0.25
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 296.0
+margin_top = 306.0
 margin_right = 332.0
-margin_bottom = 300.0
+margin_bottom = 310.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 304.0
+margin_top = 314.0
 margin_right = 332.0
-margin_bottom = 318.0
+margin_bottom = 329.0
 text = "Clippers"
 align = 1
 valign = 1
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 322.0
+margin_top = 333.0
 margin_right = 332.0
-margin_bottom = 362.0
+margin_bottom = 357.0
 alignment = 1
 
-[node name="ClipperAddToggle" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer5"]
+[node name="ClipperAddToggle" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer5"]
 margin_right = 332.0
-margin_bottom = 40.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "Add"
+align = 1
 
 [node name="HBoxContainer7" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 366.0
+margin_top = 361.0
 margin_right = 332.0
-margin_bottom = 390.0
+margin_bottom = 386.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer7"]
 margin_top = 5.0
-margin_right = 59.0
-margin_bottom = 19.0
+margin_right = 54.0
+margin_bottom = 20.0
 text = "Drag Size"
 align = 1
 valign = 1
 
 [node name="SizeSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_left = 63.0
-margin_right = 137.0
-margin_bottom = 24.0
+margin_left = 58.0
+margin_right = 132.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.01
 max_value = 1.0
@@ -449,7 +452,7 @@ step = 0.01
 value = 0.3
 
 [node name="SizeSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer7"]
-margin_left = 141.0
+margin_left = 136.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -459,30 +462,30 @@ step = 0.01
 value = 0.3
 
 [node name="HBoxContainer9" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 394.0
+margin_top = 390.0
 margin_right = 332.0
-margin_bottom = 418.0
+margin_bottom = 415.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer9"]
 margin_top = 5.0
-margin_right = 51.0
-margin_bottom = 19.0
+margin_right = 46.0
+margin_bottom = 20.0
 text = "Cut Size"
 align = 1
 valign = 1
 
 [node name="PeriodSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer9"]
-margin_left = 55.0
-margin_right = 129.0
-margin_bottom = 24.0
+margin_left = 50.0
+margin_right = 124.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 min_value = 4.0
 max_value = 200.0
 value = 4.0
 
 [node name="PeriodSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer9"]
-margin_left = 133.0
+margin_left = 128.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -491,29 +494,29 @@ max_value = 200.0
 value = 4.0
 
 [node name="HBoxContainer17" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 422.0
+margin_top = 419.0
 margin_right = 332.0
-margin_bottom = 446.0
+margin_bottom = 444.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer17"]
 margin_top = 5.0
-margin_right = 52.0
-margin_bottom = 19.0
+margin_right = 46.0
+margin_bottom = 20.0
 text = "Curve %"
 align = 1
 valign = 1
 
 [node name="CurveSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer17"]
-margin_left = 56.0
-margin_right = 130.0
-margin_bottom = 24.0
+margin_left = 50.0
+margin_right = 124.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 max_value = 110.0
 allow_greater = true
 
 [node name="CurveSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer17"]
-margin_left = 134.0
+margin_left = 128.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -521,36 +524,36 @@ max_value = 110.0
 allow_greater = true
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 450.0
+margin_top = 448.0
 margin_right = 332.0
-margin_bottom = 470.0
+margin_bottom = 469.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer6"]
 margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+margin_right = 38.0
+margin_bottom = 18.0
 text = "Mirror"
 
 [node name="MirrorOption" type="OptionButton" parent="Panel/VBoxContainer/HBoxContainer6"]
-margin_left = 43.0
+margin_left = 42.0
 margin_right = 332.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "None"
 items = [ "None", null, false, 0, null, "Left-Right", null, false, 1, null, "Top-Bottom", null, false, 2, null ]
 selected = 0
 
 [node name="HSeparator6" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 474.0
+margin_top = 473.0
 margin_right = 332.0
-margin_bottom = 478.0
+margin_bottom = 477.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label6" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 482.0
+margin_top = 481.0
 margin_right = 332.0
 margin_bottom = 496.0
 text = "Cut Mover"
@@ -560,21 +563,21 @@ valign = 1
 [node name="HBoxContainer14" type="HBoxContainer" parent="Panel/VBoxContainer"]
 margin_top = 500.0
 margin_right = 332.0
-margin_bottom = 524.0
+margin_bottom = 525.0
 alignment = 1
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/HBoxContainer14"]
 margin_top = 5.0
-margin_right = 65.0
-margin_bottom = 19.0
+margin_right = 59.0
+margin_bottom = 20.0
 text = "Move Frac"
 align = 1
 valign = 1
 
 [node name="CutMoveSpinner" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer14"]
-margin_left = 69.0
-margin_right = 143.0
-margin_bottom = 24.0
+margin_left = 63.0
+margin_right = 137.0
+margin_bottom = 25.0
 size_flags_stretch_ratio = 0.32
 min_value = 0.1
 max_value = 1.0
@@ -582,7 +585,7 @@ step = 0.01
 value = 0.5
 
 [node name="CutMoveSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer14"]
-margin_left = 147.0
+margin_left = 141.0
 margin_right = 332.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -592,31 +595,31 @@ step = 0.01
 value = 0.5
 
 [node name="HSeparator5" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 528.0
+margin_top = 529.0
 margin_right = 332.0
-margin_bottom = 532.0
+margin_bottom = 533.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label5" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 536.0
+margin_top = 537.0
 margin_right = 332.0
-margin_bottom = 550.0
+margin_bottom = 552.0
 text = "Layers"
 align = 1
 valign = 1
 
 [node name="RenameLayerButton" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 554.0
+margin_top = 556.0
 margin_right = 332.0
-margin_bottom = 574.0
+margin_bottom = 577.0
 text = "No Layer Selected"
 
 [node name="HBoxContainer10" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 578.0
+margin_top = 581.0
 margin_right = 332.0
-margin_bottom = 598.0
+margin_bottom = 602.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -624,28 +627,28 @@ __meta__ = {
 
 [node name="DupeButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
 margin_right = 164.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Dupe"
 
 [node name="DelButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer10"]
 margin_left = 168.0
 margin_right = 332.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Del"
 
 [node name="LayerList" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 602.0
+margin_top = 606.0
 margin_right = 332.0
-margin_bottom = 696.0
+margin_bottom = 695.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer11" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 700.0
+margin_top = 699.0
 margin_right = 332.0
 margin_bottom = 720.0
 alignment = 1
@@ -655,14 +658,14 @@ __meta__ = {
 
 [node name="AddFullButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer11"]
 margin_right = 164.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "+ Full"
 
 [node name="AddClearButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer11"]
 margin_left = 168.0
 margin_right = 332.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "+ Clear"
 
@@ -837,7 +840,7 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -36.0
+margin_bottom = -37.0
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 anchor_left = 0.5
@@ -850,6 +853,17 @@ margin_right = 200.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 400, 140 )
 dialog_text = "New Piece?"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+material = ExtResource( 8 )
+margin_right = 333.0
+margin_bottom = 720.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="layer_selected" from="." to="." method="_on_UI_layer_selected"]
 [connection signal="rename_selected_layer" from="." to="Panel/VBoxContainer/LayerList" method="_on_UI_rename_selected_layer"]

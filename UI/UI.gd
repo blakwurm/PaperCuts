@@ -73,6 +73,9 @@ func load_user_palettes():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
+
+func _unhandled_input(event):
 	if Input.is_action_just_pressed("save"):
 		if active_piece.from_saved:
 			emit_signal("save_file", $SaveDialog.current_path)

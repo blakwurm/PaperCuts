@@ -20,12 +20,12 @@ Controls:
 | Mouse 2 | Move the selected layer's cuts
 | Mouse 3 | Pan
 | Mouse Wheel | Zoom
-| Ctrl/Cmd+Z | Undo Cut On Layer
-| Ctrl/Cmd+Y | Redo Cut On Layer
-| Ctrl/Cmd+S | Save the piece as a .papercut.tres file
-| Ctrl/Cmd+Shift+S | Save-As
-| Ctrl/Cmd+O | Open a .papercut.tres file
-| C | Toggle clippers between "add" and "remove" |
+| Z | Undo Cut On Layer
+| Y | Redo Cut On Layer
+| S | Save the piece as a .papercut.tres file
+| Shift+S | Save-As
+| O | Open a .papercut.tres file
+| Q | Toggle clippers between "add" and "remove" |
 
 ## For Use in Godot
 

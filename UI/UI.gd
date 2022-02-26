@@ -16,6 +16,8 @@ signal del_selected_layer()
 signal dupe_selected_layer()
 signal rename_selected_layer(new_name)
 signal resize_pen_leash(new_size)
+signal resize_drag_period(new_value)
+signal set_curve_percent(new_percent)
 signal set_cut_move_frac(new_frac)
 signal set_mirror_mode(mirror_mode)
 signal save_file(filepath)
@@ -402,4 +404,18 @@ func _on_ConfirmationDialog_confirmed():
 	active_piece.from_saved = false
 	active_piece.name = ""
 	get_tree().reload_current_scene()
+	pass # Replace with function body.
+
+
+func _on_Period_value_changed(value):
+	emit_signal("resize_drag_period", value)
+	$Panel/VBoxContainer/HBoxContainer9/PeriodSlider.value = value
+	$Panel/VBoxContainer/HBoxContainer9/PeriodSpinner.value = value
+	pass # Replace with function body.
+
+
+func _on_Curve_value_changed(value):
+	emit_signal("set_curve_percent", value)
+	$Panel/VBoxContainer/HBoxContainer17/CurveSlider.value = value
+	$Panel/VBoxContainer/HBoxContainer17/CurveSpinner.value = value
 	pass # Replace with function body.

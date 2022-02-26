@@ -7,15 +7,15 @@ extends Camera2D
 
 export(float, 0.0, 1.0) var polygon_lightness = 0.0 setget set_polygon_lightness
 export(int, "None", "LR", "TB") var mirror_mode = 0
+export(int, 4, 100) var drag_period = 4 setget set_drag_period
+export(float, 0, 110) var curve_percent = 0 setget set_curve_percent
 
 onready var drag_pen = $DragPen
-onready var display_line: Line2D = $DisplayLine
-onready var mirror_line: Line2D = $MirrorLine
+onready var drawing_preview: DrawingPreview = $DrawingPreview
+onready var mirror_preview: DrawingPreview = $MirrorPreview
 onready var tween = $Tween
 
 var drawing = false
-var current_polygon: Polygon2D
-var mirror_polygon: Polygon2D
 var last_point = Vector2.ZERO
 var last_mouse_pos = Vector2.ZERO
 
@@ -35,13 +35,8 @@ func set_drag_leash_size(_new_size):
 	drag_pen.max_leash = _new_size
 
 func reset_polygon():
-	display_line.set_as_toplevel(true)
-	mirror_line.set_as_toplevel(true)
-	current_polygon = Polygon2D.new()
-	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
-	mirror_polygon = current_polygon.duplicate()
-	display_line.points = PoolVector2Array()
-	mirror_line.points = PoolVector2Array()
+	drawing_preview.clear()
+	mirror_preview.clear()
 	#self.add_child(current_polygon)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -49,28 +44,25 @@ func reset_polygon():
 
 func set_polygon_lightness(_pl):
 	polygon_lightness = _pl
-	current_polygon.color = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
-	mirror_polygon.color = current_polygon.color
 
 func _process(delta):
 
 	if drawing:
 		var penpos: Vector2 = drag_pen.get_pen_pos()
 		var length_away = penpos.distance_to(last_point)
-		if length_away > 4:
+		if length_away > drag_period:
 			last_point = penpos
 			print("drawing at ", penpos)
-			var poly = current_polygon.polygon
-			poly.append(penpos)
-			current_polygon.polygon = poly
-			display_line.points = poly
+			#var poly = current_polygon.polygon
+			#poly.append(penpos)
+			drawing_preview.add_point(penpos)
+			#current_polygon.polygon = poly
+			#display_line.points = poly
 			if mirror_mode > 0:
-				var dispoly = mirror_polygon.polygon
-				dispoly.append(calc_mirror_point(penpos, mirror_mode))
-				mirror_polygon.polygon = dispoly
-				mirror_line.points = dispoly
-			print(current_polygon.polygon.size())
-			print(mirror_polygon.polygon.size())
+				#var dispoly = mirror_polygon.polygon
+				mirror_preview.add_point(calc_mirror_point(penpos, mirror_mode))
+				#mirror_polygon.polygon = dispoly
+				#mirror_line.points = dispoly
 		pass
 
 const translate_axis = [Vector2.ZERO, Vector2(1024, 0), Vector2(0, 1024)]
@@ -102,9 +94,14 @@ func _unhandled_input(event):
 			print("draw depressed")
 			drawing = false
 			#self.get_parent().add_child(current_polygon)
+			var col = Color(polygon_lightness, polygon_lightness, polygon_lightness, 1)
+			var pol = drawing_preview.get_poly(col)
 			if mirror_mode > 0:
-				current_polygon.add_child(mirror_polygon)
-			emit_signal("create_polygon", current_polygon)
+				var prev_pol = mirror_preview.get_poly(col)
+				pol.add_child(prev_pol)
+				prev_pol.global_position = pol.global_position
+				#current_polygon.add_child(mirror_polygon)
+			emit_signal("create_polygon", pol)
 			reset_polygon()
 		if event.is_pressed():
 		# zoom in
@@ -139,6 +136,18 @@ func set_zoom_amt(new_zoom: float):
 	self.zoom = Vector2(new_zoom, new_zoom)
 	emit_signal("change_zoom", self.zoom.x)
 
+func set_drag_period(value):
+	drag_period = value
+	recalc_curves()
+
+func set_curve_percent(value):
+	curve_percent = value
+	recalc_curves()
+
+func recalc_curves():
+	for prev in [drawing_preview, mirror_preview]:
+		prev.smoothing_amount = drag_period * curve_percent * 0.01
+	pass
 
 func _on_UI_resize_pen_leash(new_size):
 	set_drag_leash_size(new_size)
@@ -158,4 +167,14 @@ func _on_UI_set_zoom(new_zoom_amt):
 func _on_UI_set_mirror_mode(mirror_mode):
 	self.mirror_mode = mirror_mode
 	print("Mirror mode is now ", mirror_mode)
+	pass # Replace with function body.
+
+
+func _on_UI_resize_drag_period(new_value):
+	self.drag_period = new_value
+	pass # Replace with function body.
+
+
+func _on_UI_set_curve_percent(new_percent):
+	self.curve_percent = new_percent
 	pass # Replace with function body.

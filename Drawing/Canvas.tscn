@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Drawing/Canvas.gd" type="Script" id=1]
 [ext_resource path="res://PaperCuts/palette_render_material.tres" type="Material" id=2]
@@ -112,38 +112,6 @@ shader_param/type_l = ExtResource( 11 )
 [sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("Layers")
 
-[sub_resource type="ViewportTexture" id=10]
-viewport_path = NodePath("Layers")
-
-[sub_resource type="OpenSimplexNoise" id=15]
-seed = 28
-
-[sub_resource type="NoiseTexture" id=16]
-width = 2048
-height = 2048
-seamless = true
-as_normalmap = true
-bump_strength = 32.0
-noise = SubResource( 15 )
-
-[sub_resource type="ShaderMaterial" id=11]
-resource_local_to_scene = true
-shader = ExtResource( 16 )
-shader_param/as_normal = true
-shader_param/encoded = SubResource( 10 )
-shader_param/type_a = ExtResource( 3 )
-shader_param/type_b = ExtResource( 5 )
-shader_param/type_c = ExtResource( 7 )
-shader_param/type_d = ExtResource( 8 )
-shader_param/type_e = ExtResource( 13 )
-shader_param/type_f = ExtResource( 6 )
-shader_param/type_g = ExtResource( 14 )
-shader_param/type_h = ExtResource( 10 )
-shader_param/type_i = ExtResource( 12 )
-shader_param/type_j = ExtResource( 15 )
-shader_param/type_k = ExtResource( 9 )
-shader_param/type_l = SubResource( 16 )
-
 [sub_resource type="ViewportTexture" id=9]
 viewport_path = NodePath("Renderer")
 
@@ -155,17 +123,19 @@ script = ExtResource( 1 )
 
 [node name="shader_debug_demo" type="Node2D" parent="."]
 visible = false
+position = Vector2( -344, -21 )
+scale = Vector2( 1.422, 1.714 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="shader_debug_demo"]
-color = Color( 0, 0.286275, 0.745098, 1 )
+color = Color( 0, 0.286275, 0.101961, 1 )
 polygon = PoolVector2Array( 677, 384, 517, 787, 859, 1019, 995, 850, 820, 792, 1167, 680, 1333, 476, 1058, 247, 947, 173 )
 
 [node name="Polygon2D3" type="Polygon2D" parent="shader_debug_demo"]
-color = Color( 0.278431, 0.588235, 0.760784, 1 )
+color = Color( 0.278431, 0.768627, 1, 1 )
 polygon = PoolVector2Array( 1008, 671, 662, 746, 795, 908, 873, 829, 1032, 790, 1167, 680, 1333, 476, 1341, 308, 1164, 281 )
 
 [node name="Polygon2D4" type="Polygon2D" parent="shader_debug_demo"]
-color = Color( 1, 0.419608, 0.117647, 1 )
+color = Color( 1, 0.419608, 0.47451, 1 )
 polygon = PoolVector2Array( 1008, 671, 1001, 695, 775, 753, 983, 1021, 868, 793, 970, 752, 1167, 680, 1041, 492, 1341, 308, 965, 446, 1022, 664, 1020, 661, 1016, 658, 1012, 657, 1008, 657, 1005, 658, 982, 676, 971, 680, 984, 691, 994, 676, 1000, 667, 1012, 661, 1014, 663, 1014, 667, 1012, 670, 1010, 671 )
 
 [node name="Layers" type="Viewport" parent="."]
@@ -209,7 +179,6 @@ texture = SubResource( 7 )
 flip_v = true
 
 [node name="Render" type="Sprite" parent="."]
-material = SubResource( 11 )
 position = Vector2( 1024, 1024 )
 texture = SubResource( 9 )
 

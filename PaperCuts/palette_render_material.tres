@@ -1,10 +1,21 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://PaperCuts/palette_rendder_shader.gdshader" type="Shader" id=1]
 [ext_resource path="res://Palettes/famicube-1x.png" type="Texture" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+width = 4096
+height = 4096
+seamless = true
+noise = SubResource( 1 )
 
 [resource]
 shader = ExtResource( 1 )
 shader_param/shadow_amount = 0.009
 shader_param/shadow_passes = 10
+shader_param/vor_time_factor = 0.01
+shader_param/island_time_factor = 0.001
 shader_param/palette = ExtResource( 2 )
+shader_param/noise_1 = SubResource( 2 )

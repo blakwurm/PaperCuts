@@ -16,6 +16,7 @@ export(int) var shadow_passes = 10
 export(bool) var save_with_shader = false
 export(bool) var save_with_pretty = false
 export(bool) var save_with_raw = false
+export(bool) var save_with_scene = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

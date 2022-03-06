@@ -17,6 +17,7 @@ export(int) var shadow_passes = 10
 export(bool) var save_with_shader = false
 export(bool) var save_with_pretty = false
 export(bool) var save_with_raw = false
+export(bool) var save_with_scene = false
 
 enum LAYER_DATA_IND {
 	NAME, HEIGHT, PALETTE_OFFSET, PNG, NORMALIND

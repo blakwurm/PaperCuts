@@ -303,14 +303,17 @@ func _on_active_piece_change():
 	$Panel/VBoxContainer/HBoxContainer15/ShadowSizeSpinner.value = active_piece.shadow_size
 	$Panel/VBoxContainer/HBoxContainer16/ShadowPassesSlider.value = active_piece.shadow_passes
 	$Panel/VBoxContainer/HBoxContainer16/ShadowPassesSpinner.value = active_piece.shadow_passes
+	$Panel/VBoxContainer/HBoxContainer3/savescenecheck.pressed = active_piece.save_with_scene
+	$Panel/VBoxContainer/HBoxContainer3/saveprettycheck.pressed = active_piece.save_with_pretty
+	$Panel/VBoxContainer/HBoxContainer3/saverawcheck.pressed = active_piece.save_with_raw
 	
 
 func _on_files_dropped(files, screen):
 	var firstfile: String = files[0]
 	if firstfile.ends_with("papercut.tres"):
-		emit_signal("load_file", firstfile)
-		$SaveDialog.current_path = firstfile
+		#emit_signal("load_file", firstfile)
 		$LoadDialog.current_path = firstfile
+		$LoadDialog.show()
 	print(files)
 
 
@@ -422,3 +425,58 @@ func _on_Curve_value_changed(value):
 	$Panel/VBoxContainer/HBoxContainer17/CurveSlider.value = value
 	$Panel/VBoxContainer/HBoxContainer17/CurveSpinner.value = value
 	pass # Replace with function body.
+
+func _on_savescenecheck_toggled(button_pressed):
+	active_piece.save_with_scene = true
+	active_piece.emit_changed()
+	pass
+
+func ___on_savescenecheck_toggled(button_pressed):
+	if active_piece.from_saved:
+		$SaveSceneDialog.current_dir = $SaveDialog.current_dir
+		$SaveSceneDialog.show()
+	else:
+		$Panel/VBoxContainer/HBoxContainer3/savescenecheck.pressed = false
+	pass # Replace with function body.
+
+
+func _on_SaveSceneDialog_dir_selected(dir):
+	var open_path = $SaveDialog.current_dir
+	active_piece.save_with_scene = true
+	var rel = get_rel_path(open_path, dir)
+	active_piece.export_scene_path = rel
+	pass # Replace with function body.
+
+
+func _on_SaveSceneDialog_popup_hide():
+	$Panel/VBoxContainer/HBoxContainer3/savescenecheck.pressed = false
+	pass # Replace with function body.
+
+func get_rel_path(basepath: String, divpath: String):
+	if basepath.ends_with("/"):
+		basepath = basepath.substr(0, basepath.length()-1)
+	if divpath.ends_with("/"):
+		divpath = divpath.substr(0, divpath.length()-1)
+	print(basepath)
+	var basesplit: PoolStringArray = basepath.split("/")
+	var divsplit: PoolStringArray = divpath.split("/")
+	var back_count = 0
+	var common_count = 0
+	for ind in range(basesplit.size()):
+		var n = basesplit[ind]
+		if back_count == 0:
+			var m = divsplit[ind]
+			if n == m:
+				common_count += 1
+			else:
+				back_count += 1
+		else: 
+			back_count += 1
+	var retcont = PoolStringArray()
+	for i in range(back_count):
+		retcont.append("..")
+	for i in range(common_count):
+		divsplit.remove(0)
+	retcont.append_array(divsplit)
+	var ret = retcont.join("/")
+	return ret

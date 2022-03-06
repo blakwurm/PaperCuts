@@ -10,6 +10,7 @@ export onready var selected_layer_name = "" setget set_selected_layer_name
 const palette_material = preload("res://PaperCuts/palette_render_material.tres")
 const active_piece = preload("res://Resources/ActivePiece.tres")
 const scene_export_template = preload("res://Resources/SceneExportTemplate.tscn")
+const export_layer_template = preload("res://PaperCuts/ExportLayer.tscn")
 onready var render = $Render
 onready var normal_render = $NormalRender
 onready var pre_color_and_shadow = $Renderer/ShadowProcessing
@@ -125,12 +126,18 @@ func redo_cut():
 
 
 func save_current(filepath: String):
-	var saved: SavedPapercut
+	var saved: SavedPapercut = SavedPapercut.new()
 	if ResourceLoader.exists(filepath):
+		#var folderpathcont = filepath.split("/")
+		#folderpathcont.remove(folderpathcont.size()-1)
+		#var folderpath = folderpathcont.join("/")
+		#var d = Directory.new()
+		#d.open(folderpath)
+		#var err = d.remove(filepath)
+		#print("save error is ", err)
 		saved = ResourceLoader.load(filepath)
 		saved.layers = []
-	else:
-		saved = SavedPapercut.new()
+	ResourceSaver.save(filepath, saved)
 	var imgparam = palette_material.get_shader_param("palette")
 	if imgparam != null:
 		saved.palette = imgparam.get_data()
@@ -151,9 +158,12 @@ func save_current(filepath: String):
 	saved.save_with_pretty = active_piece.save_with_pretty
 	saved.save_with_raw = active_piece.save_with_raw
 	saved.save_with_shader = active_piece.save_with_shader
+	saved.save_with_scene = active_piece.save_with_scene
 	var dir = Directory.new()
 	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
+	if active_piece.save_with_scene:
+		self.export_scene(filepath.replace(".papercut.tres", ".cutscene.scn"))
 	if active_piece.save_with_pretty:
 		self.export_image(filepath.replace(".papercut.tres", ".pretty.png"))
 		self.export_normal(filepath.replace(".papercut.tres", ".normal.png"))
@@ -195,8 +205,45 @@ func load_thing(filepath, append=false):
 	active_piece.save_with_pretty = res.save_with_pretty
 	active_piece.save_with_raw = res.save_with_raw
 	active_piece.save_with_shader = res.save_with_shader
+	active_piece.save_with_scene = res.save_with_scene
 	active_piece.from_saved = true
 	active_piece.emit_changed()
+
+func export_scene(filepath):
+	#var dir = Directory.new()
+	#dir.open(folderpath)
+	#dir.change_dir("../")
+	#var err = dir.make_dir_recursive(folderpath)
+	#print("create dir err ", err, " ", folderpath)
+	var saved_layers = Node2D.new()
+	saved_layers.name="layers"
+	saved_layers.owner = saved_layers
+	var packed = PackedScene.new()
+	
+	for child in layers.get_children():
+		var newtx = ImageTexture.new()
+		var img: Image = child.get_node("Texture").texture.get_data()
+		img.convert(Image.FORMAT_L8)
+		img.compress(Image.COMPRESS_PVRTC2, Image.COMPRESS_SOURCE_NORMAL, 1.0)
+		newtx.create_from_image(img, 0)
+		var l = export_layer_template.instance()
+		l.height = child.height
+		l.palette_offset = child.palette_offset
+		l.normal_chan = child.brightness_add
+		l.name = child.name
+		l.texture = newtx
+		saved_layers.add_child(l)
+		print(saved_layers.get_children())
+		l.owner = saved_layers
+		#print("writing layer here")
+		#var err = ResourceSaver.save(folderpath+"/"+child.name+".res", newtx, ResourceSaver.FLAG_COMPRESS)
+		#print("save error is ", err)
+		pass
+	var packerr = packed.pack(saved_layers)
+	print("packedchild:",packed.instance().get_children())
+	var err = ResourceSaver.save(filepath, packed, ResourceSaver.FLAG_COMPRESS)
+	print("this error? ", err, " and ", packerr)
+	pass
 
 func get_pretty_png():
 	var imgdata: Image = render.texture.get_data()

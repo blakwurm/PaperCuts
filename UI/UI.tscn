@@ -116,27 +116,27 @@ margin_bottom = 21.0
 alignment = 1
 
 [node name="NewButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
+visible = false
 margin_right = 80.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "New"
 
 [node name="OpenButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 84.0
-margin_right = 164.0
+margin_right = 108.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Open"
 
 [node name="AppendButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 168.0
-margin_right = 248.0
+margin_left = 112.0
+margin_right = 220.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Append"
 
 [node name="SaveButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer8"]
-margin_left = 252.0
+margin_left = 224.0
 margin_right = 332.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
@@ -346,6 +346,12 @@ margin_left = 202.0
 margin_right = 254.0
 margin_bottom = 24.0
 text = "Raw"
+
+[node name="savescenecheck" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 258.0
+margin_right = 318.0
+margin_bottom = 24.0
+text = "Scene"
 
 [node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer"]
 margin_top = 250.0
@@ -819,6 +825,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SaveSceneDialog" type="FileDialog" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 400, 140 )
+window_title = "Select Export Folder"
+dialog_hide_on_ok = true
+mode = 2
+access = 2
+current_dir = "/Users"
+current_path = "/Users/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="RenameDialog" type="ConfirmationDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -890,6 +912,7 @@ __meta__ = {
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer3/saveshadercheck" to="." method="_on_saveshadercheck_toggled"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer3/saveprettycheck" to="." method="_on_saveprettycheck_toggled"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer3/saverawcheck" to="." method="_on_saverawcheck_toggled"]
+[connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer3/savescenecheck" to="." method="_on_savescenecheck_toggled"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer13/ZoomSpinner" to="." method="_on_ZoomSpinner_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/HBoxContainer13/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
 [connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer5/ClipperAddToggle" to="." method="_on_ClipperAddToggle_toggled"]
@@ -917,6 +940,8 @@ __meta__ = {
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
 [connection signal="file_selected" from="AppendDialog" to="." method="_on_AppendDialog_file_selected"]
 [connection signal="file_selected" from="ExportDialog" to="." method="_on_ExportDialog_file_selected"]
+[connection signal="dir_selected" from="SaveSceneDialog" to="." method="_on_SaveSceneDialog_dir_selected"]
+[connection signal="popup_hide" from="SaveSceneDialog" to="." method="_on_SaveSceneDialog_popup_hide"]
 [connection signal="confirmed" from="RenameDialog" to="." method="_on_RenameDialog_confirmed"]
 [connection signal="text_entered" from="RenameDialog/RenameBox" to="." method="_on_RenameBox_text_entered"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]

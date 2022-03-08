@@ -245,6 +245,9 @@ func export_scene(filepath):
 		pass
 	var packerr = packed.pack(saved_layers)
 	print("packedchild:",packed.instance().get_children())
+	var dir = Directory.new()
+	var delthing = dir.remove(filepath)
+	print("removing error: ", delthing)
 	var err = ResourceSaver.save(filepath, packed, ResourceSaver.FLAG_COMPRESS)
 	print("this error? ", err, " and ", packerr)
 	pass

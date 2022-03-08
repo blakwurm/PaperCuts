@@ -17,6 +17,7 @@ export(bool) var save_with_shader = false
 export(bool) var save_with_pretty = false
 export(bool) var save_with_raw = false
 export(bool) var save_with_scene = false
+export(bool) var export_size = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

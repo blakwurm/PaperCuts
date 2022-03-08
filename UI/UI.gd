@@ -306,6 +306,7 @@ func _on_active_piece_change():
 	$Panel/VBoxContainer/HBoxContainer3/savescenecheck.pressed = active_piece.save_with_scene
 	$Panel/VBoxContainer/HBoxContainer3/saveprettycheck.pressed = active_piece.save_with_pretty
 	$Panel/VBoxContainer/HBoxContainer3/saverawcheck.pressed = active_piece.save_with_raw
+	$Panel/VBoxContainer/HBoxContainer18/ExportResSelector.selected = active_piece.export_size
 	
 
 func _on_files_dropped(files, screen):
@@ -480,3 +481,9 @@ func get_rel_path(basepath: String, divpath: String):
 	retcont.append_array(divsplit)
 	var ret = retcont.join("/")
 	return ret
+
+
+func _on_ExportResSelector_item_selected(index):
+	active_piece.export_size = index
+	active_piece.emit_changed()
+	pass # Replace with function body.

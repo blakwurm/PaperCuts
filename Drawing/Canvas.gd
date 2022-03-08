@@ -159,6 +159,7 @@ func save_current(filepath: String):
 	saved.save_with_raw = active_piece.save_with_raw
 	saved.save_with_shader = active_piece.save_with_shader
 	saved.save_with_scene = active_piece.save_with_scene
+	saved.export_size = active_piece.export_size
 	var dir = Directory.new()
 	dir.remove(filepath)
 	var res = ResourceSaver.save(filepath, saved)#, ResourceSaver.FLAG_BUNDLE_RESOURCES + ResourceSaver.FLAG_CHANGE_PATH)
@@ -205,6 +206,7 @@ func load_thing(filepath, append=false):
 	active_piece.save_with_pretty = res.save_with_pretty
 	active_piece.save_with_raw = res.save_with_raw
 	active_piece.save_with_shader = res.save_with_shader
+	active_piece.export_size = res.export_size
 	active_piece.save_with_scene = res.save_with_scene
 	active_piece.from_saved = true
 	active_piece.emit_changed()
@@ -222,9 +224,11 @@ func export_scene(filepath):
 	
 	for child in layers.get_children():
 		var newtx = ImageTexture.new()
+		newtx.storage = ImageTexture.STORAGE_COMPRESS_LOSSLESS
 		var img: Image = child.get_node("Texture").texture.get_data()
 		img.convert(Image.FORMAT_L8)
-		img.compress(Image.COMPRESS_PVRTC2, Image.COMPRESS_SOURCE_NORMAL, 1.0)
+		var newsize = get_export_pixel_size()
+		img.resize(newsize,newsize, Image.INTERPOLATE_NEAREST)
 		newtx.create_from_image(img, 0)
 		var l = export_layer_template.instance()
 		l.height = child.height
@@ -248,6 +252,8 @@ func export_scene(filepath):
 func get_pretty_png():
 	var imgdata: Image = render.texture.get_data()
 	imgdata.flip_y()
+	var newsize = get_export_pixel_size()
+	imgdata.resize(newsize,newsize, Image.INTERPOLATE_NEAREST)
 	var buf = imgdata.save_png_to_buffer()
 	return buf
 
@@ -260,17 +266,27 @@ func export_image(filepath):
 func export_normal(filepath):
 	var imgdata = normal_render.texture.get_data()
 	#imgdata.flip_y()
+	var newsize = get_export_pixel_size()
+	imgdata.resize(newsize,newsize, Image.INTERPOLATE_NEAREST)
 	print("normals are ", imgdata)
 	imgdata.save_png(filepath)
 	pass
 	
 func get_raw_png():
 	var imgdata: Image = pre_color_and_shadow.texture.get_data()
+	var newsize = get_export_pixel_size()
+	imgdata.resize(newsize,newsize, Image.INTERPOLATE_NEAREST)
 	return imgdata.save_png_to_buffer()
 	
 func export_raw_image(filepath):
 	var imgdata = pre_color_and_shadow.texture.get_data()
+	var newsize = get_export_pixel_size()
+	imgdata.resize(newsize,newsize, Image.INTERPOLATE_NEAREST)
 	imgdata.save_png(filepath)
+	
+func get_export_pixel_size():
+	var export_size = active_piece.export_size
+	return pow(2, 11-export_size)
 
 func _on_UI_add_layer(filled):
 	self.add_layer("", filled)

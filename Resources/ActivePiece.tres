@@ -14,3 +14,4 @@ save_with_shader = false
 save_with_pretty = false
 save_with_raw = false
 save_with_scene = false
+export_size = false

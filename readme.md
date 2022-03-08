@@ -4,13 +4,13 @@ A simple art tool, for making paper cut art assets for the forthcoming game Ored
 
 ## App Usage
 
-Add a layer by clicking on the "+" buttons at the bottom. Adjust the layer's distanace off of the bottom using the slider. Adjust the color using the horizontal color slider. The paper texture can be adjusted using the slider next to the color picker.
+Add a layer by clicking on the "+" buttons at the bottom. Adjust the layer's distanace off of the bottom using the slider. Adjust the color using the horizontal color slider. The paper coloration pattern can be adjusted using the slider next to the color picker.
 
-Use the "Change Palette" menu to adjust which palette you're using. Palettes are 1-pixel-high png images, and custom palettes can be added by placing them in the folder opened from the palette menu. Check out https://lospec.com/palette-list for more palettes (download them as "PNG Image (1x)")
+Use the "Change Palette" menu to adjust which palette you're using. Palettes are 1-pixel-high png images, and custom palettes can be added by placing them in the folder opened from the palette menu. Check out https://lospec.com/palette-list for more palettes (download them as "PNG Image (1x)"). The default palette is "Famicube".
 
 Undo/Redo work depending on which layer you have selected, and undo/redo cuts. Adding and removing layers are not handled with undo/redo.
 
-The palette being used will be embedded in the save file. Optionally, when saving the file several images and a .shadowmat.tres shader texture can be saved alongside the file.
+The palette being used will be embedded in the save file. Optionally, when saving the file several images, a .shadowmat.tres shader texture, and a binary .scn file with images embedded can be saved alongside the file.
 
 Controls:
 | Button | Action |

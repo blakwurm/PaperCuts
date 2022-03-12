@@ -18,6 +18,14 @@ float when_eq_f(float x, float y) {
   return 1.0 - abs(sign(x - y));
 }
 
+float when_gt(int x, int y) {
+  return float(max(sign(x - y), 0));
+}
+
+float when_gt_f(float x, float y) {
+  return max(sign(x - y), 0.0);
+}
+
 vec2 random(vec2 uv) {
 	return vec2(fract(sin(dot(uv.xy,
 		vec2(12.9898,78.233))) * (43758.5453123+TIME*vor_time_factor)));
@@ -53,8 +61,11 @@ float shadow_depth(sampler2D tex, vec2 uv, vec2 look_distance, float current_hei
 	vec2 current_look = dist_fract;
 	float shadow = 0.0;
 	for (int i = 0; i < shadow_passes; i++) {
-		float sample = textureLod(tex, uv+dist_fract*float(i), 4.0).r;
-		shadow += min(0.0, (current_height - sample)/float(i)*0.5);
+		vec4 sample_whole = textureLod(tex, uv+dist_fract*float(i), 4.0);
+		float is_glow = when_gt_f(sample_whole.b, 1.0/12.0);
+		float is_not_glow = 1.0-is_glow;
+		float sample = sample_whole.r;
+		shadow += min(0.0, is_not_glow * (current_height - sample)/float(i)*0.5);
 		current_look += dist_fract;
 	}
 	return shadow;
@@ -93,6 +104,15 @@ float do_island_banding(vec2 uv, float time, int bands, float strength) {
 	return bandy(strength * up * down * left * right, bands);
 }
 
+
+vec4 illuminate_with_color(vec4 input, float glow_amount) {
+	vec3 ret = vec3(0.0);
+	ret.r = input.r + when_gt_f(input.r, input.g) * when_gt_f(input.r, input.b) * glow_amount;
+	ret.g = input.g + when_gt_f(input.g, input.r) * when_gt_f(input.g, input.b) * glow_amount;
+	ret.b = input.b + when_gt_f(input.b, input.r) * when_gt_f(input.b, input.g) * glow_amount;
+	return vec4(ret, 1.0);
+}
+
 void fragment() {
 	vec4 screen_sample = texture(TEXTURE, UV);
 	float r = screen_sample.r;
@@ -114,22 +134,27 @@ void fragment() {
 	float n2 = do_island_smooth(SCREEN_UV*0.5, slowtime, effectstrength);
 	float n3 = do_island_smooth(fract(SCREEN_UV), slowtime, effectstrength);
 	
-	int factor = int(ceil(screen_sample.b * 9.0));
+	int factor = int(ceil(screen_sample.b * 12.0));
 	
-	float highlighter = (when_eq(factor, 0)*1.0)
-	+(when_eq(factor, 1)*((vor1.r*0.4)+0.7))
-	+(when_eq(factor, 2)*((vor2.r*0.4)+0.7))
-	+(when_eq(factor, 3)*((vor3.r*0.4)+0.7))
+	float highlighter = -0.2+(when_eq(factor, 0)*1.0)
+	+(when_eq(factor, 1)*((vor1.r*0.4)+0.5))
+	+(when_eq(factor, 2)*((vor2.r*0.4)+0.5))
+	+(when_eq(factor, 3)*((vor3.r*0.4)+0.5))
 	+(when_eq(factor, 4)*((1.0-n1*0.1)))
 	+(when_eq(factor, 5)*((1.0-n2*0.1)))
 	+(when_eq(factor, 6)*((1.0-n3*0.1)))
 	+(when_eq(factor, 7)*(1.0-(do_island_banding(fract(SCREEN_UV*0.1), slowtime, 10, 8.0))*0.4))
 	+(when_eq(factor, 8)*(1.0-(do_island_banding(fract(SCREEN_UV*0.5), slowtime, 5, 8.0))*0.4))
 	+(when_eq(factor, 9)*(1.0-(do_island_banding(fract(SCREEN_UV), slowtime, 3, 8.0))*0.4))
+	+when_gt(factor, 9)
 	;
 	
+	float glow_amnt = max(0.0, (screen_sample.b - (9.0*(1.0/12.0))))*(2.0);
+	
 	vec4 palette_sample = (texture(palette, vec2(screen_sample.g)) * highlighter); // * (1.0+15.0*pow(100000.0, screen_sample.b - 1.0)) ) ;
+	//palette_sample += when_eq(factor, 10);
 	//palette_sample.rgb *= 1.0-shadow;
+	palette_sample = illuminate_with_color(palette_sample+glow_amnt, when_gt(factor, 9));
 	COLOR = mix(palette_sample, vec4(vec3(0.0), 1.0), -shadow);
 	COLOR.a = screen_sample.a;
 }

@@ -289,6 +289,8 @@ func export_raw_image(filepath):
 	
 func get_export_pixel_size():
 	var export_size = active_piece.export_size
+	if export_size == false or export_size == null:
+		export_size = 0
 	return pow(2, 11-export_size)
 
 func _on_UI_add_layer(filled):

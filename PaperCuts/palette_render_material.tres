@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://PaperCuts/palette_rendder_shader.gdshader" type="Shader" id=1]
-[ext_resource path="res://Palettes/famicube-1x.png" type="Texture" id=2]
+[ext_resource path="res://Palettes/crayons.png" type="Texture" id=2]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 

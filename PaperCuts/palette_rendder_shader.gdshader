@@ -62,7 +62,7 @@ float shadow_depth(sampler2D tex, vec2 uv, vec2 look_distance, float current_hei
 	float shadow = 0.0;
 	for (int i = 0; i < shadow_passes; i++) {
 		vec4 sample_whole = textureLod(tex, uv+dist_fract*float(i), 4.0);
-		float is_glow = when_gt_f(sample_whole.b, 1.0/12.0);
+		float is_glow = when_gt_f(sample_whole.b, 1.0-(1.0/12.0)*3.0);
 		float is_not_glow = 1.0-is_glow;
 		float sample = sample_whole.r;
 		shadow += min(0.0, is_not_glow * (current_height - sample)/float(i)*0.5);

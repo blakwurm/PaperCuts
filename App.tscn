@@ -14,7 +14,7 @@ glow_strength = 1.28
 glow_blend_mode = 1
 glow_hdr_threshold = 1.26
 glow_hdr_luminance_cap = 0.4
-glow_hdr_scale = 0.13
+glow_hdr_scale = 0.55
 glow_bicubic_upscale = true
 glow_high_quality = true
 
@@ -22,9 +22,6 @@ glow_high_quality = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false

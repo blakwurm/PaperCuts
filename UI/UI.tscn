@@ -3,7 +3,7 @@
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Palettes/pineapple-32-1x.png" type="Texture" id=2]
 [ext_resource path="res://UI/PositionList.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Palettes/famicube-1x.png" type="Texture" id=4]
+[ext_resource path="res://Palettes/crayons.png" type="Texture" id=4]
 [ext_resource path="res://UI/ColorMenuBox.gd" type="Script" id=5]
 [ext_resource path="res://UI/ColorPickPopup.gd" type="Script" id=6]
 [ext_resource path="res://UI/TextureOption.gd" type="Script" id=7]
@@ -73,6 +73,7 @@ margin_right = 825.0
 margin_bottom = 16.0
 max_value = 1.0
 step = 0.001
+ticks_on_borders = true
 
 [node name="Control" type="Control" parent="ItemList/ColorMenuBox/ColorPicker"]
 show_behind_parent = true
@@ -92,9 +93,6 @@ mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 4 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_bottom = 1.0
@@ -854,7 +852,7 @@ anchor_bottom = 1.0
 margin_top = 1.0
 margin_bottom = 1.0
 rect_min_size = Vector2( 400, 140 )
-window_title = "Select Export Folder"
+window_title = "Open a Directory"
 dialog_hide_on_ok = true
 mode = 2
 access = 2

@@ -97,7 +97,12 @@ func rename_selected_layer(_name: String):
 	pass
 
 func get_selected_layer():
-	return layers.get_node(selected_layer_name)
+	if layers.has_node(selected_layer_name):
+		return layers.get_node(selected_layer_name)
+	elif layers.get_child_count() > 0:
+		return layers.get_children()[0]
+	else:
+		return null
 
 func set_height(_height):
 	self.get_selected_layer().set_height(_height)

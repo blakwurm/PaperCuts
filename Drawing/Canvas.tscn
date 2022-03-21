@@ -155,6 +155,7 @@ polygon = PoolVector2Array( 1008, 671, 1001, 695, 775, 753, 983, 1021, 868, 793,
 
 [node name="Layers" type="Viewport" parent="."]
 size = Vector2( 2048, 2048 )
+own_world = true
 transparent_bg = true
 usage = 0
 render_target_v_flip = true
@@ -197,6 +198,7 @@ flip_v = true
 [node name="Render" type="Sprite" parent="."]
 position = Vector2( 1024, 1024 )
 texture = SubResource( 9 )
+flip_v = true
 
 [node name="Light2D" type="Light2D" parent="."]
 visible = false

@@ -44,6 +44,8 @@ func set_palette_offset(_po):
 		needs_offset_set_on_ready = true
 	else:
 		texture.material.set_shader_param("palette_offset", _po)
+		var mat: ShaderMaterial = texture.material
+		print("set palette offset to the appropriate color: ", mat.get_shader_param("palette_offset"))
 	pass
 
 func set_brightness_add(_nb):
